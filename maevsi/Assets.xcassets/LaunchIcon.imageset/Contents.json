@@ -1,32 +1,19 @@
 {
   "images" : [
     {
-      "compression-type" : "automatic",
-      "filename" : "launch-64.png",
+      "filename" : "maevsi_icon 2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "compression-type" : "automatic",
-      "filename" : "launch-128.png",
+      "filename" : "maevsi_icon 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "compression-type" : "automatic",
-      "filename" : "launch-192.png",
+      "filename" : "maevsi_icon.png",
       "idiom" : "universal",
       "scale" : "3x"
-    },
-    {
-      "filename" : "launch-256.png",
-      "idiom" : "universal",
-      "scale" : "4x"
-    },
-    {
-      "filename" : "launch-512.png",
-      "idiom" : "universal",
-      "scale" : "8x"
     }
   ],
   "info" : {
