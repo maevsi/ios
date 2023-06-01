@@ -6,8 +6,42 @@ import SafariServices
 
 func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNavigationDelegate, NSO: NSObject, VC: ViewController) -> WKWebView{
     
-    let config = WKWebViewConfiguration()
+    let overrideConsole = """
+        function log(emoji, type, args) {
+          window.webkit.messageHandlers.logging.postMessage(
+            `${emoji} JS ${type}: ${Object.values(args)
+              .map(v => typeof(v) === "undefined" ? "undefined" : typeof(v) === "object" ? JSON.stringify(v) : v.toString())
+              .map(v => v.substring(0, 3000)) // Limit msg to 3000 chars
+              .join(", ")}`
+          )
+        }
+
+        let originalLog = console.log
+        let originalWarn = console.warn
+        let originalError = console.error
+        let originalDebug = console.debug
+
+        console.log = function() { log("📗", "log", arguments); originalLog.apply(null, arguments) }
+        console.warn = function() { log("📙", "warning", arguments); originalWarn.apply(null, arguments) }
+        console.error = function() { log("📕", "error", arguments); originalError.apply(null, arguments) }
+        console.debug = function() { log("📘", "debug", arguments); originalDebug.apply(null, arguments) }
+
+        window.addEventListener("error", function(e) {
+           log("💥", "Uncaught", [`${e.message} at ${e.filename}:${e.lineno}:${e.colno}`])
+        })
+    """
+
+    class LoggingMessageHandler: NSObject, WKScriptMessageHandler {
+        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            print(message.body)
+        }
+    }
+
     let userContentController = WKUserContentController()
+    userContentController.add(LoggingMessageHandler(), name: "logging")
+    userContentController.addUserScript(WKUserScript(source: overrideConsole, injectionTime: .atDocumentStart, forMainFrameOnly: true))
+    
+    let config = WKWebViewConfiguration()
 
     userContentController.add(WKSMH, name: "print")
     userContentController.add(WKSMH, name: "push-subscribe")
@@ -31,9 +65,9 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     webView.scrollView.bounces = false;
     webView.allowsBackForwardNavigationGestures = true
     webView.configuration.applicationNameForUserAgent = "Safari/604.1" // See https://github.com/pwa-builder/pwabuilder-ios/issues/30
-    webView.customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1";    
     webView.scrollView.contentInsetAdjustmentBehavior = .never
     webView.addObserver(NSO, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: NSKeyValueObservingOptions.new, context: nil)
+    webView.isInspectable = true
     
     return webView
 }
@@ -271,3 +305,5 @@ extension ViewController: WKUIDelegate {
         present(alert, animated: true, completion: nil)
     }
 }
+
+

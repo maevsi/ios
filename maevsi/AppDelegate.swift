@@ -1,10 +1,11 @@
 import UIKit
-import FirebaseCore
 import FirebaseMessaging
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    
     
     var window : UIWindow?
 
@@ -12,10 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // TODO: if we're using Firebase, uncomment this
-        //FirebaseApp.configure()
+        // FirebaseApp.configure()
 
         // [START set_messaging_delegate]
-        Messaging.messaging().delegate = self
+        // Messaging.messaging().delegate = self
         // [END set_messaging_delegate]
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
