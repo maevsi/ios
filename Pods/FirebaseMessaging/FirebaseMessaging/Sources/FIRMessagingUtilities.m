@@ -39,7 +39,7 @@ static NSString *const kAPSEnvironmentDevelopmentValue = @"development";
 
 #pragma mark - URL Helpers
 
-NSString *FIRMessagingTokenRegisterServer() {
+NSString *FIRMessagingTokenRegisterServer(void) {
   return @"https://fcmtoken.googleapis.com/register";
 }
 
@@ -91,7 +91,7 @@ NSString *FIRMessagingAppIdentifier(void) {
 #endif
 }
 
-NSString *FIRMessagingFirebaseAppID() {
+NSString *FIRMessagingFirebaseAppID(void) {
   return [FIROptions defaultOptions].googleAppID;
 }
 
@@ -273,7 +273,7 @@ NSArray *FIRMessagingFirebaseLocales(void) {
   return locales;
 }
 
-NSString *FIRMessagingCurrentLocale() {
+NSString *FIRMessagingCurrentLocale(void) {
   NSArray *locales = FIRMessagingFirebaseLocales();
   NSArray *preferredLocalizations =
       [NSBundle preferredLocalizationsFromArray:locales
@@ -283,7 +283,7 @@ NSString *FIRMessagingCurrentLocale() {
   return legalDocsLanguage ? legalDocsLanguage : @"en";
 }
 
-BOOL FIRMessagingHasLocaleChanged() {
+BOOL FIRMessagingHasLocaleChanged(void) {
   NSString *lastLocale = [[GULUserDefaults standardUserDefaults]
       stringForKey:kFIRMessagingInstanceIDUserDefaultsKeyLocale];
   NSString *currentLocale = FIRMessagingCurrentLocale();
@@ -334,7 +334,8 @@ BOOL FIRMessagingIsProductionApp(void) {
 #if TARGET_OS_OSX || TARGET_OS_MACCATALYST
   NSString *path = [[[[NSBundle mainBundle] resourcePath] stringByDeletingLastPathComponent]
       stringByAppendingPathComponent:@"embedded.provisionprofile"];
-#elif TARGET_OS_IOS || TARGET_OS_TV || TARGET_OS_WATCH
+#elif TARGET_OS_IOS || TARGET_OS_TV || TARGET_OS_WATCH || \
+    (defined(TARGET_OS_VISION) && TARGET_OS_VISION)
   NSString *path = [[[NSBundle mainBundle] bundlePath]
       stringByAppendingPathComponent:@"embedded.mobileprovision"];
 #endif
