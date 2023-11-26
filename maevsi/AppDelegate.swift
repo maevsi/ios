@@ -1,11 +1,10 @@
 import UIKit
+import FirebaseCore
 import FirebaseMessaging
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    
     
     var window : UIWindow?
 

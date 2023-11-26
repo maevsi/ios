@@ -19,12 +19,12 @@ class ViewController: UIViewController, WKNavigationDelegate {
     override var preferredStatusBarStyle : UIStatusBarStyle {
         if #available(iOS 13, *), overrideStatusBar{
             if #available(iOS 15, *) {
-                return .lightContent
+                return .default
             } else {
                 return statusBarTheme == "dark" ? .lightContent : .darkContent
             }
         }
-        return .lightContent
+        return .default
     }
 
     override func viewDidLoad() {

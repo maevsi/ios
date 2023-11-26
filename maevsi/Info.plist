@@ -69,6 +69,15 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Explore events</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>https://maev.si/events</string>
+		</dict>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>processing</string>
@@ -82,6 +91,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
@@ -102,7 +113,7 @@
 	<true/>
 	<key>WKAppBoundDomains</key>
 	<array>
-		<string>https://maev.si/?standalone=true</string>
+		<string>maev.si/?source=pwa</string>
 	</array>
 </dict>
 </plist>

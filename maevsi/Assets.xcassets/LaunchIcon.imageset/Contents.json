@@ -1,17 +1,18 @@
 {
   "images" : [
     {
-      "filename" : "maevsi_icon 2.png",
+      "filename" : "64.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "maevsi_icon 1.png",
+      "filename" : "128.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "maevsi_icon.png",
+      "compression-type" : "automatic",
+      "filename" : "launch-192.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
