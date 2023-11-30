@@ -8,6 +8,7 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     
     let config = WKWebViewConfiguration()
     let userContentController = WKUserContentController()
+    let osVersion = ProcessInfo().operatingSystemVersion
 
     userContentController.add(WKSMH, name: "print")
     userContentController.add(WKSMH, name: "push-subscribe")
@@ -17,11 +18,12 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     
     if #available(iOS 14, *) {
         config.limitsNavigationsToAppBoundDomains = true;
-        
     }
+    
     config.preferences.javaScriptCanOpenWindowsAutomatically = true
     config.allowsInlineMediaPlayback = true
     config.preferences.setValue(true, forKey: "standalone")
+    config.applicationNameForUserAgent = "Version/\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion) Safari/maevsi"
     
     let webView = WKWebView(frame: calcWebviewFrame(webviewView: container, toolbarView: nil), configuration: config)
     setCustomCookie(webView: webView)
@@ -30,8 +32,8 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     webView.navigationDelegate = WKND;
     webView.scrollView.bounces = false;
     webView.allowsBackForwardNavigationGestures = true
-    webView.configuration.applicationNameForUserAgent = "Safari/604.1" // See https://github.com/pwa-builder/pwabuilder-ios/issues/30
-    // webView.customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1";    
+    // webView.configuration.applicationNameForUserAgent = "Safari/604.1" // See https://github.com/pwa-builder/pwabuilder-ios/issues/30
+    // webView.customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1";
     webView.scrollView.contentInsetAdjustmentBehavior = .never
     webView.addObserver(NSO, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: NSKeyValueObservingOptions.new, context: nil)
     
