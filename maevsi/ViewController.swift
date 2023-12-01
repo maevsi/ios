@@ -49,7 +49,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         if #available(iOS 15.0, *), adaptiveUIStyle {
             themeObservation = maevsi.webView.observe(\.underPageBackgroundColor) { [unowned self] webView, _ in
                 currentWebViewTheme = maevsi.webView.underPageBackgroundColor.isLight() ?? true ? .light : .dark
-                self.overrideUIStyle()
             }
         }
     }
@@ -94,18 +93,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
 //        self.splashBkgView.frame = CGRect(x: splashBkgFrame.minX, y: statusBarHeight, width: splashBkgFrame.width, height: splashBkgFrame.height)
     }
     
-    func overrideUIStyle(toDefault: Bool = false) {
-        if #available(iOS 15.0, *), adaptiveUIStyle {
-            if (((htmlIsLoaded && !maevsi.webView.isHidden) || toDefault) && self.currentWebViewTheme != .unspecified) {
-                UIApplication
-                    .shared
-                    .connectedScenes
-                    .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
-                    .first { $0.isKeyWindow }?.overrideUserInterfaceStyle = toDefault ? .unspecified : self.currentWebViewTheme;
-            }
-        }
-    }
-    
     @objc func loadRootUrl() {
         // Was the app launched via a universal link? If so, navigate to that.
         // Otherwise, see if we were launched via shortcut and nav to that.
@@ -125,8 +112,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
             self.loadingView.isHidden = true;
            
             self.setProgress(0.0, false);
-            
-            self.overrideUIStyle()
         }
     }
     
@@ -134,8 +119,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         htmlIsLoaded = false;
         
         if (error as NSError)._code != (-999) {
-            self.overrideUIStyle(toDefault: true);
-            
             webView.isHidden = true;
             loadingView.isHidden = false;
             animateConnectionProblem(true);
