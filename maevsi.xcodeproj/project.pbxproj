@@ -19,12 +19,13 @@
 		595F23AF25CEFBFE0053416C /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A425CEFBFE0053416C /* WebView.swift */; };
 		CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE252388222B002C8D56 /* Main.storyboard */; };
 		CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */; };
-		E1E260C850014D6B34B487B0 /* Pods_maevsi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9D7FFB2FBE6EEBCA807B6A /* Pods_maevsi.framework */; };
+		E66CB9C14433DFB09B485CAC /* Pods_maevsi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52274E1984BF607F244F20EC /* Pods_maevsi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A54907175918C0FF4BCE968 /* Pods-maevsi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maevsi.release.xcconfig"; path = "Target Support Files/Pods-maevsi/Pods-maevsi.release.xcconfig"; sourceTree = "<group>"; };
 		25D3517E267A48E0002E5DC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "maevsi/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4C1C2162A8048FDF52B2A9D0 /* Pods-maevsi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maevsi.release.xcconfig"; path = "Target Support Files/Pods-maevsi/Pods-maevsi.release.xcconfig"; sourceTree = "<group>"; };
+		52274E1984BF607F244F20EC /* Pods_maevsi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_maevsi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59333BAA25CFF706003392A4 /* maevsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = maevsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		595F239A25CEFBFD0053416C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = maevsi/Settings.swift; sourceTree = "<group>"; };
 		595F239B25CEFBFD0053416C /* Entitlements */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Entitlements; path = maevsi/Entitlements; sourceTree = "<group>"; };
@@ -36,8 +37,7 @@
 		595F23A225CEFBFE0053416C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = maevsi/AppDelegate.swift; sourceTree = "<group>"; };
 		595F23A325CEFBFE0053416C /* Printer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Printer.swift; path = maevsi/Printer.swift; sourceTree = "<group>"; };
 		595F23A425CEFBFE0053416C /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebView.swift; path = maevsi/WebView.swift; sourceTree = "<group>"; };
-		BE9D7FFB2FBE6EEBCA807B6A /* Pods_maevsi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_maevsi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BEE8E5C625AE96C07F8AADED /* Pods-maevsi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maevsi.debug.xcconfig"; path = "Target Support Files/Pods-maevsi/Pods-maevsi.debug.xcconfig"; sourceTree = "<group>"; };
+		9B51E89425AED6121A50D656 /* Pods-maevsi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maevsi.debug.xcconfig"; path = "Target Support Files/Pods-maevsi/Pods-maevsi.debug.xcconfig"; sourceTree = "<group>"; };
 		CDC0FE262388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = maevsi/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = maevsi/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,28 +47,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1E260C850014D6B34B487B0 /* Pods_maevsi.framework in Frameworks */,
+				E66CB9C14433DFB09B485CAC /* Pods_maevsi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		307C42D1166DA64E321C6752 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52274E1984BF607F244F20EC /* Pods_maevsi.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		30FCACC6A7BF53CD6D9CF6C0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BEE8E5C625AE96C07F8AADED /* Pods-maevsi.debug.xcconfig */,
-				4C1C2162A8048FDF52B2A9D0 /* Pods-maevsi.release.xcconfig */,
+				9B51E89425AED6121A50D656 /* Pods-maevsi.debug.xcconfig */,
+				1A54907175918C0FF4BCE968 /* Pods-maevsi.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		90E46E861CB86F5FAF46BED9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BE9D7FFB2FBE6EEBCA807B6A /* Pods_maevsi.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CD89F880237E9D9200C436A1 = {
@@ -88,8 +88,8 @@
 				CDC0FE252388222B002C8D56 /* Main.storyboard */,
 				595F23A425CEFBFE0053416C /* WebView.swift */,
 				30FCACC6A7BF53CD6D9CF6C0 /* Pods */,
-				90E46E861CB86F5FAF46BED9 /* Frameworks */,
 				59333BAA25CFF706003392A4 /* maevsi.app */,
+				307C42D1166DA64E321C6752 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,11 +100,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD89F89D237E9D9300C436A1 /* Build configuration list for PBXNativeTarget "maevsi" */;
 			buildPhases = (
-				E07DC62CDB59F65280F7057D /* [CP] Check Pods Manifest.lock */,
+				D569F3476EAB1B89757458F9 /* [CP] Check Pods Manifest.lock */,
 				CD89F885237E9D9200C436A1 /* Sources */,
 				CD89F886237E9D9200C436A1 /* Frameworks */,
 				CD89F887237E9D9200C436A1 /* Resources */,
-				592CB04773CB45D6CE5DF117 /* [CP] Embed Pods Frameworks */,
+				710B2831C7F597C2D5C22A22 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -165,7 +165,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		592CB04773CB45D6CE5DF117 /* [CP] Embed Pods Frameworks */ = {
+		710B2831C7F597C2D5C22A22 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -182,7 +182,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-maevsi/Pods-maevsi-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E07DC62CDB59F65280F7057D /* [CP] Check Pods Manifest.lock */ = {
+		D569F3476EAB1B89757458F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -365,7 +365,7 @@
 		};
 		CD89F89E237E9D9300C436A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BEE8E5C625AE96C07F8AADED /* Pods-maevsi.debug.xcconfig */;
+			baseConfigurationReference = 9B51E89425AED6121A50D656 /* Pods-maevsi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -403,7 +403,7 @@
 		};
 		CD89F89F237E9D9300C436A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4C1C2162A8048FDF52B2A9D0 /* Pods-maevsi.release.xcconfig */;
+			baseConfigurationReference = 1A54907175918C0FF4BCE968 /* Pods-maevsi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
