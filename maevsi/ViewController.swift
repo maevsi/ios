@@ -3,17 +3,21 @@ import WebKit
 
 var webView: WKWebView! = nil
 
-class ViewController: UIViewController, WKNavigationDelegate {
+class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteractionControllerDelegate {
+
+    var documentController: UIDocumentInteractionController?
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
 
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var connectionProblemView: UIImageView!
     @IBOutlet weak var webviewView: UIView!
-    @IBOutlet weak var splashBkgView: UIView!
     var toolbarView: UIToolbar!
-    
-    var htmlIsLoaded = false
-    
+
+    var htmlIsLoaded = false;
+
     private var themeObservation: NSKeyValueObservation?
     var currentWebViewTheme: UIUserInterfaceStyle = .unspecified
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -32,97 +36,121 @@ class ViewController: UIViewController, WKNavigationDelegate {
         initWebView()
         initToolbarView()
         loadRootUrl()
-                
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification , object: nil)
+
     }
-    
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        maevsi.webView.frame = calcWebviewFrame(webviewView: webviewView, toolbarView: nil)
+    }
+
     @objc func keyboardWillHide(_ notification: NSNotification) {
         maevsi.webView.setNeedsLayout()
     }
-    
+
     func initWebView() {
         maevsi.webView = createWebView(container: webviewView, WKSMH: self, WKND: self, NSO: self, VC: self)
         webviewView.addSubview(maevsi.webView);
+
         maevsi.webView.uiDelegate = self;
+
         maevsi.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
-        
+
+        if(pullToRefresh){
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(refreshWebView(_:)), for: UIControl.Event.valueChanged)
+            maevsi.webView.scrollView.addSubview(refreshControl)
+            maevsi.webView.scrollView.bounces = true
+        }
+
         if #available(iOS 15.0, *), adaptiveUIStyle {
             themeObservation = maevsi.webView.observe(\.underPageBackgroundColor) { [unowned self] webView, _ in
                 currentWebViewTheme = maevsi.webView.underPageBackgroundColor.isLight() ?? true ? .light : .dark
+                self.overrideUIStyle()
             }
         }
     }
-    
+
+    @objc func refreshWebView(_ sender: UIRefreshControl) {
+        maevsi.webView?.reload()
+        sender.endRefreshing()
+    }
+
     func createToolbarView() -> UIToolbar{
-        let statusBarHeight = getStatusBarHeight()
+        let winScene = UIApplication.shared.connectedScenes.first
+        let windowScene = winScene as! UIWindowScene
+        var statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 60
+
+        #if targetEnvironment(macCatalyst)
+        if (statusBarHeight == 0){
+            statusBarHeight = 30
+        }
+        #endif
+
         let toolbarView = UIToolbar(frame: CGRect(x: 0, y: 0, width: webviewView.frame.width, height: 0))
         toolbarView.sizeToFit()
         toolbarView.frame = CGRect(x: 0, y: 0, width: webviewView.frame.width, height: toolbarView.frame.height + statusBarHeight)
 //        toolbarView.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin, .flexibleWidth]
-        
+
         let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let close = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(loadRootUrl))
         toolbarView.setItems([close,flex], animated: true)
-        
+
         toolbarView.isHidden = true
-        
+
         return toolbarView
     }
 
-    func getStatusBarHeight() -> CGFloat {
-        let winScene = UIApplication.shared.connectedScenes.first
-        let windowScene = winScene as! UIWindowScene
-        var statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 60
-        
-        #if targetEnvironment(macCatalyst)
-        if (statusBarHeight == 0) {
-            statusBarHeight = 30
+    func overrideUIStyle(toDefault: Bool = false) {
+        if #available(iOS 15.0, *), adaptiveUIStyle {
+            if (((htmlIsLoaded && !maevsi.webView.isHidden) || toDefault) && self.currentWebViewTheme != .unspecified) {
+                UIApplication
+                    .shared
+                    .connectedScenes
+                    .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                    .first { $0.isKeyWindow }?.overrideUserInterfaceStyle = toDefault ? .unspecified : self.currentWebViewTheme;
+            }
         }
-        #endif
-        
-        return statusBarHeight;
     }
-    
-    func initToolbarView() {
-        toolbarView =  createToolbarView()        
-        webviewView.addSubview(toolbarView)
 
-        // Set the top of the splashBkgView to the bottom of the status bar.
-//        let statusBarHeight = getStatusBarHeight()
-//        let splashBkgFrame = self.splashBkgView.frame
-//        self.splashBkgView.frame = CGRect(x: splashBkgFrame.minX, y: statusBarHeight, width: splashBkgFrame.width, height: splashBkgFrame.height)
+    func initToolbarView() {
+        toolbarView =  createToolbarView()
+
+        webviewView.addSubview(toolbarView)
     }
-    
+
     @objc func loadRootUrl() {
-        // Was the app launched via a universal link? If so, navigate to that.
-        // Otherwise, see if we were launched via shortcut and nav to that.
-        // If neither, just nav to the main PWA URL.
-        let launchUrl = SceneDelegate.universalLinkToLaunch ?? SceneDelegate.shortcutLinkToLaunch ?? rootUrl;
-        maevsi.webView.load(URLRequest(url: launchUrl))
+        maevsi.webView.load(URLRequest(url: SceneDelegate.universalLinkToLaunch ?? SceneDelegate.shortcutLinkToLaunch ?? rootUrl))
     }
-    
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
-        htmlIsLoaded = true;
-        
-        self.setProgress(1.0, true);
-        self.animateConnectionProblem(false);
-        
+        htmlIsLoaded = true
+
+        self.setProgress(1.0, true)
+        self.animateConnectionProblem(false)
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            maevsi.webView.isHidden = false;
-            self.loadingView.isHidden = true;
-           
-            self.setProgress(0.0, false);
+            maevsi.webView.isHidden = false
+            self.loadingView.isHidden = true
+
+            self.setProgress(0.0, false)
+
+            self.overrideUIStyle()
         }
     }
-    
+
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         htmlIsLoaded = false;
-        
+
         if (error as NSError)._code != (-999) {
+            self.overrideUIStyle(toDefault: true);
+
             webView.isHidden = true;
             loadingView.isHidden = false;
             animateConnectionProblem(true);
-            
+
             setProgress(0.05, true);
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -133,7 +161,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
             }
         }
     }
-    
+
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 
         if (keyPath == #keyPath(WKWebView.estimatedProgress) &&
@@ -141,19 +169,19 @@ class ViewController: UIViewController, WKNavigationDelegate {
                 !self.loadingView.isHidden &&
                 !self.htmlIsLoaded) {
                     var progress = Float(maevsi.webView.estimatedProgress);
-                    
+
                     if (progress >= 0.8) { progress = 1.0; };
                     if (progress >= 0.3) { self.animateConnectionProblem(false); }
-                    
+
                     self.setProgress(progress, true);
-            
         }
     }
-    
+
     func setProgress(_ progress: Float, _ animated: Bool) {
         self.progressView.setProgress(progress, animated: animated);
     }
-    
+
+
     func animateConnectionProblem(_ show: Bool) {
         if (show) {
             self.connectionProblemView.isHidden = false;
@@ -171,27 +199,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
             })
         }
     }
-        
+
     deinit {
         maevsi.webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
     }
-}
-
-extension ViewController: WKScriptMessageHandler {
-  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "print" {
-            printView(webView: maevsi.webView)
-        }
-        if message.name == "push-subscribe" {
-            handleSubscribeTouch(message: message)
-        }
-        if message.name == "push-permission-request" {
-            handlePushPermission()
-        }
-        if message.name == "push-permission-state" {
-            handlePushState()
-        }
-  }
 }
 
 extension UIColor {
@@ -214,4 +225,24 @@ extension UIColor {
         let brightness = Float(((components[0] * 299) + (components[1] * 587) + (components[2] * 114)) / 1000)
         return (brightness > threshold)
     }
+}
+
+extension ViewController: WKScriptMessageHandler {
+  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "print" {
+            printView(webView: maevsi.webView)
+        }
+        if message.name == "push-subscribe" {
+            handleSubscribeTouch(message: message)
+        }
+        if message.name == "push-permission-request" {
+            handlePushPermission()
+        }
+        if message.name == "push-permission-state" {
+            handlePushState()
+        }
+        if message.name == "push-token" {
+            handleFCMToken()
+        }
+  }
 }

@@ -1,4 +1,4 @@
-platform :ios, '13.0'
+platform :ios, '15.0'
 project 'maevsi.xcodeproj'
 
 target 'maevsi' do
@@ -8,4 +8,12 @@ target 'maevsi' do
   # Add the pod for Firebase Cloud Messaging
   pod 'Firebase/Messaging'
 
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+    end
+  end
 end
