@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,23 @@
 
 #import <Foundation/Foundation.h>
 
-@class FBLPromise<Value>;
-@class GULURLSessionDataResponse;
+#import "FIRMessaging.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** Promise based API for `NSURLSession`. */
-@interface NSURLSession (GULPromises)
+@class FIRMessagingExtensionHelper;
 
-/** Creates a promise wrapping `-[NSURLSession dataTaskWithRequest:completionHandler:]` method.
- * @param URLRequest The request to create a data task with.
- * @return A promise that is fulfilled when an HTTP response is received (with any response code),
- * or is rejected with the error passed to the task completion.
+@interface FIRMessaging (ExtensionHelper)
+
+/**
+ * Use the MessagingExtensionHelper to populate rich UI content for your notifications.
+ * For example, if an image URL is set in your notification payload or on the console,
+ * you can use the MessagingExtensionHelper instance returned from this method to render
+ * the image in your notification.
+ *
+ * @return An instance of MessagingExtensionHelper that handles the extensions API.
  */
-- (FBLPromise<GULURLSessionDataResponse *> *)gul_dataTaskPromiseWithRequest:
-    (NSURLRequest *)URLRequest;
++ (FIRMessagingExtensionHelper *)extensionHelper NS_SWIFT_NAME(serviceExtension());
 
 @end
 

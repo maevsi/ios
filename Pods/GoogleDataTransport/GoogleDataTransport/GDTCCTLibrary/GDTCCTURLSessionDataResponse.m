@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef FIREBASECORE_FIREBASECOREINTERNAL_H
-#define FIREBASECORE_FIREBASECOREINTERNAL_H
+#import "GoogleDataTransport/GDTCCTLibrary/Private/GDTCCTURLSessionDataResponse.h"
 
-@import FirebaseCore;
+@implementation GDTCCTURLSessionDataResponse
 
-#import "FIRAppInternal.h"
-#import "FIRComponent.h"
-#import "FIRComponentContainer.h"
-#import "FIRComponentType.h"
-#import "FIRHeartbeatLogger.h"
-#import "FIRLibrary.h"
-#import "FIRLogger.h"
+- (instancetype)initWithResponse:(NSHTTPURLResponse *)response HTTPBody:(NSData *)body {
+  self = [super init];
+  if (self) {
+    _HTTPResponse = response;
+    _HTTPBody = body;
+  }
+  return self;
+}
 
-#endif  // FIREBASECORE_FIREBASECOREINTERNAL_H
+@end

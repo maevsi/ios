@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef FIREBASECORE_FIREBASECOREINTERNAL_H
-#define FIREBASECORE_FIREBASECOREINTERNAL_H
+#import <Foundation/Foundation.h>
 
-@import FirebaseCore;
+NS_ASSUME_NONNULL_BEGIN
 
-#import "FIRAppInternal.h"
-#import "FIRComponent.h"
-#import "FIRComponentContainer.h"
-#import "FIRComponentType.h"
-#import "FIRHeartbeatLogger.h"
-#import "FIRLibrary.h"
-#import "FIRLogger.h"
+/** The class represents HTTP response received from `NSURLSession`. */
+@interface GDTCCTURLSessionDataResponse : NSObject
 
-#endif  // FIREBASECORE_FIREBASECOREINTERNAL_H
+@property(nonatomic, readonly) NSHTTPURLResponse *HTTPResponse;
+@property(nonatomic, nullable, readonly) NSData *HTTPBody;
+
+- (instancetype)initWithResponse:(NSHTTPURLResponse *)response HTTPBody:(nullable NSData *)body;
+
+@end
+
+NS_ASSUME_NONNULL_END
