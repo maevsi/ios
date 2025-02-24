@@ -19,11 +19,11 @@
 		BF91683121A19C577A2580FA /* Pods_maevsi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BE885935017A76139F443C /* Pods_maevsi.framework */; };
 		CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE252388222B002C8D56 /* Main.storyboard */; };
 		CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */; };
+		DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDBCB1132D6C602600313680 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		15B4ECE9934FD45FF08FB278 /* Pods-maevsi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maevsi.debug.xcconfig"; path = "Target Support Files/Pods-maevsi/Pods-maevsi.debug.xcconfig"; sourceTree = "<group>"; };
-		25D3517E267A48E0002E5DC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "maevsi/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		59333BAA25CFF706003392A4 /* maevsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = maevsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		595F239A25CEFBFD0053416C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = maevsi/Settings.swift; sourceTree = "<group>"; };
 		595F239B25CEFBFD0053416C /* Entitlements */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Entitlements; path = maevsi/Entitlements; sourceTree = "<group>"; };
@@ -38,6 +38,7 @@
 		65A4F995967BAE60AA5D4F90 /* Pods-maevsi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maevsi.release.xcconfig"; path = "Target Support Files/Pods-maevsi/Pods-maevsi.release.xcconfig"; sourceTree = "<group>"; };
 		CDC0FE262388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = maevsi/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = maevsi/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DDBCB1132D6C602600313680 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "maevsi/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2BE885935017A76139F443C /* Pods_maevsi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_maevsi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -77,7 +78,6 @@
 				595F239C25CEFBFD0053416C /* Assets.xcassets */,
 				595F239B25CEFBFD0053416C /* Entitlements */,
 				595F23A025CEFBFE0053416C /* Info.plist */,
-				25D3517E267A48E0002E5DC0 /* GoogleService-Info.plist */,
 				595F23A325CEFBFE0053416C /* Printer.swift */,
 				595F239F25CEFBFE0053416C /* PushNotifications.swift */,
 				595F239D25CEFBFD0053416C /* SceneDelegate.swift */,
@@ -89,6 +89,7 @@
 				30FCACC6A7BF53CD6D9CF6C0 /* Pods */,
 				59333BAA25CFF706003392A4 /* maevsi.app */,
 				95560413E8A3AF7DD976ECCA /* Frameworks */,
+				DDBCB1132D6C602600313680 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -155,6 +156,7 @@
 			files = (
 				595F23A625CEFBFE0053416C /* Entitlements in Resources */,
 				CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */,
+				DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */,
 				CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */,
 				595F23A725CEFBFE0053416C /* Assets.xcassets in Resources */,
 			);
@@ -372,7 +374,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = NJWSWLWL24;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = NJWSWLWL24;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -410,7 +412,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = NJWSWLWL24;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = NJWSWLWL24;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
