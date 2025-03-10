@@ -1,7 +1,7 @@
 platform :ios, '15.0'
-project 'maevsi.xcodeproj'
+project 'vibetype.xcodeproj'
 
-target 'maevsi' do
+target 'vibetype' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 

@@ -16,30 +16,30 @@
 		595F23AD25CEFBFE0053416C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A225CEFBFE0053416C /* AppDelegate.swift */; };
 		595F23AE25CEFBFE0053416C /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A325CEFBFE0053416C /* Printer.swift */; };
 		595F23AF25CEFBFE0053416C /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A425CEFBFE0053416C /* WebView.swift */; };
-		BF91683121A19C577A2580FA /* Pods_maevsi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BE885935017A76139F443C /* Pods_maevsi.framework */; };
+		BF91683121A19C577A2580FA /* Pods_vibetype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BE885935017A76139F443C /* Pods_vibetype.framework */; };
 		CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE252388222B002C8D56 /* Main.storyboard */; };
 		CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */; };
 		DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDBCB1132D6C602600313680 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15B4ECE9934FD45FF08FB278 /* Pods-maevsi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maevsi.debug.xcconfig"; path = "Target Support Files/Pods-maevsi/Pods-maevsi.debug.xcconfig"; sourceTree = "<group>"; };
-		59333BAA25CFF706003392A4 /* maevsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = maevsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		595F239A25CEFBFD0053416C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = maevsi/Settings.swift; sourceTree = "<group>"; };
-		595F239B25CEFBFD0053416C /* Entitlements */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Entitlements; path = maevsi/Entitlements; sourceTree = "<group>"; };
-		595F239C25CEFBFD0053416C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = maevsi/Assets.xcassets; sourceTree = "<group>"; };
-		595F239D25CEFBFD0053416C /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = maevsi/SceneDelegate.swift; sourceTree = "<group>"; };
-		595F239F25CEFBFE0053416C /* PushNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushNotifications.swift; path = maevsi/PushNotifications.swift; sourceTree = "<group>"; };
-		595F23A025CEFBFE0053416C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = maevsi/Info.plist; sourceTree = "<group>"; };
-		595F23A125CEFBFE0053416C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = maevsi/ViewController.swift; sourceTree = "<group>"; };
-		595F23A225CEFBFE0053416C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = maevsi/AppDelegate.swift; sourceTree = "<group>"; };
-		595F23A325CEFBFE0053416C /* Printer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Printer.swift; path = maevsi/Printer.swift; sourceTree = "<group>"; };
-		595F23A425CEFBFE0053416C /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebView.swift; path = maevsi/WebView.swift; sourceTree = "<group>"; };
-		65A4F995967BAE60AA5D4F90 /* Pods-maevsi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-maevsi.release.xcconfig"; path = "Target Support Files/Pods-maevsi/Pods-maevsi.release.xcconfig"; sourceTree = "<group>"; };
-		CDC0FE262388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = maevsi/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = maevsi/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		DDBCB1132D6C602600313680 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "maevsi/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E2BE885935017A76139F443C /* Pods_maevsi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_maevsi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		15B4ECE9934FD45FF08FB278 /* Pods-vibetype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vibetype.debug.xcconfig"; path = "Target Support Files/Pods-vibetype/Pods-vibetype.debug.xcconfig"; sourceTree = "<group>"; };
+		59333BAA25CFF706003392A4 /* vibetype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vibetype.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		595F239A25CEFBFD0053416C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = vibetype/Settings.swift; sourceTree = "<group>"; };
+		595F239B25CEFBFD0053416C /* Entitlements */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Entitlements; path = vibetype/Entitlements; sourceTree = "<group>"; };
+		595F239C25CEFBFD0053416C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = vibetype/Assets.xcassets; sourceTree = "<group>"; };
+		595F239D25CEFBFD0053416C /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = vibetype/SceneDelegate.swift; sourceTree = "<group>"; };
+		595F239F25CEFBFE0053416C /* PushNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushNotifications.swift; path = vibetype/PushNotifications.swift; sourceTree = "<group>"; };
+		595F23A025CEFBFE0053416C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = vibetype/Info.plist; sourceTree = "<group>"; };
+		595F23A125CEFBFE0053416C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = vibetype/ViewController.swift; sourceTree = "<group>"; };
+		595F23A225CEFBFE0053416C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = vibetype/AppDelegate.swift; sourceTree = "<group>"; };
+		595F23A325CEFBFE0053416C /* Printer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Printer.swift; path = vibetype/Printer.swift; sourceTree = "<group>"; };
+		595F23A425CEFBFE0053416C /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebView.swift; path = vibetype/WebView.swift; sourceTree = "<group>"; };
+		65A4F995967BAE60AA5D4F90 /* Pods-vibetype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vibetype.release.xcconfig"; path = "Target Support Files/Pods-vibetype/Pods-vibetype.release.xcconfig"; sourceTree = "<group>"; };
+		CDC0FE262388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DDBCB1132D6C602600313680 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "vibetype/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E2BE885935017A76139F443C /* Pods_vibetype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vibetype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF91683121A19C577A2580FA /* Pods_maevsi.framework in Frameworks */,
+				BF91683121A19C577A2580FA /* Pods_vibetype.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,8 +57,8 @@
 		30FCACC6A7BF53CD6D9CF6C0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				15B4ECE9934FD45FF08FB278 /* Pods-maevsi.debug.xcconfig */,
-				65A4F995967BAE60AA5D4F90 /* Pods-maevsi.release.xcconfig */,
+				15B4ECE9934FD45FF08FB278 /* Pods-vibetype.debug.xcconfig */,
+				65A4F995967BAE60AA5D4F90 /* Pods-vibetype.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -66,7 +66,7 @@
 		95560413E8A3AF7DD976ECCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E2BE885935017A76139F443C /* Pods_maevsi.framework */,
+				E2BE885935017A76139F443C /* Pods_vibetype.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 				CDC0FE252388222B002C8D56 /* Main.storyboard */,
 				595F23A425CEFBFE0053416C /* WebView.swift */,
 				30FCACC6A7BF53CD6D9CF6C0 /* Pods */,
-				59333BAA25CFF706003392A4 /* maevsi.app */,
+				59333BAA25CFF706003392A4 /* vibetype.app */,
 				95560413E8A3AF7DD976ECCA /* Frameworks */,
 				DDBCB1132D6C602600313680 /* GoogleService-Info.plist */,
 			);
@@ -96,9 +96,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CD89F888237E9D9200C436A1 /* maevsi */ = {
+		CD89F888237E9D9200C436A1 /* vibetype */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CD89F89D237E9D9300C436A1 /* Build configuration list for PBXNativeTarget "maevsi" */;
+			buildConfigurationList = CD89F89D237E9D9300C436A1 /* Build configuration list for PBXNativeTarget "vibetype" */;
 			buildPhases = (
 				DF4B158A675D432413440C08 /* [CP] Check Pods Manifest.lock */,
 				CD89F885237E9D9200C436A1 /* Sources */,
@@ -110,9 +110,9 @@
 			);
 			dependencies = (
 			);
-			name = maevsi;
-			productName = maevsi;
-			productReference = 59333BAA25CFF706003392A4 /* maevsi.app */;
+			name = vibetype;
+			productName = vibetype;
+			productReference = 59333BAA25CFF706003392A4 /* vibetype.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -131,7 +131,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CD89F884237E9D9200C436A1 /* Build configuration list for PBXProject "maevsi" */;
+			buildConfigurationList = CD89F884237E9D9200C436A1 /* Build configuration list for PBXProject "vibetype" */;
 			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -144,7 +144,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CD89F888237E9D9200C436A1 /* maevsi */,
+				CD89F888237E9D9200C436A1 /* vibetype */,
 			);
 		};
 /* End PBXProject section */
@@ -171,15 +171,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-maevsi/Pods-maevsi-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-maevsi/Pods-maevsi-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-maevsi/Pods-maevsi-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DF4B158A675D432413440C08 /* [CP] Check Pods Manifest.lock */ = {
@@ -197,7 +197,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-maevsi-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-vibetype-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -365,12 +365,12 @@
 		};
 		CD89F89E237E9D9300C436A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15B4ECE9934FD45FF08FB278 /* Pods-maevsi.debug.xcconfig */;
+			baseConfigurationReference = 15B4ECE9934FD45FF08FB278 /* Pods-vibetype.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = NO;
-				CODE_SIGN_ENTITLEMENTS = maevsi/Entitlements/Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = vibetype/Entitlements/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -378,8 +378,8 @@
 				DEVELOPMENT_TEAM = NJWSWLWL24;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = NJWSWLWL24;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
-				INFOPLIST_FILE = maevsi/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = maevsi;
+				INFOPLIST_FILE = vibetype/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = vibetype;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 11.0;
@@ -389,7 +389,7 @@
 				);
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa;
-				PRODUCT_NAME = maevsi;
+				PRODUCT_NAME = vibetype;
 				PROVISIONING_PROFILE_SPECIFIER = Distribution;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Distribution;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -403,12 +403,12 @@
 		};
 		CD89F89F237E9D9300C436A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65A4F995967BAE60AA5D4F90 /* Pods-maevsi.release.xcconfig */;
+			baseConfigurationReference = 65A4F995967BAE60AA5D4F90 /* Pods-vibetype.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = NO;
-				CODE_SIGN_ENTITLEMENTS = maevsi/Entitlements/Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = vibetype/Entitlements/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -416,8 +416,8 @@
 				DEVELOPMENT_TEAM = NJWSWLWL24;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = NJWSWLWL24;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
-				INFOPLIST_FILE = maevsi/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = maevsi;
+				INFOPLIST_FILE = vibetype/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = vibetype;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 11.0;
@@ -427,7 +427,7 @@
 				);
 				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa;
-				PRODUCT_NAME = maevsi;
+				PRODUCT_NAME = vibetype;
 				PROVISIONING_PROFILE_SPECIFIER = Distribution;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Distribution;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -442,7 +442,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CD89F884237E9D9200C436A1 /* Build configuration list for PBXProject "maevsi" */ = {
+		CD89F884237E9D9200C436A1 /* Build configuration list for PBXProject "vibetype" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CD89F89B237E9D9300C436A1 /* Debug */,
@@ -451,7 +451,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CD89F89D237E9D9300C436A1 /* Build configuration list for PBXNativeTarget "maevsi" */ = {
+		CD89F89D237E9D9300C436A1 /* Build configuration list for PBXNativeTarget "vibetype" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CD89F89E237E9D9300C436A1 /* Debug */,
