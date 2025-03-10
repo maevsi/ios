@@ -36,7 +36,7 @@ func handleSubscribeTouch(message: WKScriptMessage) {
             Messaging.messaging().subscribe(toTopic: _message.topic) { error in }
         }
     }
-    
+
 
   // [END subscribe_topic]
 }
@@ -58,7 +58,7 @@ func parseSubscribeMessage(message: WKScriptMessage) -> [SubscribeMessage] {
                 }
             }
         } catch _ {
-            
+
         }
     }
     return subscribeMessages
@@ -156,7 +156,7 @@ func handleFCMToken(){
                 print("FCM registration token: \(token)")
                 checkViewAndEvaluate(event: "push-token", detail: "'\(token)'")
             }
-        }   
+        }
     })
 }
 
