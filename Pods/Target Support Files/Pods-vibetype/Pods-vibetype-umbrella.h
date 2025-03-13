@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_maevsiVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_maevsiVersionString[];
+FOUNDATION_EXPORT double Pods_vibetypeVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_vibetypeVersionString[];
 
