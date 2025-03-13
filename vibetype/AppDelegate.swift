@@ -119,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print full message.
         print("push userInfo 4:", userInfo)
-        sendPushToWebView(userInfo: userInfo)
+        sendPushClickToWebView(userInfo: userInfo)
 
         completionHandler()
       }
