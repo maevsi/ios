@@ -77,7 +77,7 @@
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Explore events</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>https://maev.si/events</string>
+			<string>https://vibetype.app/events</string>
 		</dict>
 	</array>
 	<key>UIBackgroundModes</key>
@@ -116,7 +116,7 @@
 	<true/>
 	<key>WKAppBoundDomains</key>
 	<array>
-		<string>maev.si/?source=pwa</string>
+		<string>vibetype.app/?source=pwa</string>
 	</array>
 </dict>
 </plist>
