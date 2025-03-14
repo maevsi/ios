@@ -117,13 +117,13 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
         if (navigationAction.shouldPerformDownload || navigationAction.request.url?.scheme == "blob") {
             return decisionHandler(.download)
         }
-        if navigationAction.request.value(forHTTPHeaderField: "vibetype-platform") == nil {
+        /*if navigationAction.request.value(forHTTPHeaderField: "vibetype-platform") == nil {
             decisionHandler(.cancel)
 
             var req = navigationAction.request
             req.addValue("ios", forHTTPHeaderField: "vibetype-platform")
             webView.load(req)
-        } else {
+        } else {*/
             if let requestUrl = navigationAction.request.url{
                 if let requestHost = requestUrl.host {
                     // NOTE: Match auth origin first, because host origin may be a subset of auth origin and may therefore always match
@@ -192,7 +192,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
             else {
                 decisionHandler(.cancel)
             }
-        }
+        //}
     }
     // Handle javascript: `window.alert(message: String)`
     func webView(_ webView: WKWebView,
