@@ -377,7 +377,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NJWSWLWL24;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = NJWSWLWL24;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -390,7 +390,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa;
 				PRODUCT_NAME = vibetype;
 				PROVISIONING_PROFILE_SPECIFIER = Distribution;
@@ -415,7 +415,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NJWSWLWL24;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = NJWSWLWL24;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -428,7 +428,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa;
 				PRODUCT_NAME = vibetype;
 				PROVISIONING_PROFILE_SPECIFIER = Distribution;
