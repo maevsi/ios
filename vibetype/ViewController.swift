@@ -1,5 +1,6 @@
 import UIKit
 import WebKit
+import AppTrackingTransparency
 
 var webView: WKWebView! = nil
 
@@ -35,6 +36,9 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         super.viewDidLoad()
         initWebView()
         initToolbarView()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+               self.handleTrackingPermission()
+           }
         loadRootUrl()
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification , object: nil)
@@ -228,21 +232,66 @@ extension UIColor {
 }
 
 extension ViewController: WKScriptMessageHandler {
-  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if message.name == "print" {
-            printView(webView: vibetype.webView)
-        }
-        if message.name == "push-subscribe" {
-            handleSubscribeTouch(message: message)
-        }
-        if message.name == "push-permission-request" {
-            handlePushPermission()
-        }
-        if message.name == "push-permission-state" {
-            handlePushState()
-        }
-        if message.name == "push-token" {
-            handleFCMToken()
-        }
-  }
+
+
+func returnTrackingPermissionResult(isAuthorized: Bool) {
+    let result = isAuthorized ? "authorized" : "denied"
+    dispatchEventToWebView(name: "tracking-permission-request", data: result)
 }
+
+func returnTrackingPermissionState(state: String) {
+    dispatchEventToWebView(name: "tracking-permission-state", data: state)
+}
+
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        switch message.name {
+        case "print":
+            printView(webView: vibetype.webView)
+        case "push-subscribe":
+            handleSubscribeTouch(message: message)
+        case "push-permission-request":
+            handlePushPermission()
+        case "push-permission-state":
+            handlePushState()
+        case "push-token":
+            handleFCMToken()
+        case "tracking-permission-request":
+            handleTrackingPermission()
+        case "tracking-permission-state":
+            handleTrackingState()
+        default:
+            break
+        }
+    }
+
+   func handleTrackingPermission() {
+    ATTrackingManager.requestTrackingAuthorization { status in
+        let isAuthorized = status == .authorized
+        self.returnTrackingPermissionResult(isAuthorized: isAuthorized)
+    }
+}
+
+func handleTrackingState() {
+    let status = ATTrackingManager.trackingAuthorizationStatus
+    let isAuthorized = status == .authorized
+    let state = isAuthorized ? "authorized" : "denied"
+    returnTrackingPermissionState(state: state)
+}
+    func dispatchEventToWebView(name: String, data: String) {
+        let js = """
+        const event = new CustomEvent('\(name)', { detail: '\(data)' });
+        window.dispatchEvent(event);
+        """
+        vibetype.webView.evaluateJavaScript(js, completionHandler: nil)
+    }
+
+}
+
+  
+
+
+
+
+
+
