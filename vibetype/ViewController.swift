@@ -37,8 +37,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         initWebView()
         initToolbarView()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-               self.handleTrackingPermission()
-           }
+            self.handleTrackingPermission()
+        }
         loadRootUrl()
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification , object: nil)
@@ -232,17 +232,14 @@ extension UIColor {
 }
 
 extension ViewController: WKScriptMessageHandler {
+    func returnTrackingPermissionResult(isAuthorized: Bool) {
+        let result = isAuthorized ? "authorized" : "denied"
+        dispatchEventToWebView(name: "tracking-permission-request", data: result)
+    }
 
-
-func returnTrackingPermissionResult(isAuthorized: Bool) {
-    let result = isAuthorized ? "authorized" : "denied"
-    dispatchEventToWebView(name: "tracking-permission-request", data: result)
-}
-
-func returnTrackingPermissionState(state: String) {
-    dispatchEventToWebView(name: "tracking-permission-state", data: state)
-}
-
+    func returnTrackingPermissionState(state: String) {
+        dispatchEventToWebView(name: "tracking-permission-state", data: state)
+    }
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
@@ -265,19 +262,20 @@ func returnTrackingPermissionState(state: String) {
         }
     }
 
-   func handleTrackingPermission() {
-    ATTrackingManager.requestTrackingAuthorization { status in
-        let isAuthorized = status == .authorized
-        self.returnTrackingPermissionResult(isAuthorized: isAuthorized)
+    func handleTrackingPermission() {
+        ATTrackingManager.requestTrackingAuthorization { status in
+            let isAuthorized = status == .authorized
+            self.returnTrackingPermissionResult(isAuthorized: isAuthorized)
+        }
     }
-}
 
-func handleTrackingState() {
-    let status = ATTrackingManager.trackingAuthorizationStatus
-    let isAuthorized = status == .authorized
-    let state = isAuthorized ? "authorized" : "denied"
-    returnTrackingPermissionState(state: state)
-}
+    func handleTrackingState() {
+        let status = ATTrackingManager.trackingAuthorizationStatus
+        let isAuthorized = status == .authorized
+        let state = isAuthorized ? "authorized" : "denied"
+        returnTrackingPermissionState(state: state)
+    }
+
     func dispatchEventToWebView(name: String, data: String) {
         let js = """
         const event = new CustomEvent('\(name)', { detail: '\(data)' });
@@ -285,13 +283,4 @@ func handleTrackingState() {
         """
         vibetype.webView.evaluateJavaScript(js, completionHandler: nil)
     }
-
 }
-
-  
-
-
-
-
-
-
