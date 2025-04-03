@@ -19,7 +19,7 @@ let allowedOrigins: [String] = ["vibetype.app"]
 let authOrigins: [String] = []
 // allowedOrigins + authOrigins <= 10
 
-let platformCookie = Cookie(name: "app-platform", value: "iOS App Store")
+let platformCookie = Cookie(name: "app-platform", value: "ios")
 
 // UI options
 let displayMode = "standalone" // standalone / fullscreen.
