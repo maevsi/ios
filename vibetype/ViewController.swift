@@ -36,13 +36,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         super.viewDidLoad()
         initWebView()
         initToolbarView()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.handleTrackingPermission()
-        }
         loadRootUrl()
-
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification , object: nil)
-
     }
 
     override func viewDidLayoutSubviews() {
@@ -125,25 +120,36 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         webviewView.addSubview(toolbarView)
     }
 
-    @objc func loadRootUrl() {
+ @objc func loadRootUrl() {
         vibetype.webView.load(URLRequest(url: SceneDelegate.universalLinkToLaunch ?? SceneDelegate.shortcutLinkToLaunch ?? rootUrl))
     }
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
-        htmlIsLoaded = true
-
-        self.setProgress(1.0, true)
-        self.animateConnectionProblem(false)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            vibetype.webView.isHidden = false
-            self.loadingView.isHidden = true
-
-            self.setProgress(0.0, false)
-
-            self.overrideUIStyle()
-        }
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    htmlIsLoaded = true
+    self.setProgress(1.0, true)
+    self.animateConnectionProblem(false)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+        vibetype.webView.isHidden = false
+        self.loadingView.isHidden = true
+        self.setProgress(0.0, false)
+        self.overrideUIStyle()
+        self.handleTrackingPermission()
     }
+}
+
+// Enable this block for local simulator testing to bypass SSL certificate validation.
+// (Do NOT use this in production.)
+/*
+func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, 
+             completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+        completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
+    } else {
+        completionHandler(.performDefaultHandling, nil)
+    }
+}
+*/
+
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         htmlIsLoaded = false;
@@ -263,24 +269,35 @@ extension ViewController: WKScriptMessageHandler {
     }
 
     func handleTrackingPermission() {
-        ATTrackingManager.requestTrackingAuthorization { status in
+        ATTrackingManager.requestTrackingAuthorization { [weak self] status in
             let isAuthorized = status == .authorized
-            self.returnTrackingPermissionResult(isAuthorized: isAuthorized)
+            self?.dispatchEventToWebView(
+                name: "tracking-permission-result",
+                data: isAuthorized ? "authorized" : "denied"
+            )
         }
     }
 
-    func handleTrackingState() {
-        let status = ATTrackingManager.trackingAuthorizationStatus
-        let isAuthorized = status == .authorized
-        let state = isAuthorized ? "authorized" : "denied"
-        returnTrackingPermissionState(state: state)
-    }
-
-    func dispatchEventToWebView(name: String, data: String) {
-        let js = """
-        const event = new CustomEvent('\(name)', { detail: '\(data)' });
-        window.dispatchEvent(event);
-        """
-        vibetype.webView.evaluateJavaScript(js, completionHandler: nil)
+func dispatchEventToWebView(name: String, data: String) {
+    DispatchQueue.main.async {
+        vibetype.webView.evaluateJavaScript("""
+            window.dispatchEvent(new CustomEvent('\(name)', { detail: '\(data)' }));
+            """, completionHandler: nil)
     }
 }
+
+func handleTrackingState() {
+    let status = ATTrackingManager.trackingAuthorizationStatus
+    let isAuthorized = status == .authorized
+    let state = isAuthorized ? "authorized" : "denied"
+    returnTrackingPermissionState(state: state)
+}
+}
+
+  
+
+
+
+
+
+

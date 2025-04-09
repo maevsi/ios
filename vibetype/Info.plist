@@ -50,6 +50,8 @@
 	<string>Capture Video by user request</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Track current location by user request</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This allows us to provide you with a personalized experience</string>
 	<!-- <key>NSMicrophoneUsageDescription</key>
 	<string>Capture Audio by user request</string> -->
 	<key>UIApplicationSceneManifest</key>
@@ -116,7 +118,7 @@
 	<true/>
 	<key>WKAppBoundDomains</key>
 	<array>
-		<string>vibetype.app/?source=pwa</string>
+		<string>192.168.0.105:3000/?source=pwa</string>
 	</array>
 </dict>
 </plist>

@@ -3,8 +3,6 @@ import UIKit
 import AuthenticationServices
 import SafariServices
 import AppTrackingTransparency
-import FirebaseCore
-
 
 func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNavigationDelegate, NSO: NSObject, VC: ViewController) -> WKWebView{
 
@@ -365,9 +363,9 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
         self.documentController?.presentPreview(animated: true)
     }
 
-    func webView(_ webView: WKWebView, navigationAction: WKNavigationAction, didBecome download: WKDownload) {
-        download.delegate = self
-    }
+   func webView(_ webView: WKWebView, navigationAction: WKNavigationAction, didBecome download: WKDownload) {
+    download.delegate = self
+}
 
     func download(_ download: WKDownload, decideDestinationUsing response: URLResponse,
                 suggestedFilename: String,

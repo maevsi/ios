@@ -16,14 +16,16 @@
 		595F23AD25CEFBFE0053416C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A225CEFBFE0053416C /* AppDelegate.swift */; };
 		595F23AE25CEFBFE0053416C /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A325CEFBFE0053416C /* Printer.swift */; };
 		595F23AF25CEFBFE0053416C /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A425CEFBFE0053416C /* WebView.swift */; };
-		BF91683121A19C577A2580FA /* Pods_vibetype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BE885935017A76139F443C /* Pods_vibetype.framework */; };
 		CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE252388222B002C8D56 /* Main.storyboard */; };
 		CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */; };
 		DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDBCB1132D6C602600313680 /* GoogleService-Info.plist */; };
+		F5D04133E31B96C611EA3336 /* Pods_vibetype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CAA57987F33013C7A1AE6F1 /* Pods_vibetype.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15B4ECE9934FD45FF08FB278 /* Pods-vibetype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vibetype.debug.xcconfig"; path = "Target Support Files/Pods-vibetype/Pods-vibetype.debug.xcconfig"; sourceTree = "<group>"; };
+		2F92957C789FDB3F908AFEF4 /* Pods-vibetype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vibetype.release.xcconfig"; path = "Target Support Files/Pods-vibetype/Pods-vibetype.release.xcconfig"; sourceTree = "<group>"; };
+		3CAF3341F8D75FBBBAFA92DF /* Pods-vibetype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vibetype.debug.xcconfig"; path = "Target Support Files/Pods-vibetype/Pods-vibetype.debug.xcconfig"; sourceTree = "<group>"; };
+		4CAA57987F33013C7A1AE6F1 /* Pods_vibetype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vibetype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59333BAA25CFF706003392A4 /* vibetype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vibetype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		595F239A25CEFBFD0053416C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = vibetype/Settings.swift; sourceTree = "<group>"; };
 		595F239B25CEFBFD0053416C /* Entitlements */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Entitlements; path = vibetype/Entitlements; sourceTree = "<group>"; };
@@ -35,11 +37,9 @@
 		595F23A225CEFBFE0053416C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = vibetype/AppDelegate.swift; sourceTree = "<group>"; };
 		595F23A325CEFBFE0053416C /* Printer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Printer.swift; path = vibetype/Printer.swift; sourceTree = "<group>"; };
 		595F23A425CEFBFE0053416C /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebView.swift; path = vibetype/WebView.swift; sourceTree = "<group>"; };
-		65A4F995967BAE60AA5D4F90 /* Pods-vibetype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vibetype.release.xcconfig"; path = "Target Support Files/Pods-vibetype/Pods-vibetype.release.xcconfig"; sourceTree = "<group>"; };
 		CDC0FE262388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DDBCB1132D6C602600313680 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "vibetype/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E2BE885935017A76139F443C /* Pods_vibetype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vibetype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF91683121A19C577A2580FA /* Pods_vibetype.framework in Frameworks */,
+				F5D04133E31B96C611EA3336 /* Pods_vibetype.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,16 +57,16 @@
 		30FCACC6A7BF53CD6D9CF6C0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				15B4ECE9934FD45FF08FB278 /* Pods-vibetype.debug.xcconfig */,
-				65A4F995967BAE60AA5D4F90 /* Pods-vibetype.release.xcconfig */,
+				3CAF3341F8D75FBBBAFA92DF /* Pods-vibetype.debug.xcconfig */,
+				2F92957C789FDB3F908AFEF4 /* Pods-vibetype.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		95560413E8A3AF7DD976ECCA /* Frameworks */ = {
+		9D5D7042A533C18A99BCB537 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E2BE885935017A76139F443C /* Pods_vibetype.framework */,
+				4CAA57987F33013C7A1AE6F1 /* Pods_vibetype.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -88,8 +88,8 @@
 				595F23A425CEFBFE0053416C /* WebView.swift */,
 				30FCACC6A7BF53CD6D9CF6C0 /* Pods */,
 				59333BAA25CFF706003392A4 /* vibetype.app */,
-				95560413E8A3AF7DD976ECCA /* Frameworks */,
 				DDBCB1132D6C602600313680 /* GoogleService-Info.plist */,
+				9D5D7042A533C18A99BCB537 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,11 +100,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD89F89D237E9D9300C436A1 /* Build configuration list for PBXNativeTarget "vibetype" */;
 			buildPhases = (
-				DF4B158A675D432413440C08 /* [CP] Check Pods Manifest.lock */,
+				0C527C7B384A4EDB4585D3EB /* [CP] Check Pods Manifest.lock */,
 				CD89F885237E9D9200C436A1 /* Sources */,
 				CD89F886237E9D9200C436A1 /* Frameworks */,
 				CD89F887237E9D9200C436A1 /* Resources */,
-				98A973720F3450EC01D94E4C /* [CP] Embed Pods Frameworks */,
+				78D914A405BB7567F2674770 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,24 +166,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		98A973720F3450EC01D94E4C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DF4B158A675D432413440C08 /* [CP] Check Pods Manifest.lock */ = {
+		0C527C7B384A4EDB4585D3EB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -203,6 +186,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78D914A405BB7567F2674770 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -368,7 +368,7 @@
 		};
 		CD89F89E237E9D9300C436A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15B4ECE9934FD45FF08FB278 /* Pods-vibetype.debug.xcconfig */;
+			baseConfigurationReference = 3CAF3341F8D75FBBBAFA92DF /* Pods-vibetype.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -406,7 +406,7 @@
 		};
 		CD89F89F237E9D9300C436A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 65A4F995967BAE60AA5D4F90 /* Pods-vibetype.release.xcconfig */;
+			baseConfigurationReference = 2F92957C789FDB3F908AFEF4 /* Pods-vibetype.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
