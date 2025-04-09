@@ -59,15 +59,19 @@ final class HeartbeatStorage: Sendable, HeartbeatStorageProtocol {
     // `nonisolated(unsafe)` to disable concurrency-safety checks. The
     // property's access is protected by an external synchronization mechanism
     // (see `instancesLock` property).
-    private nonisolated(unsafe) static var cachedInstances: AtomicBox<
-      [String: WeakContainer<HeartbeatStorage>]
-    > = AtomicBox([:])
+    private nonisolated(unsafe) static var cachedInstances: [
+      String: WeakContainer<HeartbeatStorage>
+    ] = [:]
   #else
     // TODO(Xcode 16): Delete this block when minimum supported Xcode is
     // Xcode 16.
-    static var cachedInstances: AtomicBox<[String: WeakContainer<HeartbeatStorage>]> =
-      AtomicBox([:])
+    private static var cachedInstances: [
+      String: WeakContainer<HeartbeatStorage>
+    ] = [:]
   #endif // compiler(>=6)
+
+  /// Used to synchronize concurrent access to  the `cachedInstances` property.
+  private static let instancesLock = NSLock()
 
   /// Gets an existing `HeartbeatStorage` instance with the given `id` if one exists. Otherwise,
   /// makes a new instance with the given `id`.
@@ -75,7 +79,7 @@ final class HeartbeatStorage: Sendable, HeartbeatStorageProtocol {
   /// - Parameter id: A string identifier.
   /// - Returns: A `HeartbeatStorage` instance.
   static func getInstance(id: String) -> HeartbeatStorage {
-    cachedInstances.withLock { cachedInstances in
+    instancesLock.withLock {
       if let cachedInstance = cachedInstances[id]?.object {
         return cachedInstance
       } else {
@@ -106,8 +110,8 @@ final class HeartbeatStorage: Sendable, HeartbeatStorageProtocol {
 
   deinit {
     // Removes the instance if it was cached.
-    Self.cachedInstances.withLock { value in
-      value.removeValue(forKey: id)
+    _ = Self.instancesLock.withLock {
+      Self.cachedInstances.removeValue(forKey: id)
     }
   }
 
