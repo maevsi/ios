@@ -47,7 +47,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Capture Video by user request</string>
+	<string>Allow camera access to quickly scan event QR codes and check in</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Track current location by user request</string>
 	<key>NSUserTrackingUsageDescription</key>
