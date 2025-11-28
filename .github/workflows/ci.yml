@@ -1,0 +1,33 @@
+name: CI
+
+permissions: {}
+
+on:
+  pull_request:
+  push:
+    branches:
+      - alpha
+      - beta
+      - main
+      - renovate/**
+
+jobs:
+  build:
+    name: Build iOS (simulator)
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@8aeb6ff8030dd539317f8e1769a044873b56ea71 # v1.268.0
+
+      - name: Install CocoaPods
+        run: |
+          sudo gem install cocoapods xcpretty
+
+      - name: Build workspace on iOS Simulator
+        run: |
+          set -o pipefail
+          xcodebuild -workspace vibetype.xcworkspace -scheme vibetype -destination 'platform=iOS Simulator,name=iPhone 16' -configuration Release clean build | xcpretty
