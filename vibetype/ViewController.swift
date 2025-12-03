@@ -73,6 +73,15 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         }
     }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        if userSelectedSystemMode {
+            currentWebViewTheme = traitCollection.userInterfaceStyle == .dark ? .dark : .light
+            overrideUIStyle()
+        }
+    }
+
     @objc func refreshWebView(_ sender: UIRefreshControl) {
         vibetype.webView?.reload()
         sender.endRefreshing()
