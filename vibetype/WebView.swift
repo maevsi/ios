@@ -2,7 +2,7 @@ import UIKit
 @preconcurrency import WebKit
 import AuthenticationServices
 import SafariServices
-
+import AppTrackingTransparency
 
 func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNavigationDelegate, NSO: NSObject, VC: ViewController) -> WKWebView{
 
@@ -16,6 +16,8 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     userContentController.add(WKSMH, name: "push-permission-request")
     userContentController.add(WKSMH, name: "push-permission-state")
     userContentController.add(WKSMH, name: "push-token")
+    userContentController.add(WKSMH, name: "tracking-permission-request")
+    userContentController.add(WKSMH, name: "tracking-permission-state")
 
     config.userContentController = userContentController
 
