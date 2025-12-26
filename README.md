@@ -83,6 +83,7 @@ brew install ruby
 echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
 echo 'export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"' >> ~/.zshrc
 echo 'export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"' >> ~/.zshrc
+echo 'export PATH="$(ruby -e '\''print Gem.default_dir'\'')/bin:$PATH"' >> ~/.zshrc
 exec zsh
 ```
 </details>
@@ -94,6 +95,7 @@ exec zsh
 echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.zshrc
 echo 'export LDFLAGS="-L/usr/local/opt/ruby/lib"' >> ~/.zshrc
 echo 'export CPPFLAGS="-I/usr/local/opt/ruby/include"' >> ~/.zshrc
+echo 'export PATH="$(ruby -e '\''print Gem.default_dir'\'')/bin:$PATH"' >> ~/.zshrc
 exec zsh
 ```
 </details>
@@ -110,7 +112,7 @@ ruby -v
 <summary><strong>💎 Step 2: Install CocoaPods</strong></summary>
 
 ```sh
-gem install cocoapods
+sudo gem install cocoapods
 ```
 
 Verify:
