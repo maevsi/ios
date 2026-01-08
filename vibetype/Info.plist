@@ -47,9 +47,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Capture Video by user request</string>
+	<string>Allow camera access to quickly scan event QR codes and check in</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Track current location by user request</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This app would like to track you across apps and websites to provide personalized experiences and analytics</string>
 	<!-- <key>NSMicrophoneUsageDescription</key>
 	<string>Capture Audio by user request</string> -->
 	<key>UIApplicationSceneManifest</key>
