@@ -20,7 +20,7 @@ jobs:
   build:
     needs: ci-optimization
     name: Build iOS (simulator)
-    runs-on: macos-latest
+    runs-on: macos-26 # change back to macos-latest once v26 is default
 
     steps:
       - name: Checkout repository
@@ -36,4 +36,4 @@ jobs:
       - name: Build workspace on iOS Simulator
         run: |
           set -o pipefail
-          xcodebuild -workspace vibetype.xcworkspace -scheme vibetype -destination 'platform=iOS Simulator,name=iPhone 16' -configuration Release clean build | xcpretty
+          xcodebuild -workspace vibetype.xcworkspace -scheme vibetype -destination 'platform=iOS Simulator,name=iPhone 17' -configuration Release clean build | xcpretty
