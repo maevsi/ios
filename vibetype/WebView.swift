@@ -1,5 +1,5 @@
 import UIKit
-@preconcurrency import WebKit
+import WebKit
 import AuthenticationServices
 import SafariServices
 
