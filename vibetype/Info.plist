@@ -47,9 +47,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Capture Video by user request</string>
+	<string>The app allows taking photos of event posters to show interest in the listed events.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Track current location by user request</string>
+	<string>The app allows accessing your location to provide event recommendations based on your area.</string>
 	<!-- <key>NSMicrophoneUsageDescription</key>
 	<string>Capture Audio by user request</string> -->
 	<key>UIApplicationSceneManifest</key>
