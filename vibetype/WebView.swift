@@ -26,16 +26,20 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     config.applicationNameForUserAgent = "Device/\(deviceModel) Version/\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion) Safari/vibetype"
 
     let webView = WKWebView(frame: calcWebviewFrame(webviewView: container, toolbarView: nil), configuration: config)
-
     setCustomCookie(webView: webView)
 
     webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
     webView.isHidden = true;
     webView.navigationDelegate = WKND
     webView.scrollView.bounces = false
     webView.scrollView.contentInsetAdjustmentBehavior = .never
     webView.allowsBackForwardNavigationGestures = true
+
+    // Check if macCatalyst 16.4+ is available and if so, enable web inspector.
+    // This allows the web app to be inspected using Safari Web Inspector. Supported on iOS 16.4+ and macOS 13.3+
+    if #available(iOS 16.4, macOS 13.3, *) {
+        webView.isInspectable = true
+    }
 
     // let deviceModel = UIDevice.current.model
     // let osVersion = UIDevice.current.systemVersion
@@ -364,6 +368,11 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
 
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let fileURL = documentsPath.appendingPathComponent(suggestedFilename)
+
+        // Remove existing file if it exists, otherwise it may show an old file/content just by having the same name.
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            try? FileManager.default.removeItem(at: fileURL)
+        }
 
         self.openFile(url: fileURL)
         completionHandler(fileURL)
