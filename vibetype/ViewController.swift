@@ -246,5 +246,93 @@ extension ViewController: WKScriptMessageHandler {
         if message.name == "push-token" {
             handleFCMToken()
         }
+        if message.name == "att-request-permission" {
+            handleATTPermissionRequest()
+        }
+        if message.name == "att-get-status" {
+            handleATTGetStatus()
+        }
+        if message.name == "att-get-idfa" {
+            handleATTGetIDFA()
+        }
   }
+}
+
+// MARK: - App Tracking Transparency Handlers
+extension ViewController {
+
+    func handleATTPermissionRequest() {
+        if #available(iOS 14, *) {
+            TrackingTransparencyManager.requestPermission { status in
+                let statusString = TrackingTransparencyManager.statusToString(status)
+                let script = """
+                    window.dispatchEvent(new CustomEvent('attPermissionResponse', {
+                        detail: { status: '\(statusString)' }
+                    }));
+                """
+                vibetype.webView.evaluateJavaScript(script) { result, error in
+                    if let error = error {
+                        print("Error dispatching ATT permission response: \(error)")
+                    }
+                }
+            }
+        } else {
+            // ATT is only available on iOS 14+
+            let script = """
+                window.dispatchEvent(new CustomEvent('attPermissionResponse', {
+                    detail: { status: 'unavailable', error: 'ATT requires iOS 14 or later' }
+                }));
+            """
+            vibetype.webView.evaluateJavaScript(script)
+        }
+    }
+
+    func handleATTGetStatus() {
+        if #available(iOS 14, *) {
+            let statusString = TrackingTransparencyManager.getStatusString()
+            let script = """
+                window.dispatchEvent(new CustomEvent('attStatusResponse', {
+                    detail: { status: '\(statusString)' }
+                }));
+            """
+            vibetype.webView.evaluateJavaScript(script) { result, error in
+                if let error = error {
+                    print("Error dispatching ATT status response: \(error)")
+                }
+            }
+        } else {
+            // ATT is only available on iOS 14+
+            let script = """
+                window.dispatchEvent(new CustomEvent('attStatusResponse', {
+                    detail: { status: 'unavailable' }
+                }));
+            """
+            vibetype.webView.evaluateJavaScript(script)
+        }
+    }
+
+    func handleATTGetIDFA() {
+        if #available(iOS 14, *) {
+            let idfa = TrackingTransparencyManager.getIDFA()
+            let idfaValue = idfa ?? "null"
+            let script = """
+                window.dispatchEvent(new CustomEvent('attIDFAResponse', {
+                    detail: { idfa: '\(idfaValue)' }
+                }));
+            """
+            vibetype.webView.evaluateJavaScript(script) { result, error in
+                if let error = error {
+                    print("Error dispatching ATT IDFA response: \(error)")
+                }
+            }
+        } else {
+            // ATT is only available on iOS 14+
+            let script = """
+                window.dispatchEvent(new CustomEvent('attIDFAResponse', {
+                    detail: { idfa: null, error: 'ATT requires iOS 14 or later' }
+                }));
+            """
+            vibetype.webView.evaluateJavaScript(script)
+        }
+    }
 }
