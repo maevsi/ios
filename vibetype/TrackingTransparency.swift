@@ -21,19 +21,7 @@ class TrackingTransparencyManager {
 
     // Get status as a string representation for JavaScript
     static func getStatusString() -> String {
-        let status = getStatus()
-        switch status {
-        case .notDetermined:
-            return "notDetermined"
-        case .restricted:
-            return "restricted"
-        case .denied:
-            return "denied"
-        case .authorized:
-            return "authorized"
-        @unknown default:
-            return "unknown"
-        }
+        return statusToString(getStatus())
     }
 
     // Convert status to string
@@ -59,6 +47,13 @@ class TrackingTransparencyManager {
         }
 
         let idfa = ASIdentifierManager.shared().advertisingIdentifier
+
+        // Apple returns all zeros when tracking is not authorized
+        let zeroIDFA = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
+        guard idfa != zeroIDFA else {
+            return nil
+        }
+
         return idfa.uuidString
     }
 }

@@ -265,9 +265,15 @@ extension ViewController {
         if #available(iOS 14, *) {
             TrackingTransparencyManager.requestPermission { status in
                 let statusString = TrackingTransparencyManager.statusToString(status)
+                let detail: [String: Any] = ["status": statusString]
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: detail),
+                      let jsonString = String(data: jsonData, encoding: .utf8) else {
+                    print("Error serializing ATT permission response")
+                    return
+                }
                 let script = """
                     window.dispatchEvent(new CustomEvent('attPermissionResponse', {
-                        detail: { status: '\(statusString)' }
+                        detail: \(jsonString)
                     }));
                 """
                 vibetype.webView.evaluateJavaScript(script) { result, error in
@@ -283,16 +289,26 @@ extension ViewController {
                     detail: { status: 'unavailable', error: 'ATT requires iOS 14 or later' }
                 }));
             """
-            vibetype.webView.evaluateJavaScript(script)
+            vibetype.webView.evaluateJavaScript(script) { result, error in
+                if let error = error {
+                    print("Error dispatching ATT permission response: \(error)")
+                }
+            }
         }
     }
 
     func handleATTGetStatus() {
         if #available(iOS 14, *) {
             let statusString = TrackingTransparencyManager.getStatusString()
+            let detail: [String: Any] = ["status": statusString]
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: detail),
+                  let jsonString = String(data: jsonData, encoding: .utf8) else {
+                print("Error serializing ATT status response")
+                return
+            }
             let script = """
                 window.dispatchEvent(new CustomEvent('attStatusResponse', {
-                    detail: { status: '\(statusString)' }
+                    detail: \(jsonString)
                 }));
             """
             vibetype.webView.evaluateJavaScript(script) { result, error in
@@ -302,22 +318,37 @@ extension ViewController {
             }
         } else {
             // ATT is only available on iOS 14+
+            let detail: [String: Any] = ["status": "unavailable"]
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: detail),
+                  let jsonString = String(data: jsonData, encoding: .utf8) else {
+                print("Error serializing ATT status response")
+                return
+            }
             let script = """
                 window.dispatchEvent(new CustomEvent('attStatusResponse', {
-                    detail: { status: 'unavailable' }
+                    detail: \(jsonString)
                 }));
             """
-            vibetype.webView.evaluateJavaScript(script)
+            vibetype.webView.evaluateJavaScript(script) { result, error in
+                if let error = error {
+                    print("Error dispatching ATT status response: \(error)")
+                }
+            }
         }
     }
 
     func handleATTGetIDFA() {
         if #available(iOS 14, *) {
             let idfa = TrackingTransparencyManager.getIDFA()
-            let idfaValue = idfa ?? "null"
+            let detail: [String: Any?] = ["idfa": idfa]
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: detail, options: []),
+                  let jsonString = String(data: jsonData, encoding: .utf8) else {
+                print("Error serializing ATT IDFA response")
+                return
+            }
             let script = """
                 window.dispatchEvent(new CustomEvent('attIDFAResponse', {
-                    detail: { idfa: '\(idfaValue)' }
+                    detail: \(jsonString)
                 }));
             """
             vibetype.webView.evaluateJavaScript(script) { result, error in
@@ -327,12 +358,22 @@ extension ViewController {
             }
         } else {
             // ATT is only available on iOS 14+
+            let detail: [String: Any?] = ["idfa": nil, "error": "ATT requires iOS 14 or later"]
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: detail, options: []),
+                  let jsonString = String(data: jsonData, encoding: .utf8) else {
+                print("Error serializing ATT IDFA response")
+                return
+            }
             let script = """
                 window.dispatchEvent(new CustomEvent('attIDFAResponse', {
-                    detail: { idfa: null, error: 'ATT requires iOS 14 or later' }
+                    detail: \(jsonString)
                 }));
             """
-            vibetype.webView.evaluateJavaScript(script)
+            vibetype.webView.evaluateJavaScript(script) { result, error in
+                if let error = error {
+                    print("Error dispatching ATT IDFA response: \(error)")
+                }
+            }
         }
     }
 }
