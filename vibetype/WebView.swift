@@ -16,6 +16,9 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     userContentController.add(WKSMH, name: "push-permission-request")
     userContentController.add(WKSMH, name: "push-permission-state")
     userContentController.add(WKSMH, name: "push-token")
+    userContentController.add(WKSMH, name: "att-request-permission")
+    userContentController.add(WKSMH, name: "att-get-status")
+    userContentController.add(WKSMH, name: "att-get-idfa")
 
     config.userContentController = userContentController
 

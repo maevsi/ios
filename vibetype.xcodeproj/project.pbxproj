@@ -18,6 +18,7 @@
 		595F23AF25CEFBFE0053416C /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A425CEFBFE0053416C /* WebView.swift */; };
 		6BC0B4AB2ED94D4100E03379 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6BC0B4AA2ED94D3A00E03379 /* README.md */; };
 		7692219AF6CB60CE94E971C2 /* Pods_vibetype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4248D6343DB1391C0EB00BB7 /* Pods_vibetype.framework */; };
+		936658952F3085DF00CE9A4A /* TrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936658942F3085DF00CE9A4A /* TrackingTransparency.swift */; };
 		CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE252388222B002C8D56 /* Main.storyboard */; };
 		CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */; };
 		DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDBCB1132D6C602600313680 /* GoogleService-Info.plist */; };
@@ -37,6 +38,7 @@
 		595F23A325CEFBFE0053416C /* Printer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Printer.swift; path = vibetype/Printer.swift; sourceTree = "<group>"; };
 		595F23A425CEFBFE0053416C /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebView.swift; path = vibetype/WebView.swift; sourceTree = "<group>"; };
 		6BC0B4AA2ED94D3A00E03379 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		936658942F3085DF00CE9A4A /* TrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackingTransparency.swift; path = vibetype/TrackingTransparency.swift; sourceTree = "<group>"; };
 		B3109B700B2E429F9589C698 /* Pods-vibetype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vibetype.release.xcconfig"; path = "Target Support Files/Pods-vibetype/Pods-vibetype.release.xcconfig"; sourceTree = "<group>"; };
 		CDC0FE262388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				595F23A125CEFBFE0053416C /* ViewController.swift */,
 				CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */,
 				CDC0FE252388222B002C8D56 /* Main.storyboard */,
+				936658942F3085DF00CE9A4A /* TrackingTransparency.swift */,
 				595F23A425CEFBFE0053416C /* WebView.swift */,
 				30FCACC6A7BF53CD6D9CF6C0 /* Pods */,
 				59333BAA25CFF706003392A4 /* vibetype.app */,
@@ -200,9 +203,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -218,6 +225,7 @@
 			files = (
 				595F23AD25CEFBFE0053416C /* AppDelegate.swift in Sources */,
 				595F23A825CEFBFE0053416C /* SceneDelegate.swift in Sources */,
+				936658952F3085DF00CE9A4A /* TrackingTransparency.swift in Sources */,
 				595F23A525CEFBFE0053416C /* Settings.swift in Sources */,
 				595F23AE25CEFBFE0053416C /* Printer.swift in Sources */,
 				595F23AC25CEFBFE0053416C /* ViewController.swift in Sources */,

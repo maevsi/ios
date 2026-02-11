@@ -246,5 +246,80 @@ extension ViewController: WKScriptMessageHandler {
         if message.name == "push-token" {
             handleFCMToken()
         }
+        if message.name == "att-request-permission" {
+            handleATTPermissionRequest()
+        }
+        if message.name == "att-get-status" {
+            handleATTGetStatus()
+        }
+        if message.name == "att-get-idfa" {
+            handleATTGetIDFA()
+        }
   }
+}
+
+// MARK: - App Tracking Transparency Handlers
+extension ViewController {
+
+    // Helper method to dispatch ATT events to webview with proper JSON serialization
+    private func dispatchATTEvent(eventName: String, detail: [String: Any]) {
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: detail),
+              let jsonString = String(data: jsonData, encoding: .utf8) else {
+            print("Error serializing ATT response for event: \(eventName)")
+            return
+        }
+        let script = """
+            window.dispatchEvent(new CustomEvent('\(eventName)', {
+                detail: \(jsonString)
+            }));
+        """
+        vibetype.webView.evaluateJavaScript(script) { result, error in
+            if let error = error {
+                print("Error dispatching \(eventName): \(error)")
+            }
+        }
+    }
+
+    func handleATTPermissionRequest() {
+        if #available(iOS 14, *) {
+            TrackingTransparencyManager.requestPermission { status in
+                let statusString = TrackingTransparencyManager.statusToString(status)
+                let detail: [String: Any] = ["status": statusString]
+                self.dispatchATTEvent(eventName: "attPermissionResponse", detail: detail)
+            }
+        } else {
+            // ATT is only available on iOS 14+
+            let detail: [String: Any] = ["status": "unavailable", "error": "ATT requires iOS 14 or later"]
+            dispatchATTEvent(eventName: "attPermissionResponse", detail: detail)
+        }
+    }
+
+    func handleATTGetStatus() {
+        if #available(iOS 14, *) {
+            let statusString = TrackingTransparencyManager.getStatusString()
+            let detail: [String: Any] = ["status": statusString]
+            dispatchATTEvent(eventName: "attStatusResponse", detail: detail)
+        } else {
+            // ATT is only available on iOS 14+
+            let detail: [String: Any] = ["status": "unavailable"]
+            dispatchATTEvent(eventName: "attStatusResponse", detail: detail)
+        }
+    }
+
+    func handleATTGetIDFA() {
+        if #available(iOS 14, *) {
+            let idfa = TrackingTransparencyManager.getIDFA()
+            var detail: [String: Any] = [:]
+            if let idfa = idfa {
+                detail["idfa"] = idfa
+            } else {
+                detail["idfa"] = NSNull()
+            }
+            dispatchATTEvent(eventName: "attIDFAResponse", detail: detail)
+        } else {
+            // ATT is only available on iOS 14+
+            let detail: [String: Any] = ["idfa": NSNull(), "error": "ATT requires iOS 14 or later"]
+            dispatchATTEvent(eventName: "attIDFAResponse", detail: detail)
+        }
+    }
 }
