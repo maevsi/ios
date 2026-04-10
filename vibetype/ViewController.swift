@@ -231,11 +231,17 @@ extension UIColor {
 
 extension ViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "att-get-idfa" {
+            handleATTGetIDFA()
+        }
+        if message.name == "att-get-status" {
+            handleATTGetStatus()
+        }
+        if message.name == "att-request-permission" {
+            handleATTPermissionRequest()
+        }
         if message.name == "print" {
             printView(webView: vibetype.webView)
-        }
-        if message.name == "push-subscribe" {
-            handleSubscribeTouch(message: message)
         }
         if message.name == "push-permission-request" {
             handlePushPermission()
@@ -243,8 +249,61 @@ extension ViewController: WKScriptMessageHandler {
         if message.name == "push-permission-state" {
             handlePushState()
         }
+        if message.name == "push-subscribe" {
+            handleSubscribeTouch(message: message)
+        }
         if message.name == "push-token" {
             handleFCMToken()
         }
   }
+}
+
+// MARK: - App Tracking Transparency Handlers
+extension ViewController {
+
+    private func dispatchATTEvent(eventName: String, detail: String) {
+        func toJsonString(_ value: String) -> String? {
+            guard let data = try? JSONSerialization.data(withJSONObject: [value]),
+                  let json = String(data: data, encoding: .utf8) else { return nil }
+            return String(json.dropFirst().dropLast()) // strip wrapping [ and ]
+        }
+        guard let detailJson = toJsonString(detail),
+              let eventNameJson = toJsonString(eventName) else {
+            print("Error encoding ATT event data for: \(eventName)")
+            return
+        }
+        let script = "window.dispatchEvent(new CustomEvent(\(eventNameJson), { detail: \(detailJson) }));"
+        vibetype.webView.evaluateJavaScript(script) { _, error in
+            if let error = error {
+                print("Error dispatching \(eventName): \(error)")
+            }
+        }
+    }
+
+    func handleATTPermissionRequest() {
+        if #available(iOS 14, *) {
+            TrackingTransparencyManager.requestPermission { [weak self] status in
+                guard let self else { return }
+                self.dispatchATTEvent(eventName: "att-permission-response", detail: TrackingTransparencyManager.statusToString(status))
+            }
+        } else {
+            dispatchATTEvent(eventName: "att-permission-response", detail: "unavailable")
+        }
+    }
+
+    func handleATTGetStatus() {
+        if #available(iOS 14, *) {
+            dispatchATTEvent(eventName: "att-status-response", detail: TrackingTransparencyManager.getStatusString())
+        } else {
+            dispatchATTEvent(eventName: "att-status-response", detail: "unavailable")
+        }
+    }
+
+    func handleATTGetIDFA() {
+        if #available(iOS 14, *) {
+            dispatchATTEvent(eventName: "att-idfa-response", detail: TrackingTransparencyManager.getIDFA() ?? "")
+        } else {
+            dispatchATTEvent(eventName: "att-idfa-response", detail: "")
+        }
+    }
 }
