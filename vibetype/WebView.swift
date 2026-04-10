@@ -11,14 +11,14 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     let deviceModel = UIDevice.current.model
     let osVersion = ProcessInfo().operatingSystemVersion
 
+    userContentController.add(WKSMH, name: "att-get-idfa")
+    userContentController.add(WKSMH, name: "att-get-status")
+    userContentController.add(WKSMH, name: "att-request-permission")
     userContentController.add(WKSMH, name: "print")
-    userContentController.add(WKSMH, name: "push-subscribe")
     userContentController.add(WKSMH, name: "push-permission-request")
     userContentController.add(WKSMH, name: "push-permission-state")
+    userContentController.add(WKSMH, name: "push-subscribe")
     userContentController.add(WKSMH, name: "push-token")
-    userContentController.add(WKSMH, name: "att-request-permission")
-    userContentController.add(WKSMH, name: "att-get-status")
-    userContentController.add(WKSMH, name: "att-get-idfa")
 
     config.userContentController = userContentController
 
