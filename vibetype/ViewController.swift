@@ -262,7 +262,17 @@ extension ViewController: WKScriptMessageHandler {
 extension ViewController {
 
     private func dispatchATTEvent(eventName: String, detail: String) {
-        let script = "window.dispatchEvent(new CustomEvent('\(eventName)', { detail: '\(detail)' }));"
+        func toJsonString(_ value: String) -> String? {
+            guard let data = try? JSONSerialization.data(withJSONObject: [value]),
+                  let json = String(data: data, encoding: .utf8) else { return nil }
+            return String(json.dropFirst().dropLast()) // strip wrapping [ and ]
+        }
+        guard let detailJson = toJsonString(detail),
+              let eventNameJson = toJsonString(eventName) else {
+            print("Error encoding ATT event data for: \(eventName)")
+            return
+        }
+        let script = "window.dispatchEvent(new CustomEvent(\(eventNameJson), { detail: \(detailJson) }));"
         vibetype.webView.evaluateJavaScript(script) { _, error in
             if let error = error {
                 print("Error dispatching \(eventName): \(error)")
@@ -272,7 +282,8 @@ extension ViewController {
 
     func handleATTPermissionRequest() {
         if #available(iOS 14, *) {
-            TrackingTransparencyManager.requestPermission { status in
+            TrackingTransparencyManager.requestPermission { [weak self] status in
+                guard let self else { return }
                 self.dispatchATTEvent(eventName: "att-permission-response", detail: TrackingTransparencyManager.statusToString(status))
             }
         } else {

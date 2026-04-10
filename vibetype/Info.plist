@@ -53,7 +53,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>The app allows accessing your location to provide event recommendations based on your area.</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This allows us to provide you with personalized content and improve your experience.</string>
+	<string>Your device's advertising identifier will be used by Google Analytics to measure and analyze app usage across apps and websites, helping us understand how our service is being used and improve it for all users.</string>
 	<!-- <key>NSMicrophoneUsageDescription</key>
 	<string>Capture Audio by user request</string> -->
 	<key>UIApplicationSceneManifest</key>

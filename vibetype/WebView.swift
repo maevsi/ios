@@ -3,22 +3,35 @@ import WebKit
 import AuthenticationServices
 import SafariServices
 
+final class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
+    private weak var delegate: AnyObject?
 
-func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNavigationDelegate, NSO: NSObject, VC: ViewController) -> WKWebView{
+    init(delegate: AnyObject & WKScriptMessageHandler) {
+        self.delegate = delegate
+        super.init()
+    }
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        (delegate as? WKScriptMessageHandler)?.userContentController(userContentController, didReceive: message)
+    }
+}
+
+func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler, WKND: WKNavigationDelegate, NSO: NSObject, VC: ViewController) -> WKWebView{
 
     let config = WKWebViewConfiguration()
     let userContentController = WKUserContentController()
     let deviceModel = UIDevice.current.model
     let osVersion = ProcessInfo().operatingSystemVersion
+    let weakHandler = WeakScriptMessageHandler(delegate: WKSMH)
 
-    userContentController.add(WKSMH, name: "att-get-idfa")
-    userContentController.add(WKSMH, name: "att-get-status")
-    userContentController.add(WKSMH, name: "att-request-permission")
-    userContentController.add(WKSMH, name: "print")
-    userContentController.add(WKSMH, name: "push-permission-request")
-    userContentController.add(WKSMH, name: "push-permission-state")
-    userContentController.add(WKSMH, name: "push-subscribe")
-    userContentController.add(WKSMH, name: "push-token")
+    userContentController.add(weakHandler, name: "att-get-idfa")
+    userContentController.add(weakHandler, name: "att-get-status")
+    userContentController.add(weakHandler, name: "att-request-permission")
+    userContentController.add(weakHandler, name: "print")
+    userContentController.add(weakHandler, name: "push-permission-request")
+    userContentController.add(weakHandler, name: "push-permission-state")
+    userContentController.add(weakHandler, name: "push-subscribe")
+    userContentController.add(weakHandler, name: "push-token")
 
     config.userContentController = userContentController
 
