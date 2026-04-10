@@ -402,7 +402,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa;
 				PRODUCT_NAME = vibetype;
 				PROVISIONING_PROFILE_SPECIFIER = Distribution;
@@ -440,7 +440,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa;
 				PRODUCT_NAME = vibetype;
 				PROVISIONING_PROFILE_SPECIFIER = Distribution;
