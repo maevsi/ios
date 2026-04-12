@@ -13,7 +13,7 @@
     <key>provisioningProfiles</key>
     <dict>
         <key>si.maev.twa</key>
-        <string>vibetype Distribution</string>
+        <string>Distribution</string>
     </dict>
     <key>teamID</key>
     <string>NJWSWLWL24</string>
