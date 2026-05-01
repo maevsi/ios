@@ -17,7 +17,7 @@
 		595F23AE25CEFBFE0053416C /* Printer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A325CEFBFE0053416C /* Printer.swift */; };
 		595F23AF25CEFBFE0053416C /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F23A425CEFBFE0053416C /* WebView.swift */; };
 		6BC0B4AB2ED94D4100E03379 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6BC0B4AA2ED94D3A00E03379 /* README.md */; };
-		7692219AF6CB60CE94E971C2 /* Pods_vibetype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4248D6343DB1391C0EB00BB7 /* Pods_vibetype.framework */; };
+		9356D2B42FA5641D00A47119 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 9356D2B32FA5641D00A47119 /* FirebaseMessaging */; };
 		936658952F3085DF00CE9A4A /* TrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936658942F3085DF00CE9A4A /* TrackingTransparency.swift */; };
 		CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE252388222B002C8D56 /* Main.storyboard */; };
 		CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */; };
@@ -25,7 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4248D6343DB1391C0EB00BB7 /* Pods_vibetype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vibetype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59333BAA25CFF706003392A4 /* vibetype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vibetype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		595F239A25CEFBFD0053416C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = vibetype/Settings.swift; sourceTree = "<group>"; };
 		595F239B25CEFBFD0053416C /* Entitlements */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Entitlements; path = vibetype/Entitlements; sourceTree = "<group>"; };
@@ -39,11 +38,9 @@
 		595F23A425CEFBFE0053416C /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebView.swift; path = vibetype/WebView.swift; sourceTree = "<group>"; };
 		6BC0B4AA2ED94D3A00E03379 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		936658942F3085DF00CE9A4A /* TrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackingTransparency.swift; path = vibetype/TrackingTransparency.swift; sourceTree = "<group>"; };
-		B3109B700B2E429F9589C698 /* Pods-vibetype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vibetype.release.xcconfig"; path = "Target Support Files/Pods-vibetype/Pods-vibetype.release.xcconfig"; sourceTree = "<group>"; };
 		CDC0FE262388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DDBCB1132D6C602600313680 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "vibetype/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E90F0EAE7E43A4E47FF81A42 /* Pods-vibetype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vibetype.debug.xcconfig"; path = "Target Support Files/Pods-vibetype/Pods-vibetype.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,22 +48,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7692219AF6CB60CE94E971C2 /* Pods_vibetype.framework in Frameworks */,
+				9356D2B42FA5641D00A47119 /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		30FCACC6A7BF53CD6D9CF6C0 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				E90F0EAE7E43A4E47FF81A42 /* Pods-vibetype.debug.xcconfig */,
-				B3109B700B2E429F9589C698 /* Pods-vibetype.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		CD89F880237E9D9200C436A1 = {
 			isa = PBXGroup;
 			children = (
@@ -84,19 +72,9 @@
 				CDC0FE252388222B002C8D56 /* Main.storyboard */,
 				936658942F3085DF00CE9A4A /* TrackingTransparency.swift */,
 				595F23A425CEFBFE0053416C /* WebView.swift */,
-				30FCACC6A7BF53CD6D9CF6C0 /* Pods */,
 				59333BAA25CFF706003392A4 /* vibetype.app */,
 				DDBCB1132D6C602600313680 /* GoogleService-Info.plist */,
-				FDE2E6C2F19E7F9BA11730F6 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		FDE2E6C2F19E7F9BA11730F6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4248D6343DB1391C0EB00BB7 /* Pods_vibetype.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,11 +84,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD89F89D237E9D9300C436A1 /* Build configuration list for PBXNativeTarget "vibetype" */;
 			buildPhases = (
-				027ED28FC592D9C33589CB72 /* [CP] Check Pods Manifest.lock */,
 				CD89F885237E9D9200C436A1 /* Sources */,
 				CD89F886237E9D9200C436A1 /* Frameworks */,
 				CD89F887237E9D9200C436A1 /* Resources */,
-				D6AE297CFF463F9FDAA80B8F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -147,6 +123,9 @@
 				Base,
 			);
 			mainGroup = CD89F880237E9D9200C436A1;
+			packageReferences = (
+				9356D2B22FA5641D00A47119 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = CD89F880237E9D9200C436A1;
 			projectDirPath = "";
 			projectRoot = "";
@@ -171,48 +150,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		027ED28FC592D9C33589CB72 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-vibetype-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D6AE297CFF463F9FDAA80B8F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-vibetype/Pods-vibetype-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CD89F885237E9D9200C436A1 /* Sources */ = {
@@ -376,7 +313,6 @@
 		};
 		CD89F89E237E9D9300C436A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E90F0EAE7E43A4E47FF81A42 /* Pods-vibetype.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -411,7 +347,6 @@
 		};
 		CD89F89F237E9D9300C436A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3109B700B2E429F9589C698 /* Pods-vibetype.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -466,6 +401,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9356D2B22FA5641D00A47119 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 12.12.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9356D2B32FA5641D00A47119 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9356D2B22FA5641D00A47119 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CD89F881237E9D9200C436A1 /* Project object */;
 }

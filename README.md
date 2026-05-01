@@ -27,7 +27,7 @@ Vibetype iOS provides a native wrapper around Vibetype's Progressive Web App, ru
 
 - ✅ **Native feel** with full-screen WebView experience
 - 🔔 **Push notifications** via Firebase Cloud Messaging (APNs-backed)
-- 📦 **Zero setup** – dependencies included via CocoaPods
+- 📦 **Zero setup** – dependencies managed via Swift Package Manager
 - 🚀 **Fast iteration** – update web content without app store releases
 
 ### 🔗 Related Projects
@@ -42,12 +42,10 @@ Vibetype iOS provides a native wrapper around Vibetype's Progressive Web App, ru
 **Already have Xcode?** You can start immediately:
 
 ```sh
-open vibetype.xcworkspace
+open vibetype.xcodeproj
 ```
 
-That's it! All dependencies are pre-installed. Press `Cmd+R` to build and run.
-
-> ℹ️ **Note:** Always open `vibetype.xcworkspace`, never `vibetype.xcodeproj`
+That's it! SPM handles all dependencies automatically. Press `Cmd+R` to build and run.
 
 ---
 
@@ -59,83 +57,12 @@ That's it! All dependencies are pre-installed. Press `Cmd+R` to build and run.
 - Apple Developer account for signing & push notifications (optional)
 - Homebrew for managing Ruby (optional)
 
-### Installing Dependencies
+### Managing Dependencies
 
-Dependencies are already included, but if you need to update or modify them:
+Dependencies are managed through Swift Package Manager (SPM), which is integrated into Xcode. No additional tools need to be installed.
 
-<details>
-<summary><strong>🍺 Step 1: Install Homebrew & Ruby</strong></summary>
+**To update dependencies:**
 
-```sh
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install Ruby via Homebrew
-brew install ruby
-```
-
-**Configure PATH** (choose based on your Mac architecture):
-
-<details>
-<summary>Apple Silicon (M1/M2/M3)</summary>
-
-```sh
-echo 'export PATH="/opt/homebrew/opt/ruby/bin:$PATH"' >> ~/.zshrc
-echo 'export LDFLAGS="-L/opt/homebrew/opt/ruby/lib"' >> ~/.zshrc
-echo 'export CPPFLAGS="-I/opt/homebrew/opt/ruby/include"' >> ~/.zshrc
-echo 'export PATH="$(ruby -e '\''print Gem.default_dir'\'')/bin:$PATH"' >> ~/.zshrc
-exec zsh
-```
-</details>
-
-<details>
-<summary>Intel Mac</summary>
-
-```sh
-echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' >> ~/.zshrc
-echo 'export LDFLAGS="-L/usr/local/opt/ruby/lib"' >> ~/.zshrc
-echo 'export CPPFLAGS="-I/usr/local/opt/ruby/include"' >> ~/.zshrc
-echo 'export PATH="$(ruby -e '\''print Gem.default_dir'\'')/bin:$PATH"' >> ~/.zshrc
-exec zsh
-```
-</details>
-
-Verify installation:
-```sh
-ruby -v
-# Should show Ruby 3.x
-```
-
-</details>
-
-<details>
-<summary><strong>💎 Step 2: Install CocoaPods</strong></summary>
-
-```sh
-sudo gem install cocoapods
-```
-
-Verify:
-```sh
-pod --version
-```
-
-Common CocoaPods Commands:
-```sh
-# 📦 Install dependencies (after Podfile changes)
-pod install
-
-# ⬆️ Update pods to latest compatible versions
-pod update
-
-# 🔄 Refresh CocoaPods spec repository
-pod install --repo-update
-
-# 🧹 Remove CocoaPods integration completely
-pod deintegrate
-
-# 🗑️ Clear local cache (when troubleshooting)
-pod cache clean --all
-```
-
-</details>
+1. Open `vibetype.xcodeproj` in Xcode
+2. Go to **File** → **Packages** → **Update to Latest Package Versions**
+3. Or select the project, then **Package Dependencies** tab to manage individual packages
