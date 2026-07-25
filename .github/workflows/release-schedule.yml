@@ -1,0 +1,19 @@
+name: "Release: Scheduled"
+
+permissions: {}
+
+on:
+  schedule:
+    - cron: "44 9 26 */2 *" # 26th of every other month at 09:44 AM UTC on the default branch
+  workflow_dispatch:
+
+jobs:
+  release-schedule:
+    name: "Release: Scheduled"
+    uses: dargmuesli/github-actions/.github/workflows/release-schedule.yml@709b1aafc707215fb7bdee40fd3367d3623b4aa8 # 5.9.0
+    permissions:
+      contents: read
+    secrets:
+      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    with:
+      IS_DEBOUNCED: ${{ github.event_name != 'workflow_dispatch' }}

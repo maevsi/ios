@@ -1,0 +1,48 @@
+{
+    "plugins": [
+        [
+            "@semantic-release/commit-analyzer",
+            {
+                "preset": "conventionalcommits",
+                "presetConfig": {}
+            }
+        ],
+        [
+            "@semantic-release/release-notes-generator",
+            {
+                "preset": "conventionalcommits",
+                "presetConfig": {}
+            }
+        ],
+        "@semantic-release/changelog",
+        [
+            "semantic-release-replace-plugin",
+            {
+                "replacements": [
+                    {
+                        "countMatches": true,
+                        "files": ["vibetype.xcodeproj/project.pbxproj"],
+                        "from": "MARKETING_VERSION = [0-9.]+;",
+                        "to": "MARKETING_VERSION = ${nextRelease.version};",
+                        "results": [
+                            {
+                                "file": "vibetype.xcodeproj/project.pbxproj",
+                                "hasChanged": true,
+                                "numMatches": 2,
+                                "numReplacements": 2
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "assets": ["CHANGELOG.md", "vibetype.xcodeproj/project.pbxproj"]
+            }
+        ],
+        "@semantic-release/github"
+    ],
+    "tagFormat": "${version}"
+}
