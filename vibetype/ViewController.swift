@@ -68,11 +68,24 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         }
 
         if #available(iOS 15.0, *), adaptiveUIStyle {
+            // Pin the web view to the true system appearance. The chrome override below is set on the
+            // key window, which would otherwise propagate into the web view and change what
+            // `prefers-color-scheme` reports to the page. That feedback loop locks a "follow system"
+            // page to whichever style we last forced (e.g. it never returns to dark after being
+            // switched to light). An explicit override on the web view decouples it from the window.
+            syncWebViewInterfaceStyle()
             themeObservation = vibetype.webView.observe(\.underPageBackgroundColor) { [unowned self] webView, _ in
                 currentWebViewTheme = vibetype.webView.underPageBackgroundColor.isLight() ?? true ? .light : .dark
                 self.overrideUIStyle()
             }
         }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // Keep the web view aligned with the true device appearance when the user changes the
+        // system dark/light setting while the app is running.
+        syncWebViewInterfaceStyle()
     }
 
     @objc func refreshWebView(_ sender: UIRefreshControl) {
@@ -107,13 +120,35 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
 
     func overrideUIStyle(toDefault: Bool = false) {
         if #available(iOS 15.0, *), adaptiveUIStyle {
-            if (((htmlIsLoaded && !vibetype.webView.isHidden) || toDefault) && self.currentWebViewTheme != .unspecified) {
-                UIApplication
-                    .shared
-                    .connectedScenes
-                    .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
-                    .first { $0.isKeyWindow }?.overrideUserInterfaceStyle = toDefault ? .unspecified : self.currentWebViewTheme;
-            }
+            guard toDefault || (htmlIsLoaded && !vibetype.webView.isHidden) else { return }
+            let style: UIUserInterfaceStyle = toDefault ? .unspecified : self.currentWebViewTheme
+            UIApplication
+                .shared
+                .connectedScenes
+                .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                .first { $0.isKeyWindow }?.overrideUserInterfaceStyle = style
+        }
+    }
+
+    // The true device appearance, unaffected by the chrome override we place on the key window.
+    // Trait overrides only propagate downward, so the window scene above the window keeps the real
+    // system style.
+    @available(iOS 15.0, *)
+    private var systemInterfaceStyle: UIUserInterfaceStyle {
+        // Prefer the scene hosting this view controller when available.
+        if let windowScene = view.window?.windowScene {
+            return windowScene.traitCollection.userInterfaceStyle
+        }
+        // Fallback to the foreground-active scene.
+        let windowScene = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first { $0.activationState == .foregroundActive }
+        return windowScene?.traitCollection.userInterfaceStyle ?? .unspecified
+    }
+
+    private func syncWebViewInterfaceStyle() {
+        if #available(iOS 15.0, *), adaptiveUIStyle {
+            vibetype.webView?.overrideUserInterfaceStyle = systemInterfaceStyle
         }
     }
 
@@ -204,6 +239,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
 
     deinit {
         vibetype.webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
+        themeObservation?.invalidate()
     }
 }
 
