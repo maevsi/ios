@@ -10,8 +10,6 @@ on:
       - beta
       - main
       - renovate/**
-    tags:
-      - '[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   ci-optimization:
@@ -22,7 +20,7 @@ jobs:
   build:
     needs: ci-optimization
     name: Build iOS (simulator)
-    runs-on: macos-26 # TODO: change back to macos-latest once v26 is default (https://github.com/actions/runner-images/blob/main/README.md#available-images)
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
@@ -36,15 +34,30 @@ jobs:
             -destination 'platform=iOS Simulator,name=iPhone 17' \
             -configuration Release \
             clean build | xcpretty
-  release:
+  release_semantic:
     needs: build
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    if: github.event_name == 'push'
+    name: Release (semantic)
+    uses: dargmuesli/github-actions/.github/workflows/release-semantic.yml@709b1aafc707215fb7bdee40fd3367d3623b4aa8 # 5.9.0
+    permissions:
+      contents: write
+      id-token: write
+    secrets:
+      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    with:
+      EXTRA_PLUGINS: |
+        semantic-release-replace-plugin
+  release:
+    needs: release_semantic
+    if: needs.release_semantic.outputs.new_release_version != null
     name: Sign and release to TestFlight
     runs-on: macos-26
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.release_semantic.outputs.new_release_version }}
 
       - name: Archive app
         env:
