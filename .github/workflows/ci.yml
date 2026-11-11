@@ -51,7 +51,7 @@ jobs:
     needs: release_semantic
     if: needs.release_semantic.outputs.new_release_version != null
     name: Sign and release to TestFlight
-    runs-on: macos-26
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
