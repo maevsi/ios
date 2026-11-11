@@ -19,8 +19,11 @@ jobs:
       pull-requests: read
   build:
     needs: ci-optimization
+    if: needs.ci-optimization.outputs.continue == 'true'
     name: Build iOS (simulator)
     runs-on: macos-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -31,7 +34,7 @@ jobs:
           set -o pipefail
           xcodebuild -project vibetype.xcodeproj \
             -scheme vibetype \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -destination 'generic/platform=iOS Simulator' \
             -configuration Release \
             clean build | xcpretty
   release_semantic:
