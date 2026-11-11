@@ -19,8 +19,11 @@ jobs:
       pull-requests: read
   build:
     needs: ci-optimization
+    if: needs.ci-optimization.outputs.continue == 'true'
     name: Build iOS (simulator)
-    runs-on: macos-latest
+    runs-on: macos-26
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
