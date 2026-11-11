@@ -21,7 +21,7 @@ jobs:
     needs: ci-optimization
     if: needs.ci-optimization.outputs.continue == 'true'
     name: Build iOS (simulator)
-    runs-on: macos-26
+    runs-on: macos-latest
     permissions:
       contents: read
 
