@@ -2,7 +2,6 @@ import Foundation
 import AppTrackingTransparency
 import AdSupport
 
-@available(iOS 14, *)
 class TrackingTransparencyManager {
 
     // Request ATT permission and return the result via callback

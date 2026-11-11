@@ -16,7 +16,7 @@ final class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
     }
 }
 
-func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler, WKND: WKNavigationDelegate, NSO: NSObject, VC: ViewController) -> WKWebView{
+func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler, WKND: WKNavigationDelegate) -> WKWebView{
 
     let config = WKWebViewConfiguration()
     let userContentController = WKUserContentController()
@@ -41,7 +41,7 @@ func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler,
     config.preferences.setValue(true, forKey: "standalone")
     config.applicationNameForUserAgent = "Device/\(deviceModel) Version/\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion) Safari/vibetype"
 
-    let webView = WKWebView(frame: calcWebviewFrame(webviewView: container, toolbarView: nil), configuration: config)
+    let webView = WKWebView(frame: calcWebviewFrame(webviewView: container), configuration: config)
     setCustomCookie(webView: webView)
 
     webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -50,11 +50,6 @@ func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler,
     webView.scrollView.bounces = false
     webView.scrollView.contentInsetAdjustmentBehavior = .never
     webView.allowsBackForwardNavigationGestures = true
-
-    // let deviceModel = UIDevice.current.model
-    // let osVersion = UIDevice.current.systemVersion
-    // webView.configuration.applicationNameForUserAgent = "Safari/604.1" // See https://github.com/pwa-builder/pwabuilder-ios/issues/30
-    // webView.customUserAgent = "Mozilla/5.0 (\(deviceModel); CPU \(deviceModel) OS \(osVersion.replacingOccurrences(of: ".", with: "_")) like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/\(osVersion) Mobile/15E148 Safari/604.1 PWAShell"
 
     #if DEBUG
     if #available(iOS 16.4, *) {
@@ -73,12 +68,6 @@ func hostMatches(_ host: String, origin: String) -> Bool {
     return host == origin || host.hasSuffix("." + origin)
 }
 
-func setAppStoreAsReferrer(contentController: WKUserContentController) {
-    let scriptSource = "document.referrer = `app-info://platform/ios-store`;"
-    let script = WKUserScript(source: scriptSource, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-    contentController.addUserScript(script);
-}
-
 func setCustomCookie(webView: WKWebView) {
     let _platformCookie = HTTPCookie(properties: [
         .domain: rootUrl.host!,
@@ -93,31 +82,26 @@ func setCustomCookie(webView: WKWebView) {
 
 }
 
-func calcWebviewFrame(webviewView: UIView, toolbarView: UIToolbar?) -> CGRect{
-    if ((toolbarView) != nil) {
-        return CGRect(x: 0, y: toolbarView!.frame.height, width: webviewView.frame.width, height: webviewView.frame.height - toolbarView!.frame.height)
-    }
-    else {
-        let winScene = UIApplication.shared.connectedScenes.first
-        let windowScene = winScene as! UIWindowScene
-        var statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 0
+func calcWebviewFrame(webviewView: UIView) -> CGRect{
+    let winScene = UIApplication.shared.connectedScenes.first
+    let windowScene = winScene as! UIWindowScene
+    var statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 0
 
-        switch displayMode {
-        case "fullscreen":
-            #if targetEnvironment(macCatalyst)
-                if let titlebar = windowScene.titlebar {
-                    titlebar.titleVisibility = .hidden
-                    titlebar.toolbar = nil
-                }
-            #endif
-            return CGRect(x: 0, y: 0, width: webviewView.frame.width, height: webviewView.frame.height)
-        default:
-            #if targetEnvironment(macCatalyst)
-            statusBarHeight = 29
-            #endif
-            let windowHeight = webviewView.frame.height - statusBarHeight
-            return CGRect(x: 0, y: statusBarHeight, width: webviewView.frame.width, height: windowHeight)
-        }
+    switch displayMode {
+    case "fullscreen":
+        #if targetEnvironment(macCatalyst)
+            if let titlebar = windowScene.titlebar {
+                titlebar.titleVisibility = .hidden
+                titlebar.toolbar = nil
+            }
+        #endif
+        return CGRect(x: 0, y: 0, width: webviewView.frame.width, height: webviewView.frame.height)
+    default:
+        #if targetEnvironment(macCatalyst)
+        statusBarHeight = 29
+        #endif
+        let windowHeight = webviewView.frame.height - statusBarHeight
+        return CGRect(x: 0, y: statusBarHeight, width: webviewView.frame.width, height: windowHeight)
     }
 }
 
@@ -150,25 +134,10 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
             }
 
             if let requestHost = requestUrl.host {
-                // NOTE: Match auth origin first, because host origin may be a subset of auth origin and may therefore always match
-                let matchingAuthOrigin = authOrigins.first(where: { hostMatches(requestHost, origin: $0) })
-                if (matchingAuthOrigin != nil) {
-                    decisionHandler(.allow)
-                    if (toolbarView.isHidden) {
-                        toolbarView.isHidden = false
-                        webView.frame = calcWebviewFrame(webviewView: webviewView, toolbarView: toolbarView)
-                    }
-                    return
-                }
-
                 let matchingHostOrigin = allowedOrigins.first(where: { hostMatches(requestHost, origin: $0) })
                 if (matchingHostOrigin != nil) {
                     // Open in main webview
                     decisionHandler(.allow)
-                    if (!toolbarView.isHidden) {
-                        toolbarView.isHidden = true
-                        webView.frame = calcWebviewFrame(webviewView: webviewView, toolbarView: nil)
-                    }
                     return
                 }
                 // Embedded frames may load third-party content, the main frame leaves the app instead.
@@ -193,13 +162,6 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
                 }
             } else {
                 decisionHandler(.cancel)
-                if requestUrl.isFileURL {
-                    // not tested
-                    downloadAndOpenFile(url: requestUrl.absoluteURL)
-                }
-                // if (requestUrl.absoluteString.contains("base64")){
-                //     downloadAndOpenBase64File(base64String: requestUrl.absoluteString)
-                // }
             }
         }
         else {
@@ -314,56 +276,6 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
         // Display the NSAlert
         present(alert, animated: true, completion: nil)
     }
-
-    func downloadAndOpenFile(url: URL){
-
-        let destinationFileUrl = url
-        let sessionConfig = URLSessionConfiguration.default
-        let session = URLSession(configuration: sessionConfig)
-        let request = URLRequest(url:url)
-        let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
-            if let tempLocalUrl = tempLocalUrl, error == nil {
-                if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                    print("Successfully download. Status code: \(statusCode)")
-                }
-                do {
-                    try FileManager.default.copyItem(at: tempLocalUrl, to: destinationFileUrl)
-                    self.openFile(url: destinationFileUrl)
-                } catch (let writeError) {
-                    print("Error creating a file \(destinationFileUrl) : \(writeError)")
-                }
-            } else {
-                print("Error took place while downloading a file. Error description: \(error?.localizedDescription ?? "N/A") ")
-            }
-        }
-        task.resume()
-    }
-
-    // func downloadAndOpenBase64File(base64String: String) {
-    //     // Split the base64 string to extract the data and the file extension
-    //     let components = base64String.components(separatedBy: ";base64,")
-
-    //     // Make sure the base64 string has the correct format
-    //     guard components.count == 2, let format = components.first?.split(separator: "/").last else {
-    //         print("Invalid base64 string format")
-    //         return
-    //     }
-
-    //     // Remove the data type prefix to get the base64 data
-    //     let dataString = components.last!
-
-    //     if let imageData = Data(base64Encoded: dataString) {
-    //         let documentsUrl: URL  =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    //         let destinationFileUrl = documentsUrl.appendingPathComponent("image.\(format)")
-
-    //         do {
-    //             try imageData.write(to: destinationFileUrl)
-    //             self.openFile(url: destinationFileUrl)
-    //         } catch {
-    //             print("Error writing image to file url: \(destinationFileUrl): \(error)")
-    //         }
-    //     }
-    // }
 
     func openFile(url: URL) {
         self.documentController = UIDocumentInteractionController(url: url)

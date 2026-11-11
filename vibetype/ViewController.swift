@@ -15,27 +15,15 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var connectionProblemView: UIImageView!
     @IBOutlet weak var webviewView: UIView!
-    var toolbarView: UIToolbar!
 
     var htmlIsLoaded = false;
 
     private var themeObservation: NSKeyValueObservation?
     var currentWebViewTheme: UIUserInterfaceStyle = .unspecified
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        if #available(iOS 13, *), overrideStatusBar{
-            if #available(iOS 15, *) {
-                return .default
-            } else {
-                return statusBarTheme == "dark" ? .lightContent : .darkContent
-            }
-        }
-        return .default
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         initWebView()
-        initToolbarView()
         loadRootUrl()
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification , object: nil)
@@ -44,7 +32,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        vibetype.webView.frame = calcWebviewFrame(webviewView: webviewView, toolbarView: nil)
+        vibetype.webView.frame = calcWebviewFrame(webviewView: webviewView)
     }
 
     @objc func keyboardWillHide(_ notification: NSNotification) {
@@ -52,7 +40,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
     }
 
     func initWebView() {
-        vibetype.webView = createWebView(container: webviewView, WKSMH: self, WKND: self, NSO: self, VC: self)
+        vibetype.webView = createWebView(container: webviewView, WKSMH: self, WKND: self)
         webviewView.addSubview(vibetype.webView);
 
         vibetype.webView.uiDelegate = self;
@@ -68,7 +56,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
             #endif
         }
 
-        if #available(iOS 15.0, *), adaptiveUIStyle {
+        if adaptiveUIStyle {
             // Pin the web view to the true system appearance. The chrome override below is set on the
             // key window, which would otherwise propagate into the web view and change what
             // `prefers-color-scheme` reports to the page. That feedback loop locks a "follow system"
@@ -94,33 +82,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         sender.endRefreshing()
     }
 
-    func createToolbarView() -> UIToolbar{
-        let winScene = UIApplication.shared.connectedScenes.first
-        let windowScene = winScene as! UIWindowScene
-        var statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 60
-
-        #if targetEnvironment(macCatalyst)
-        if (statusBarHeight == 0){
-            statusBarHeight = 30
-        }
-        #endif
-
-        let toolbarView = UIToolbar(frame: CGRect(x: 0, y: 0, width: webviewView.frame.width, height: 0))
-        toolbarView.sizeToFit()
-        toolbarView.frame = CGRect(x: 0, y: 0, width: webviewView.frame.width, height: toolbarView.frame.height + statusBarHeight)
-//        toolbarView.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin, .flexibleWidth]
-
-        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let close = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(loadRootUrl))
-        toolbarView.setItems([close,flex], animated: true)
-
-        toolbarView.isHidden = true
-
-        return toolbarView
-    }
-
     func overrideUIStyle(toDefault: Bool = false) {
-        if #available(iOS 15.0, *), adaptiveUIStyle {
+        if adaptiveUIStyle {
             guard toDefault || (htmlIsLoaded && !vibetype.webView.isHidden) else { return }
             let style: UIUserInterfaceStyle = toDefault ? .unspecified : self.currentWebViewTheme
             UIApplication
@@ -134,7 +97,6 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
     // The true device appearance, unaffected by the chrome override we place on the key window.
     // Trait overrides only propagate downward, so the window scene above the window keeps the real
     // system style.
-    @available(iOS 15.0, *)
     private var systemInterfaceStyle: UIUserInterfaceStyle {
         // Prefer the scene hosting this view controller when available.
         if let windowScene = view.window?.windowScene {
@@ -148,15 +110,9 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
     }
 
     private func syncWebViewInterfaceStyle() {
-        if #available(iOS 15.0, *), adaptiveUIStyle {
+        if adaptiveUIStyle {
             vibetype.webView?.overrideUserInterfaceStyle = systemInterfaceStyle
         }
-    }
-
-    func initToolbarView() {
-        toolbarView =  createToolbarView()
-
-        webviewView.addSubview(toolbarView)
     }
 
     @objc func loadRootUrl() {
@@ -325,29 +281,17 @@ extension ViewController {
     }
 
     func handleATTPermissionRequest() {
-        if #available(iOS 14, *) {
-            TrackingTransparencyManager.requestPermission { [weak self] status in
-                guard let self else { return }
-                self.dispatchATTEvent(eventName: "att-permission-response", detail: TrackingTransparencyManager.statusToString(status))
-            }
-        } else {
-            dispatchATTEvent(eventName: "att-permission-response", detail: "unavailable")
+        TrackingTransparencyManager.requestPermission { [weak self] status in
+            guard let self else { return }
+            self.dispatchATTEvent(eventName: "att-permission-response", detail: TrackingTransparencyManager.statusToString(status))
         }
     }
 
     func handleATTGetStatus() {
-        if #available(iOS 14, *) {
-            dispatchATTEvent(eventName: "att-status-response", detail: TrackingTransparencyManager.getStatusString())
-        } else {
-            dispatchATTEvent(eventName: "att-status-response", detail: "unavailable")
-        }
+        dispatchATTEvent(eventName: "att-status-response", detail: TrackingTransparencyManager.getStatusString())
     }
 
     func handleATTGetIDFA() {
-        if #available(iOS 14, *) {
-            dispatchATTEvent(eventName: "att-idfa-response", detail: TrackingTransparencyManager.getIDFA() ?? "")
-        } else {
-            dispatchATTEvent(eventName: "att-idfa-response", detail: "")
-        }
+        dispatchATTEvent(eventName: "att-idfa-response", detail: TrackingTransparencyManager.getIDFA() ?? "")
     }
 }

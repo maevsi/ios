@@ -55,7 +55,6 @@ That's it! SPM handles all dependencies automatically. Press `Cmd+R` to build an
 
 - macOS with Xcode installed
 - Apple Developer account for signing & push notifications (optional)
-- Homebrew for managing Ruby (optional)
 
 ### Managing Dependencies
 
