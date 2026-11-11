@@ -3,7 +3,7 @@ import FirebaseCore
 import FirebaseMessaging
 
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window : UIWindow?
@@ -40,11 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // this callback will not be fired till the user taps on the notification launching the application.
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-          print("Message ID 2: \(messageID)")
-        }
-
         // Print full message. **
         print("push userInfo 2:", userInfo)
         // A visible notification that arrives in the foreground is already forwarded by `willPresent`.
@@ -82,11 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-          print("Message ID: 3 \(messageID)")
-        }
-
         // Print full message.
         print("push userInfo 3:", userInfo)
         sendPushToWebView(userInfo: userInfo)
@@ -99,11 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                   didReceive response: UNNotificationResponse,
                                   withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-          print("Message ID 4: \(messageID)")
-        }
-
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print full message.
