@@ -74,6 +74,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                      completionHandler: @escaping (Bool) -> Void) {
         if let shortcutUrl = URL.init(string: shortcutItem.type) {
             vibetype.webView.load(URLRequest(url: shortcutUrl))
+            completionHandler(true)
+        } else {
+            completionHandler(false)
         }
     }
 
