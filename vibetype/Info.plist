@@ -81,7 +81,7 @@
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Explore events</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>https://vibetype.app/events</string>
+			<string>https://vibetype.app/event</string>
 		</dict>
 	</array>
 	<key>UIBackgroundModes</key>
