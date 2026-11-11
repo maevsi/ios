@@ -34,21 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
 
       // [START receive_message]
-      func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-          print("Message ID 1: \(messageID)")
-        }
-
-        // Print full message.
-        print("push userInfo 1:", userInfo)
-        sendPushToWebView(userInfo: userInfo)
-      }
-
       func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // If you are receiving a notification message while your app is in the background,
@@ -62,7 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Print full message. **
         print("push userInfo 2:", userInfo)
-        sendPushToWebView(userInfo: userInfo)
+        // A visible notification that arrives in the foreground is already forwarded by `willPresent`.
+        let isVisible = (userInfo["aps"] as? [AnyHashable: Any])?["alert"] != nil
+        if application.applicationState != .active || !isVisible {
+            sendPushToWebView(userInfo: userInfo)
+        }
 
         completionHandler(UIBackgroundFetchResult.newData)
       }
