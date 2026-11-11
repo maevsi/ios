@@ -1,3 +1,9 @@
+## [0.5.8](https://github.com/maevsi/ios/compare/0.5.7...0.5.8) (2026-11-11)
+
+### Bug Fixes
+
+* **webview:** harden link handling and the native bridge ([#48](https://github.com/maevsi/ios/issues/48)) ([d37f2b1](https://github.com/maevsi/ios/commit/d37f2b11a1c57c7bf86910b531be3198ad5f847f)), closes [#49](https://github.com/maevsi/ios/issues/49)
+
 ## [0.5.7](https://github.com/maevsi/ios/compare/0.5.6...0.5.7) (2026-11-11)
 
 ### Bug Fixes
