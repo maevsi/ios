@@ -181,7 +181,8 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         htmlIsLoaded = false;
 
-        if (error as NSError)._code != (-999) {
+        // -999 is a cancelled load, 102 a navigation that the policy handler cancelled or turned into a download.
+        if ![-999, 102].contains((error as NSError).code) {
             self.overrideUIStyle(toDefault: true);
 
             webView.isHidden = true;
