@@ -6,6 +6,7 @@ var webView: WKWebView! = nil
 class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteractionControllerDelegate {
 
     var documentController: UIDocumentInteractionController?
+    var downloadDestinations: [WKDownload: URL] = [:]
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
         return self
     }
@@ -165,6 +166,10 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         htmlIsLoaded = true
 
+        // The launch link has been served, later reloads start from the root again.
+        SceneDelegate.universalLinkToLaunch = nil
+        SceneDelegate.shortcutLinkToLaunch = nil
+
         self.setProgress(1.0, true)
         self.animateConnectionProblem(false)
 
@@ -268,6 +273,8 @@ extension UIColor {
 
 extension ViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        // Embedded frames must not reach the native bridge.
+        guard message.frameInfo.isMainFrame else { return }
         if message.name == "att-get-idfa" {
             handleATTGetIDFA()
         }

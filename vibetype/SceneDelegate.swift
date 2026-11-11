@@ -47,8 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             comps?.scheme = "https"
 
             if let url = comps?.url {
-                // Handle it inside our web view in a SPA-friendly way.
-                vibetype.webView.evaluateJavaScript("location.href = '\(url)'")
+                vibetype.webView.load(URLRequest(url: url))
             }
         }
     }
@@ -65,8 +64,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
 
-        // Handle it inside our web view in a SPA-friendly way.
-        vibetype.webView.evaluateJavaScript("location.href = '\(universalLink)'")
+        // Load the link as a navigation. Building a script from it would let a crafted link run code in the page.
+        vibetype.webView.load(URLRequest(url: universalLink))
     }
 
     // This function is called if our app is already loaded and the user activates the app via shortcut
@@ -74,7 +73,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                      performActionFor shortcutItem: UIApplicationShortcutItem,
                      completionHandler: @escaping (Bool) -> Void) {
         if let shortcutUrl = URL.init(string: shortcutItem.type) {
-            vibetype.webView.evaluateJavaScript("location.href = '\(shortcutUrl)'");
+            vibetype.webView.load(URLRequest(url: shortcutUrl))
+            completionHandler(true)
+        } else {
+            completionHandler(false)
         }
     }
 
