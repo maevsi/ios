@@ -43,11 +43,6 @@
 	<string>public.app-category.social-networking</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>The app allows taking photos of event posters to show interest in the listed events.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -118,7 +113,7 @@
 	<true/>
 	<key>WKAppBoundDomains</key>
 	<array>
-		<string>vibetype.app/?source=pwa</string>
+		<string>vibetype.app</string>
 	</array>
 </dict>
 </plist>

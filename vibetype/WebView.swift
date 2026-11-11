@@ -51,12 +51,6 @@ func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler,
     webView.scrollView.contentInsetAdjustmentBehavior = .never
     webView.allowsBackForwardNavigationGestures = true
 
-    // Check if macCatalyst 16.4+ is available and if so, enable web inspector.
-    // This allows the web app to be inspected using Safari Web Inspector. Supported on iOS 16.4+ and macOS 13.3+
-    if #available(iOS 16.4, macOS 13.3, *) {
-        webView.isInspectable = true
-    }
-
     // let deviceModel = UIDevice.current.model
     // let osVersion = UIDevice.current.systemVersion
     // webView.configuration.applicationNameForUserAgent = "Safari/604.1" // See https://github.com/pwa-builder/pwabuilder-ios/issues/30
@@ -71,6 +65,14 @@ func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler,
     #endif
 
     return webView
+}
+
+// A host belongs to an origin if it is that origin or one of its subdomains.
+// A substring match would also accept hosts like `vibetype.app.example.com`.
+func hostMatches(_ host: String, origin: String) -> Bool {
+    let host = host.lowercased()
+    let origin = origin.lowercased()
+    return host == origin || host.hasSuffix("." + origin)
 }
 
 func setAppStoreAsReferrer(contentController: WKUserContentController) {
@@ -151,7 +153,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
 
             if let requestHost = requestUrl.host {
                 // NOTE: Match auth origin first, because host origin may be a subset of auth origin and may therefore always match
-                let matchingAuthOrigin = authOrigins.first(where: { requestHost.range(of: $0) != nil })
+                let matchingAuthOrigin = authOrigins.first(where: { hostMatches(requestHost, origin: $0) })
                 if (matchingAuthOrigin != nil) {
                     decisionHandler(.allow)
                     if (toolbarView.isHidden) {
@@ -161,7 +163,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
                     return
                 }
 
-                let matchingHostOrigin = allowedOrigins.first(where: { requestHost.range(of: $0) != nil })
+                let matchingHostOrigin = allowedOrigins.first(where: { hostMatches(requestHost, origin: $0) })
                 if (matchingHostOrigin != nil) {
                     // Open in main webview
                     decisionHandler(.allow)

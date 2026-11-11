@@ -268,6 +268,8 @@ extension UIColor {
 
 extension ViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        // Embedded frames must not reach the native bridge.
+        guard message.frameInfo.isMainFrame else { return }
         if message.name == "att-get-idfa" {
             handleATTGetIDFA()
         }
