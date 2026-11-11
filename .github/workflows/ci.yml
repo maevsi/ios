@@ -34,7 +34,7 @@ jobs:
           set -o pipefail
           xcodebuild -project vibetype.xcodeproj \
             -scheme vibetype \
-            -destination 'platform=iOS Simulator,name=iPhone 17' \
+            -destination 'generic/platform=iOS Simulator' \
             -configuration Release \
             clean build | xcpretty
   release_semantic:
