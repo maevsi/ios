@@ -108,6 +108,7 @@
 	<key>WKAppBoundDomains</key>
 	<array>
 		<string>vibetype.app</string>
+		<string>challenges.cloudflare.com</string>
 	</array>
 </dict>
 </plist>
