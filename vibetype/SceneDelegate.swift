@@ -13,8 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Check to see if we were launched via a universal link or a shortcut.
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // The style override on the key window hides system appearance changes from the view controller's traits,
-        // so `traitCollectionDidChange` never fires for them. The scene above the window still sees them.
-        // Scene trait observation needs iOS 17, so iOS 15.6 to 16 still miss these changes until the next launch;
+        // so `traitCollectionDidChange` only fires for them once the app returns from the background. The scene above
+        // the window sees them live. Scene trait observation needs iOS 17, so iOS 15.6 to 16 still only catch up on return;
         // covering them would mean moving the override off the window, e.g. to `preferredStatusBarStyle`.
         if #available(iOS 17.0, *), let windowScene = scene as? UIWindowScene {
             windowScene.registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (windowScene: UIWindowScene, _: UITraitCollection) in

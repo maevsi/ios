@@ -73,7 +73,9 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         // Keep the web view aligned with the true device appearance when the user changes the
-        // system dark/light setting while the app is running.
+        // system dark/light setting. The chrome override on the key window holds these traits while
+        // the app is in the foreground, so this only fires once the app returns from the background,
+        // which is the sole path on iOS 15.6 to 16. The scene delegate covers live changes on iOS 17+.
         syncWebViewInterfaceStyle()
     }
 
