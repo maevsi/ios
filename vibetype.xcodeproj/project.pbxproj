@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A52A00000000000000000002 /* WebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A00000000000000000001 /* WebViewTests.swift */; };
 		595F23A525CEFBFE0053416C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595F239A25CEFBFD0053416C /* Settings.swift */; };
 		595F23A625CEFBFE0053416C /* Entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 595F239B25CEFBFD0053416C /* Entitlements */; };
 		595F23A725CEFBFE0053416C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 595F239C25CEFBFD0053416C /* Assets.xcassets */; };
@@ -24,7 +25,19 @@
 		DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDBCB1132D6C602600313680 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A52A00000000000000000007 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD89F881237E9D9200C436A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD89F888237E9D9200C436A1;
+			remoteInfo = vibetype;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		A52A00000000000000000001 /* WebViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewTests.swift; sourceTree = "<group>"; };
+		A52A00000000000000000003 /* vibetypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vibetypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59333BAA25CFF706003392A4 /* vibetype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vibetype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		595F239A25CEFBFD0053416C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = vibetype/Settings.swift; sourceTree = "<group>"; };
 		595F239B25CEFBFD0053416C /* Entitlements */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Entitlements; path = vibetype/Entitlements; sourceTree = "<group>"; };
@@ -52,6 +65,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A52A00000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -74,7 +94,17 @@
 				595F23A425CEFBFE0053416C /* WebView.swift */,
 				59333BAA25CFF706003392A4 /* vibetype.app */,
 				DDBCB1132D6C602600313680 /* GoogleService-Info.plist */,
+				A52A0000000000000000000C /* vibetypeTests */,
+				A52A00000000000000000003 /* vibetypeTests.xctest */,
 			);
+			sourceTree = "<group>";
+		};
+		A52A0000000000000000000C /* vibetypeTests */ = {
+			isa = PBXGroup;
+			children = (
+				A52A00000000000000000001 /* WebViewTests.swift */,
+			);
+			path = vibetypeTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -97,6 +127,23 @@
 			productReference = 59333BAA25CFF706003392A4 /* vibetype.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A52A00000000000000000006 /* vibetypeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A52A00000000000000000009 /* Build configuration list for PBXNativeTarget "vibetypeTests" */;
+			buildPhases = (
+				A52A00000000000000000004 /* Sources */,
+				A52A00000000000000000005 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A52A00000000000000000008 /* PBXTargetDependency */,
+			);
+			name = vibetypeTests;
+			productName = vibetypeTests;
+			productReference = A52A00000000000000000003 /* vibetypeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -111,6 +158,9 @@
 					CD89F888237E9D9200C436A1 = {
 						CreatedOnToolsVersion = 11.2.1;
 						LastSwiftMigration = 1120;
+					};
+					A52A00000000000000000006 = {
+						TestTargetID = CD89F888237E9D9200C436A1;
 					};
 				};
 			};
@@ -131,6 +181,7 @@
 			projectRoot = "";
 			targets = (
 				CD89F888237E9D9200C436A1 /* vibetype */,
+				A52A00000000000000000006 /* vibetypeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -167,7 +218,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A52A00000000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A52A00000000000000000002 /* WebViewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A52A00000000000000000008 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD89F888237E9D9200C436A1 /* vibetype */;
+			targetProxy = A52A00000000000000000007 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CDC0FE252388222B002C8D56 /* Main.storyboard */ = {
@@ -379,6 +446,40 @@
 			};
 			name = Release;
 		};
+		A52A0000000000000000000A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NJWSWLWL24;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vibetype.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/vibetype";
+			};
+			name = Debug;
+		};
+		A52A0000000000000000000B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NJWSWLWL24;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vibetype.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/vibetype";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -396,6 +497,15 @@
 			buildConfigurations = (
 				CD89F89E237E9D9300C436A1 /* Debug */,
 				CD89F89F237E9D9300C436A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A52A00000000000000000009 /* Build configuration list for PBXNativeTarget "vibetypeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A52A0000000000000000000A /* Debug */,
+				A52A0000000000000000000B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

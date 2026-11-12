@@ -37,6 +37,16 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             -configuration Release \
             clean build | xcpretty
+
+      - name: Test on iOS Simulator
+        run: |
+          set -o pipefail
+          # Simulator names change with the runner image, so take the first available iPhone.
+          udid=$(xcrun simctl list devices available --json | jq -r '[.devices[][] | select(.name | startswith("iPhone"))][0].udid')
+          xcodebuild -project vibetype.xcodeproj \
+            -scheme vibetype \
+            -destination "platform=iOS Simulator,id=$udid" \
+            test | xcpretty
   release_semantic:
     needs: build
     if: github.event_name == 'push'
