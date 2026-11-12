@@ -12,6 +12,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // This function is called when your app launches.
     // Check to see if we were launched via a universal link or a shortcut.
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        // The style override on the key window hides system appearance changes from the view controller's traits,
+        // so `traitCollectionDidChange` never fires for them. The scene above the window still sees them.
+        // Scene trait observation needs iOS 17, so iOS 15.6 to 16 still miss these changes until the next launch;
+        // covering them would mean moving the override off the window, e.g. to `preferredStatusBarStyle`.
+        if #available(iOS 17.0, *), let windowScene = scene as? UIWindowScene {
+            windowScene.registerForTraitChanges([UITraitUserInterfaceStyle.self]) { (windowScene: UIWindowScene, _: UITraitCollection) in
+                (windowScene.windows.first?.rootViewController as? ViewController)?.syncWebViewInterfaceStyle()
+            }
+        }
+
         // See if our app is being launched via universal link.
         // If so, store that link so we can navigate to it once our webView is initialized.
         for userActivity in connectionOptions.userActivities {

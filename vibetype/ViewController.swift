@@ -109,7 +109,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         return windowScene?.traitCollection.userInterfaceStyle ?? .unspecified
     }
 
-    private func syncWebViewInterfaceStyle() {
+    func syncWebViewInterfaceStyle() {
         if adaptiveUIStyle {
             vibetype.webView?.overrideUserInterfaceStyle = systemInterfaceStyle
         }
