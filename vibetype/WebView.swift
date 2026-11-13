@@ -127,9 +127,8 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
             let externalSchemes = ["tel", "telprompt", "mailto", "facetime", "facetime-audio", "fb", "fb-messenger", "sms", "itms-services", "itms-apps", "itms", "maps"]
             if let requestScheme = requestUrl.scheme?.lowercased(), externalSchemes.contains(requestScheme) {
                 decisionHandler(.cancel)
-                if UIApplication.shared.canOpenURL(requestUrl) {
-                    UIApplication.shared.open(requestUrl)
-                }
+                // `canOpenURL` reports false for schemes missing from `LSApplicationQueriesSchemes`, `open` needs no declaration.
+                UIApplication.shared.open(requestUrl)
                 return
             }
 
@@ -156,9 +155,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
                     self.present(safariViewController, animated: true, completion: nil)
                 } else {
                     // Scheme is not supported or no scheme is given, use openURL
-                    if (UIApplication.shared.canOpenURL(requestUrl)) {
-                        UIApplication.shared.open(requestUrl)
-                    }
+                    UIApplication.shared.open(requestUrl)
                 }
             } else {
                 decisionHandler(.cancel)
