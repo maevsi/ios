@@ -1,3 +1,11 @@
+## [0.5.9](https://github.com/maevsi/ios/compare/0.5.8...0.5.9) (2026-11-13)
+
+### Bug Fixes
+
+* **theme:** follow system appearance changes in both directions ([#55](https://github.com/maevsi/ios/issues/55)) ([d74c3ae](https://github.com/maevsi/ios/commit/d74c3ae76cb1c594c6b65b50a0c1313b6b52fb1f))
+* **webview:** keep the native bridge working after third-party frames ([#53](https://github.com/maevsi/ios/issues/53)) ([dfb1fa8](https://github.com/maevsi/ios/commit/dfb1fa89b6de906ee3175b38cbe5c02e4da77215))
+* **webview:** open external schemes without querying them first ([#54](https://github.com/maevsi/ios/issues/54)) ([ad95d7b](https://github.com/maevsi/ios/commit/ad95d7bd7aecd1b745eabba110079aabdb7dfdf6))
+
 ## [0.5.8](https://github.com/maevsi/ios/compare/0.5.7...0.5.8) (2026-11-11)
 
 ### Bug Fixes
