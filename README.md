@@ -65,3 +65,8 @@ Dependencies are managed through Swift Package Manager (SPM), which is integrate
 1. Open `vibetype.xcodeproj` in Xcode
 2. Go to **File** → **Packages** → **Update to Latest Package Versions**
 3. Or select the project, then **Package Dependencies** tab to manage individual packages
+
+### Release Signing
+
+CI signs releases with a development certificate stored in repository secrets.
+See [docs/signing.md](docs/signing.md) for how to create and renew it.
