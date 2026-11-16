@@ -1,3 +1,9 @@
+## [0.5.10](https://github.com/maevsi/ios/compare/0.5.9...0.5.10) (2026-11-16)
+
+### Bug Fixes
+
+* **shortcut:** open the events shortcut in the user's language ([#58](https://github.com/maevsi/ios/issues/58)) ([028fe85](https://github.com/maevsi/ios/commit/028fe85cd95889471bcaeb4e06d6344b11e1f925))
+
 ## [0.5.9](https://github.com/maevsi/ios/compare/0.5.8...0.5.9) (2026-11-13)
 
 ### Bug Fixes
