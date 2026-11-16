@@ -1,0 +1,2 @@
+/* the title of the home screen shortcut, keyed by its English text in Info.plist */
+"Explore events" = "Veranstaltungen entdecken";
