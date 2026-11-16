@@ -22,6 +22,7 @@
 		936658952F3085DF00CE9A4A /* TrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936658942F3085DF00CE9A4A /* TrackingTransparency.swift */; };
 		CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE252388222B002C8D56 /* Main.storyboard */; };
 		CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */; };
+		A52A00000000000000000101 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52A00000000000000000102 /* InfoPlist.strings */; };
 		DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDBCB1132D6C602600313680 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		936658942F3085DF00CE9A4A /* TrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackingTransparency.swift; path = vibetype/TrackingTransparency.swift; sourceTree = "<group>"; };
 		CDC0FE262388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A52A00000000000000000103 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = vibetype/de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DDBCB1132D6C602600313680 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "vibetype/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 				595F239C25CEFBFD0053416C /* Assets.xcassets */,
 				595F239B25CEFBFD0053416C /* Entitlements */,
 				595F23A025CEFBFE0053416C /* Info.plist */,
+				A52A00000000000000000102 /* InfoPlist.strings */,
 				595F23A325CEFBFE0053416C /* Printer.swift */,
 				595F239F25CEFBFE0053416C /* PushNotifications.swift */,
 				595F239D25CEFBFD0053416C /* SceneDelegate.swift */,
@@ -171,6 +174,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = CD89F880237E9D9200C436A1;
 			packageReferences = (
@@ -196,6 +200,7 @@
 				CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */,
 				DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */,
 				CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */,
+				A52A00000000000000000101 /* InfoPlist.strings in Resources */,
 				595F23A725CEFBFE0053416C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +242,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A52A00000000000000000102 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A52A00000000000000000103 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		CDC0FE252388222B002C8D56 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
