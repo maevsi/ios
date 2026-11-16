@@ -1,3 +1,9 @@
+## [0.5.11](https://github.com/maevsi/ios/compare/0.5.10...0.5.11) (2026-11-16)
+
+### Bug Fixes
+
+* **release:** sign with a fixed development certificate ([#59](https://github.com/maevsi/ios/issues/59)) ([22de88d](https://github.com/maevsi/ios/commit/22de88d468dd2acf16c4e16fb4cb55e07e12046e))
+
 ## [0.5.10](https://github.com/maevsi/ios/compare/0.5.9...0.5.10) (2026-11-16)
 
 ### Bug Fixes
