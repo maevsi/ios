@@ -6,12 +6,17 @@ Export to App Store Connect then re-signs the archive through cloud signing, whi
 The archive step does need a development certificate whose private key is in the runner's keychain.
 GitHub's macOS runners start with an empty keychain, so without one Xcode creates a fresh "Apple Development: Created via API" certificate on every release.
 Those pile up until the account reaches Apple's certificate limit and the archive fails with "Your account has reached the maximum number of certificates".
-To prevent that, CI imports one fixed certificate from repository secrets before archiving.
+To prevent that, CI imports one fixed certificate before archiving.
 
 ## Secrets
 
+All secrets live in the `testflight` deployment environment, which only `main` can deploy to.
+
 | Secret | Content |
 | --- | --- |
+| `APPSTORE_CONNECT_API_KEY_ID` | the key ID, which is also part of the file name `AuthKey_<KEY_ID>.p8` |
+| `APPSTORE_CONNECT_API_KEY_ISSUER_ID` | the issuer ID shown above the list of team keys |
+| `APPSTORE_CONNECT_API_KEY_PRIVATE_KEY` | the content of `AuthKey_<KEY_ID>.p8` |
 | `BUILD_CERTIFICATE_BASE64` | the `.p12` holding the certificate and its private key, base64 encoded |
 | `P12_PASSWORD` | the password the `.p12` was exported with |
 | `KEYCHAIN_PASSWORD` | any random string, used for the temporary keychain on the runner |
@@ -50,15 +55,35 @@ These steps work on any machine with OpenSSL, no Mac required.
 5. Store the secrets:
 
    ```sh
-   base64 -w0 ci.p12 | gh secret set BUILD_CERTIFICATE_BASE64 --repo maevsi/ios
-   gh secret set P12_PASSWORD --repo maevsi/ios
-   gh secret set KEYCHAIN_PASSWORD --repo maevsi/ios --body "$(openssl rand -base64 24)"
+   base64 -w0 ci.p12 | gh secret set BUILD_CERTIFICATE_BASE64 --repo maevsi/ios --env testflight
+   gh secret set P12_PASSWORD --repo maevsi/ios --env testflight
+   gh secret set KEYCHAIN_PASSWORD --repo maevsi/ios --env testflight --body "$(openssl rand -base64 24)"
    ```
 
 6. Keep `ci.key` and `ci.p12` in a password manager if wanted, then delete the scratch directory.
 
+## App Store Connect API key
+
+Xcode uses the key to fetch provisioning profiles while archiving and to sign through the cloud while exporting.
+Create a team key in [App Store Connect](https://appstoreconnect.apple.com/access/integrations/api) under Users and Access, Integrations, App Store Connect API.
+Apple offers the `.p8` download only once, so store it right away.
+
+```sh
+gh secret set APPSTORE_CONNECT_API_KEY_PRIVATE_KEY --repo maevsi/ios --env testflight < AuthKey_<KEY_ID>.p8
+gh secret set APPSTORE_CONNECT_API_KEY_ID --repo maevsi/ios --env testflight --body "<KEY_ID>"
+gh secret set APPSTORE_CONNECT_API_KEY_ISSUER_ID --repo maevsi/ios --env testflight
+```
+
+## Checking the secrets
+
+The `Signing` workflow archives and exports the app with these secrets, without uploading anything:
+
+```sh
+gh workflow run signing.yml --repo maevsi/ios
+```
+
 ## Renewal
 
 The certificate is valid for one year.
-Repeat the steps above before it expires and replace the secrets.
+Repeat the steps above before it expires, replace the secrets, and run the `Signing` workflow to check them.
 Xcode fetches a matching development provisioning profile through the App Store Connect API key, so no profile needs to be stored.
