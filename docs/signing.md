@@ -74,16 +74,8 @@ gh secret set APPSTORE_CONNECT_API_KEY_ID --repo maevsi/ios --env testflight --b
 gh secret set APPSTORE_CONNECT_API_KEY_ISSUER_ID --repo maevsi/ios --env testflight
 ```
 
-## Checking the secrets
-
-The `Signing` workflow archives and exports the app with these secrets, without uploading anything:
-
-```sh
-gh workflow run signing.yml --repo maevsi/ios
-```
-
 ## Renewal
 
 The certificate is valid for one year.
-Repeat the steps above before it expires, replace the secrets, and run the `Signing` workflow to check them.
+Repeat the steps above before it expires and replace the secrets.
 Xcode fetches a matching development provisioning profile through the App Store Connect API key, so no profile needs to be stored.
