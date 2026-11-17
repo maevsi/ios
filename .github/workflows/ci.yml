@@ -11,6 +11,11 @@ on:
       - main
       - renovate/**
 
+# Release branches queue instead of being cancelled, so a release never stops halfway.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ !contains(fromJSON('["refs/heads/alpha", "refs/heads/beta", "refs/heads/main"]'), github.ref) }}
+
 jobs:
   ci-optimization:
     name: CI optimization
@@ -21,13 +26,16 @@ jobs:
     needs: ci-optimization
     if: needs.ci-optimization.outputs.continue == 'true'
     name: Build iOS (simulator)
-    runs-on: macos-latest
+    runs-on: macos-26
+    timeout-minutes: 30
     permissions:
       contents: read
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Build on iOS Simulator
         run: |
@@ -64,12 +72,17 @@ jobs:
     needs: release_semantic
     if: needs.release_semantic.outputs.new_release_version != null
     name: Sign and release to TestFlight
-    runs-on: macos-latest
+    runs-on: macos-26
+    timeout-minutes: 30
+    environment: testflight
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           ref: ${{ needs.release_semantic.outputs.new_release_version }}
 
       # Without a signing identity in the keychain, automatic signing creates a new certificate on every run until the account hits Apple's limit. See docs/signing.md.
