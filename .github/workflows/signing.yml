@@ -3,6 +3,9 @@ name: Signing
 permissions: {}
 
 on:
+  push:
+    branches:
+      - docs/signing/environment
   workflow_dispatch:
 
 jobs:
