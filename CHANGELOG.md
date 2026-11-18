@@ -1,3 +1,9 @@
+## [0.5.12](https://github.com/maevsi/ios/compare/0.5.11...0.5.12) (2026-11-18)
+
+### Bug Fixes
+
+* **camera:** explain the poster photo with a concrete example ([#62](https://github.com/maevsi/ios/issues/62)) ([8305500](https://github.com/maevsi/ios/commit/8305500031d852d68d6ac69a294d1e0348be42a0))
+
 ## [0.5.11](https://github.com/maevsi/ios/compare/0.5.10...0.5.11) (2026-11-16)
 
 ### Bug Fixes
