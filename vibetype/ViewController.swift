@@ -242,6 +242,9 @@ extension ViewController: WKScriptMessageHandler {
         if message.name == "att-request-permission" {
             handleATTPermissionRequest()
         }
+        if message.name == "poster-scan" {
+            handlePosterScan()
+        }
         if message.name == "print" {
             printView(webView: vibetype.webView)
         }
@@ -263,7 +266,7 @@ extension ViewController: WKScriptMessageHandler {
 // MARK: - App Tracking Transparency Handlers
 extension ViewController {
 
-    private func dispatchATTEvent(eventName: String, detail: String) {
+    func dispatchEvent(eventName: String, detail: String) {
         func toJsonString(_ value: String) -> String? {
             guard let data = try? JSONSerialization.data(withJSONObject: [value]),
                   let json = String(data: data, encoding: .utf8) else { return nil }
@@ -271,7 +274,7 @@ extension ViewController {
         }
         guard let detailJson = toJsonString(detail),
               let eventNameJson = toJsonString(eventName) else {
-            print("Error encoding ATT event data for: \(eventName)")
+            print("Error encoding event data for: \(eventName)")
             return
         }
         let script = "window.dispatchEvent(new CustomEvent(\(eventNameJson), { detail: \(detailJson) }));"
@@ -285,15 +288,15 @@ extension ViewController {
     func handleATTPermissionRequest() {
         TrackingTransparencyManager.requestPermission { [weak self] status in
             guard let self else { return }
-            self.dispatchATTEvent(eventName: "att-permission-response", detail: TrackingTransparencyManager.statusToString(status))
+            self.dispatchEvent(eventName: "att-permission-response", detail: TrackingTransparencyManager.statusToString(status))
         }
     }
 
     func handleATTGetStatus() {
-        dispatchATTEvent(eventName: "att-status-response", detail: TrackingTransparencyManager.getStatusString())
+        dispatchEvent(eventName: "att-status-response", detail: TrackingTransparencyManager.getStatusString())
     }
 
     func handleATTGetIDFA() {
-        dispatchATTEvent(eventName: "att-idfa-response", detail: TrackingTransparencyManager.getIDFA() ?? "")
+        dispatchEvent(eventName: "att-idfa-response", detail: TrackingTransparencyManager.getIDFA() ?? "")
     }
 }
