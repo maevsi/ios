@@ -133,3 +133,29 @@ jobs:
             -authenticationKeyPath "$RUNNER_TEMP/private_keys/AuthKey_${API_KEY_ID}.p8" \
             -authenticationKeyID "$API_KEY_ID" \
             -authenticationKeyIssuerID "$API_KEY_ISSUER_ID"
+  # Waits for App Store Connect to process the build on a Linux runner, which costs less than the macOS one.
+  release_notes:
+    needs: [release_semantic, release]
+    name: Set the TestFlight release notes
+    runs-on: ubuntu-26.04
+    timeout-minutes: 60
+    environment: testflight
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ needs.release_semantic.outputs.new_release_version }}
+
+      - name: Set the release notes
+        env:
+          API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
+          API_KEY_ISSUER_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ISSUER_ID }}
+          API_KEY_PRIVATE_KEY: ${{ secrets.APPSTORE_CONNECT_API_KEY_PRIVATE_KEY }}
+          BUNDLE_ID: si.maev.twa
+          TAG: ${{ needs.release_semantic.outputs.new_release_version }}
+        run: .github/scripts/store-notes.sh testflight "$TAG"
