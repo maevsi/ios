@@ -17,6 +17,7 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
     @IBOutlet weak var webviewView: UIView!
 
     var htmlIsLoaded = false;
+    var sharedPoster: String?
 
     private var themeObservation: NSKeyValueObservation?
     var currentWebViewTheme: UIUserInterfaceStyle = .unspecified
@@ -24,9 +25,13 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
     override func viewDidLoad() {
         super.viewDidLoad()
         initWebView()
+        if receiveSharedPoster() {
+            SceneDelegate.universalLinkToLaunch = posterHuntingUrl
+        }
         loadRootUrl()
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.openSharedPoster), name: UIApplication.willEnterForegroundNotification, object: nil)
 
     }
 
@@ -244,6 +249,9 @@ extension ViewController: WKScriptMessageHandler {
         }
         if message.name == "poster-scan" {
             handlePosterScan()
+        }
+        if message.name == "poster-shared-request" {
+            handlePosterSharedRequest()
         }
         if message.name == "print" {
             printView(webView: vibetype.webView)

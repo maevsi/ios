@@ -1,0 +1,5 @@
+/* Shown after a poster image was handed to the app */
+"Open Vibetype to read the poster." = "Öffne Vibetype, um das Plakat auszulesen.";
+
+/* Shown when the shared image could not be read or saved */
+"The image could not be shared." = "Das Bild konnte nicht geteilt werden.";

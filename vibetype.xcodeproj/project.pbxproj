@@ -26,6 +26,11 @@
 		CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */; };
 		A52A00000000000000000101 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52A00000000000000000102 /* InfoPlist.strings */; };
 		DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDBCB1132D6C602600313680 /* GoogleService-Info.plist */; };
+		B05700000000000000000011 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000010 /* ShareViewController.swift */; };
+		B05700000000000000000012 /* PosterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000003 /* PosterImage.swift */; };
+		B05700000000000000000017 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000015 /* Localizable.strings */; };
+		B05700000000000000000019 /* vibetypeShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B05700000000000000000018 /* vibetypeShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B05700000000000000000026 /* PosterShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000025 /* PosterShare.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +41,28 @@
 			remoteGlobalIDString = CD89F888237E9D9200C436A1;
 			remoteInfo = vibetype;
 		};
+		B05700000000000000000020 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD89F881237E9D9200C436A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B0570000000000000000001B;
+			remoteInfo = vibetypeShare;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B0570000000000000000001F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B05700000000000000000019 /* vibetypeShare.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A52A00000000000000000001 /* WebViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewTests.swift; sourceTree = "<group>"; };
@@ -60,6 +86,12 @@
 		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A52A00000000000000000103 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = vibetype/de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DDBCB1132D6C602600313680 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "vibetype/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B05700000000000000000010 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		B05700000000000000000013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B05700000000000000000014 /* Entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.plist; sourceTree = "<group>"; };
+		B05700000000000000000016 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B05700000000000000000018 /* vibetypeShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = vibetypeShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B05700000000000000000025 /* PosterShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PosterShare.swift; path = vibetype/PosterShare.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +104,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A52A00000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0570000000000000000001D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -92,6 +131,7 @@
 				A52A00000000000000000102 /* InfoPlist.strings */,
 				B05700000000000000000003 /* PosterImage.swift */,
 				B05700000000000000000001 /* PosterScan.swift */,
+				B05700000000000000000025 /* PosterShare.swift */,
 				595F23A325CEFBFE0053416C /* Printer.swift */,
 				595F239F25CEFBFE0053416C /* PushNotifications.swift */,
 				595F239D25CEFBFD0053416C /* SceneDelegate.swift */,
@@ -105,6 +145,8 @@
 				DDBCB1132D6C602600313680 /* GoogleService-Info.plist */,
 				A52A0000000000000000000C /* vibetypeTests */,
 				A52A00000000000000000003 /* vibetypeTests.xctest */,
+				B0570000000000000000001A /* vibetypeShare */,
+				B05700000000000000000018 /* vibetypeShare.appex */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,6 +156,17 @@
 				A52A00000000000000000001 /* WebViewTests.swift */,
 			);
 			path = vibetypeTests;
+			sourceTree = "<group>";
+		};
+		B0570000000000000000001A /* vibetypeShare */ = {
+			isa = PBXGroup;
+			children = (
+				B05700000000000000000014 /* Entitlements.plist */,
+				B05700000000000000000013 /* Info.plist */,
+				B05700000000000000000015 /* Localizable.strings */,
+				B05700000000000000000010 /* ShareViewController.swift */,
+			);
+			path = vibetypeShare;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,10 +179,12 @@
 				CD89F885237E9D9200C436A1 /* Sources */,
 				CD89F886237E9D9200C436A1 /* Frameworks */,
 				CD89F887237E9D9200C436A1 /* Resources */,
+				B0570000000000000000001F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B05700000000000000000021 /* PBXTargetDependency */,
 			);
 			name = vibetype;
 			productName = vibetype;
@@ -153,6 +208,23 @@
 			productReference = A52A00000000000000000003 /* vibetypeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B0570000000000000000001B /* vibetypeShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B05700000000000000000024 /* Build configuration list for PBXNativeTarget "vibetypeShare" */;
+			buildPhases = (
+				B0570000000000000000001C /* Sources */,
+				B0570000000000000000001D /* Frameworks */,
+				B0570000000000000000001E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vibetypeShare;
+			productName = vibetypeShare;
+			productReference = B05700000000000000000018 /* vibetypeShare.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -170,6 +242,9 @@
 					};
 					A52A00000000000000000006 = {
 						TestTargetID = CD89F888237E9D9200C436A1;
+					};
+					B0570000000000000000001B = {
+						CreatedOnToolsVersion = 27.0;
 					};
 				};
 			};
@@ -192,6 +267,7 @@
 			targets = (
 				CD89F888237E9D9200C436A1 /* vibetype */,
 				A52A00000000000000000006 /* vibetypeTests */,
+				B0570000000000000000001B /* vibetypeShare */,
 			);
 		};
 /* End PBXProject section */
@@ -211,6 +287,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0570000000000000000001E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B05700000000000000000017 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -224,6 +308,7 @@
 				595F23A525CEFBFE0053416C /* Settings.swift in Sources */,
 				B05700000000000000000004 /* PosterImage.swift in Sources */,
 				B05700000000000000000002 /* PosterScan.swift in Sources */,
+				B05700000000000000000026 /* PosterShare.swift in Sources */,
 				595F23AE25CEFBFE0053416C /* Printer.swift in Sources */,
 				595F23AC25CEFBFE0053416C /* ViewController.swift in Sources */,
 				595F23AA25CEFBFE0053416C /* PushNotifications.swift in Sources */,
@@ -239,6 +324,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0570000000000000000001C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B05700000000000000000012 /* PosterImage.swift in Sources */,
+				B05700000000000000000011 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -246,6 +340,11 @@
 			isa = PBXTargetDependency;
 			target = CD89F888237E9D9200C436A1 /* vibetype */;
 			targetProxy = A52A00000000000000000007 /* PBXContainerItemProxy */;
+		};
+		B05700000000000000000021 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B0570000000000000000001B /* vibetypeShare */;
+			targetProxy = B05700000000000000000020 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -272,6 +371,14 @@
 				CDC0FE282388222B002C8D56 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B05700000000000000000015 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B05700000000000000000016 /* de */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -311,6 +418,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -330,6 +438,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				MARKETING_VERSION = 0.5.12;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -375,6 +484,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -388,6 +498,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				MARKETING_VERSION = 0.5.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -408,7 +519,6 @@
 				CODE_SIGN_ENTITLEMENTS = vibetype/Entitlements/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NJWSWLWL24;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				INFOPLIST_FILE = vibetype/Info.plist;
@@ -420,7 +530,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.12;
 				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa;
 				PRODUCT_NAME = vibetype;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -442,7 +551,6 @@
 				CODE_SIGN_ENTITLEMENTS = vibetype/Entitlements/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NJWSWLWL24;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				INFOPLIST_FILE = vibetype/Info.plist;
@@ -454,7 +562,6 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.12;
 				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa;
 				PRODUCT_NAME = vibetype;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -501,6 +608,60 @@
 			};
 			name = Release;
 		};
+		B05700000000000000000022 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = vibetypeShare/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NJWSWLWL24;
+				INFOPLIST_FILE = vibetypeShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa.share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B05700000000000000000023 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = vibetypeShare/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NJWSWLWL24;
+				INFOPLIST_FILE = vibetypeShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = si.maev.twa.share;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -527,6 +688,15 @@
 			buildConfigurations = (
 				A52A0000000000000000000A /* Debug */,
 				A52A0000000000000000000B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B05700000000000000000024 /* Build configuration list for PBXNativeTarget "vibetypeShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B05700000000000000000022 /* Debug */,
+				B05700000000000000000023 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
