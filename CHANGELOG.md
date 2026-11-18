@@ -1,3 +1,10 @@
+## [0.6.0](https://github.com/maevsi/ios/compare/0.5.13...0.6.0) (2026-11-18)
+
+### Features
+
+* **poster:** scan event posters with the native document camera ([#67](https://github.com/maevsi/ios/issues/67)) ([8d2e767](https://github.com/maevsi/ios/commit/8d2e7679c3d0489bb3384e3887d635fb94d8f1a1))
+* **share:** add a share extension that sends poster photos to poster hunting ([#68](https://github.com/maevsi/ios/issues/68)) ([85a2b59](https://github.com/maevsi/ios/commit/85a2b594ba23e41dc69a3e809f0bb824d2491b12))
+
 ## [0.5.13](https://github.com/maevsi/ios/compare/0.5.12...0.5.13) (2026-11-18)
 
 ### Bug Fixes
