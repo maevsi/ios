@@ -1,0 +1,1 @@
+Die Tracking-Abfrage und die Schaltflächen in Dialogen erscheinen jetzt auch auf Deutsch.
