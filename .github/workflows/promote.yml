@@ -49,6 +49,8 @@ jobs:
           if [ -z "$TAG" ]; then
             TAG=$(git describe --tags --abbrev=0 --exclude '*-*')
           fi
+          # The scripts come from the ref this workflow runs on, so that a fix to them reaches a release tagged before it.
+          cp -R .github/scripts "$RUNNER_TEMP/scripts"
           git checkout -q "refs/tags/$TAG"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
       - name: Collect the release notes since the version on the App Store
@@ -61,7 +63,7 @@ jobs:
           RELEASE_NOTES_EN: ${{ inputs.release-notes-en }}
           TAG: ${{ steps.tag.outputs.tag }}
         run: |
-          live=$(.github/scripts/store-notes.sh live)
+          live=$("$RUNNER_TEMP/scripts/store-notes.sh" live)
           if [ -z "$live" ]; then
             # Apple accepts no "What's New" on the first version of an app.
             echo "::notice::No version is on the App Store yet, so $TAG goes to review without release notes."
@@ -69,7 +71,7 @@ jobs:
             echo submit=true >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          notes=$(.github/scripts/store-notes.sh whatsnew "$live" "$TAG")
+          notes=$("$RUNNER_TEMP/scripts/store-notes.sh" whatsnew "$live" "$TAG")
           if [ -z "$notes" ]; then
             if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
               echo "::error::No release since $live added release notes, so pass them to this workflow."
@@ -104,7 +106,6 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          ref: refs/tags/${{ needs.notes.outputs.tag }}
       - name: Submit the release
         env:
           API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
