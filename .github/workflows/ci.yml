@@ -45,13 +45,6 @@ jobs:
           echo "SIMULATOR_UDID=$udid" >> "$GITHUB_ENV"
           xcrun simctl bootstatus "$udid" -b >/dev/null 2>&1 &
 
-      - name: Cache Swift packages
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: .build/SourcePackages
-          key: spm-${{ hashFiles('vibetype.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-          restore-keys: spm-
-
       - name: Build on iOS Simulator
         run: |
           set -o pipefail
@@ -59,7 +52,6 @@ jobs:
             -scheme vibetype \
             -destination 'generic/platform=iOS Simulator' \
             -configuration Release \
-            -clonedSourcePackagesDirPath .build/SourcePackages \
             clean build | xcpretty
 
       - name: Test on iOS Simulator
@@ -68,7 +60,6 @@ jobs:
           xcodebuild -project vibetype.xcodeproj \
             -scheme vibetype \
             -destination "platform=iOS Simulator,id=$SIMULATOR_UDID" \
-            -clonedSourcePackagesDirPath .build/SourcePackages \
             test | xcpretty
   release_semantic:
     needs: build
@@ -117,14 +108,6 @@ jobs:
           security list-keychain -d user -s "$keychain"
           security find-identity -v -p codesigning "$keychain" | grep "Apple Development"
 
-      # The build job of the same run saved this cache, so restoring it is enough.
-      - name: Restore Swift packages
-        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: .build/SourcePackages
-          key: spm-${{ hashFiles('vibetype.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-          restore-keys: spm-
-
       - name: Archive app
         env:
           API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
@@ -138,7 +121,6 @@ jobs:
             -configuration Release \
             -destination 'generic/platform=iOS' \
             -archivePath "$RUNNER_TEMP/vibetype.xcarchive" \
-            -clonedSourcePackagesDirPath .build/SourcePackages \
             -allowProvisioningUpdates \
             -authenticationKeyPath "$RUNNER_TEMP/private_keys/AuthKey_${API_KEY_ID}.p8" \
             -authenticationKeyID "$API_KEY_ID" \
