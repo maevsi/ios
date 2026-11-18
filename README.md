@@ -70,3 +70,8 @@ Dependencies are managed through Swift Package Manager (SPM), which is integrate
 
 CI signs releases with a development certificate stored in repository secrets.
 See [docs/signing.md](docs/signing.md) for how to create and renew it.
+
+### Release Notes
+
+Pull requests that trigger a release add release notes, which CI sets on TestFlight.
+See [docs/store-notes.md](docs/store-notes.md) for the format.

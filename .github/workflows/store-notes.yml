@@ -1,0 +1,35 @@
+name: Store notes
+
+permissions: {}
+
+on:
+  pull_request:
+    # The check depends on the title and the labels too, not only on the commits.
+    types: [opened, synchronize, reopened, edited, labeled, unlabeled]
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+
+jobs:
+  store-notes:
+    name: Check the store release notes
+    runs-on: ubuntu-26.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Test the release notes script
+        run: .github/scripts/store-notes.test.sh
+      - name: Check the release notes of this pull request
+        env:
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+          SKIP: ${{ contains(github.event.pull_request.labels.*.name, 'no-store-notes') }}
+          TITLE: ${{ github.event.pull_request.title }}
+        run: .github/scripts/store-notes.sh pr
