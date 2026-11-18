@@ -76,4 +76,26 @@ fails check store-notes/broken
 printf '%s\n' "$(printf 'x%.0s' {1..151})" >store-notes/broken/en-US.txt
 fails check store-notes/broken
 
+# The token verifies with the key's public half, however the private key was pasted.
+node -e '
+const crypto = require("crypto");
+const { execFileSync } = require("child_process");
+const { privateKey, publicKey } = crypto.generateKeyPairSync("ec", { namedCurve: "prime256v1" });
+const pem = privateKey.export({ format: "pem", type: "pkcs8" });
+for (const key of [
+  pem,
+  pem.replace(/\n/g, "\r\n"),
+  pem.replace(/\n/g, "\\n"),
+  pem.replace(/\n/g, " "),
+  pem.split("\n").filter((line) => !line.startsWith("-----")).join(""),
+  Buffer.from(pem).toString("base64"),
+]) {
+  const env = { ...process.env, API_KEY_ID: "KEY", API_KEY_ISSUER_ID: "ISSUER", API_KEY_PRIVATE_KEY: key };
+  const [header, payload, signature] = execFileSync(process.argv[1], ["token"], { env }).toString().trim().split(".");
+  const valid = crypto.verify("sha256", Buffer.from(header + "." + payload),
+    { dsaEncoding: "ieee-p1363", key: publicKey }, Buffer.from(signature, "base64url"));
+  if (!valid) throw new Error("invalid token for the key " + JSON.stringify(key));
+}
+' "$script"
+
 echo ok
