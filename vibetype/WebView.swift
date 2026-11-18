@@ -182,7 +182,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
 
         // Add a confirmation action “OK”
         let okAction = UIAlertAction(
-            title: "OK",
+            title: NSLocalizedString("OK", comment: "Confirms a dialog opened by the web app"),
             style: .default,
             handler: { _ in
                 // Call completionHandler
@@ -209,7 +209,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
 
         // Add a confirmation action “Cancel”
         let cancelAction = UIAlertAction(
-            title: "Cancel",
+            title: NSLocalizedString("Cancel", comment: "Dismisses a dialog opened by the web app"),
             style: .cancel,
             handler: { _ in
                 // Call completionHandler
@@ -219,7 +219,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
 
         // Add a confirmation action “OK”
         let okAction = UIAlertAction(
-            title: "OK",
+            title: NSLocalizedString("OK", comment: "Confirms a dialog opened by the web app"),
             style: .default,
             handler: { _ in
                 // Call completionHandler
@@ -248,7 +248,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
 
         // Add a confirmation action “Cancel”
         let cancelAction = UIAlertAction(
-            title: "Cancel",
+            title: NSLocalizedString("Cancel", comment: "Dismisses a dialog opened by the web app"),
             style: .cancel,
             handler: { _ in
                 // Call completionHandler
@@ -258,7 +258,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
 
         // Add a confirmation action “OK”
         let okAction = UIAlertAction(
-            title: "OK",
+            title: NSLocalizedString("OK", comment: "Confirms a dialog opened by the web app"),
             style: .default,
             handler: { _ in
                 // Call completionHandler with Alert input

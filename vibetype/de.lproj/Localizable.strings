@@ -1,0 +1,5 @@
+/* Dismisses a dialog opened by the web app */
+"Cancel" = "Abbrechen";
+
+/* Confirms a dialog opened by the web app */
+"OK" = "OK";
