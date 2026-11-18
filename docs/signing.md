@@ -74,6 +74,19 @@ gh secret set APPSTORE_CONNECT_API_KEY_ID --repo maevsi/ios --env testflight --b
 gh secret set APPSTORE_CONNECT_API_KEY_ISSUER_ID --repo maevsi/ios --env testflight
 ```
 
+## Share extension
+
+The archive holds two targets, the app `si.maev.twa` and its share extension `si.maev.twa.share`, and CI signs both the same way.
+They exchange shared images through the App Group `group.si.maev.twa`, which both entitlement files list.
+
+Set this up once in [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/identifiers/list) before the first release that contains the extension:
+
+1. Register the App Group `group.si.maev.twa`.
+2. Register the App ID `si.maev.twa.share` if it does not exist yet.
+3. Enable the App Groups capability on both App IDs and assign `group.si.maev.twa` to each.
+
+Automatic signing then fetches a development profile for each target through the App Store Connect API key while archiving, and cloud signing covers both at export.
+
 ## Renewal
 
 The certificate is valid for one year.

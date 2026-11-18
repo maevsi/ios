@@ -8,6 +8,9 @@ struct Cookie {
 // URL for first launch
 let rootUrl = URL(string: "https://vibetype.app/?source=pwa")!
 
+// Opened for a poster shared through the share extension
+let posterHuntingUrl = URL(string: "https://vibetype.app/event/ingest/image")!
+
 // allowed origin is for what we are sticking to pwa domain
 // This should also appear in Info.plist
 let allowedOrigins: [String] = ["vibetype.app"]

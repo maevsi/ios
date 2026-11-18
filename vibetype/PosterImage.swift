@@ -1,5 +1,12 @@
 import UIKit
 
+// Where the share extension leaves a poster for the app, which picks it up on its next launch or foreground.
+func sharedPosterUrl() -> URL? {
+    return FileManager.default
+        .containerURL(forSecurityApplicationGroupIdentifier: "group.si.maev.twa")?
+        .appendingPathComponent("poster-shared.jpg")
+}
+
 // Downscales the image to at most `maxPixels` on its long edge and encodes it as JPEG.
 func posterJpeg(_ image: UIImage, maxPixels: CGFloat = 2048) -> Data? {
     let pixelWidth = image.size.width * image.scale
