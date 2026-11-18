@@ -73,5 +73,5 @@ See [docs/signing.md](docs/signing.md) for how to create and renew it.
 
 ### Release Notes
 
-Pull requests that trigger a release add release notes, which CI sets on TestFlight.
+Pull requests that trigger a release add release notes, which CI sets on TestFlight and on the App Store.
 See [docs/store-notes.md](docs/store-notes.md) for the format.

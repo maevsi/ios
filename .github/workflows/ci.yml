@@ -159,3 +159,11 @@ jobs:
           BUNDLE_ID: si.maev.twa
           TAG: ${{ needs.release_semantic.outputs.new_release_version }}
         run: .github/scripts/store-notes.sh testflight "$TAG"
+  promote:
+    needs: [release_semantic, release]
+    name: Promote to the App Store
+    uses: ./.github/workflows/promote.yml
+    permissions:
+      contents: read
+    with:
+      tag: ${{ needs.release_semantic.outputs.new_release_version }}

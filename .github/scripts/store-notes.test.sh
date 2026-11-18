@@ -50,6 +50,13 @@ expect "$("$script" notes 1.0.0 1.1.0 en-US)" $'• The start screen is light no
 expect "$("$script" notes 1.0.1 1.0.2 en-US)" ''
 fails notes 0.9.0 1.1.0 en-US
 
+# The App Store notes of every locale, which overrides replace, and which need both locales.
+expect "$("$script" whatsnew 1.0.0 1.0.1)" '{"de-DE":"• Der Startbildschirm ist jetzt hell.","en-US":"• The start screen is light now."}'
+expect "$("$script" whatsnew 1.0.1 1.0.2)" ''
+expect "$(RELEASE_NOTES_DE='Neu' RELEASE_NOTES_EN='New' "$script" whatsnew 1.0.1 1.0.2)" '{"de-DE":"Neu","en-US":"New"}'
+RELEASE_NOTES_DE='Neu' fails whatsnew 1.0.1 1.0.2
+RELEASE_NOTES_DE=$(printf 'x%.0s' {1..4001}) RELEASE_NOTES_EN='New' fails whatsnew 1.0.1 1.0.2
+
 # Releases without fragments leave TestFlight alone, before any call to App Store Connect.
 expect "$("$script" testflight 1.0.0)" '::notice::1.0.0 is the first release, so there are no release notes to collect.'
 expect "$("$script" testflight 1.0.2)" '::notice::No release since 1.0.1 added release notes, so TestFlight shows none for 1.0.2.'

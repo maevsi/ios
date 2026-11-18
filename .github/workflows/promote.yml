@@ -1,0 +1,115 @@
+name: Promote
+
+permissions: {}
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: The release to submit, which must be on TestFlight
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      release-notes-de:
+        description: German release notes replacing the collected ones, at most 4000 characters
+        required: false
+        type: string
+      release-notes-en:
+        description: English release notes replacing the collected ones, at most 4000 characters
+        required: false
+        type: string
+
+env:
+  BUNDLE_ID: si.maev.twa
+
+jobs:
+  notes:
+    name: Collect the release notes
+    runs-on: ubuntu-26.04
+    timeout-minutes: 10
+    # Runs before the approval for the App Store, so that the approver can read the notes first.
+    environment: testflight
+    permissions:
+      contents: read
+    outputs:
+      notes: ${{ steps.notes.outputs.notes }}
+      submit: ${{ steps.notes.outputs.submit }}
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check out the release
+        id: tag
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          if [ -z "$TAG" ]; then
+            TAG=$(git describe --tags --abbrev=0 --exclude '*-*')
+          fi
+          git checkout -q "refs/tags/$TAG"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+      - name: Collect the release notes since the version on the App Store
+        id: notes
+        env:
+          API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
+          API_KEY_ISSUER_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ISSUER_ID }}
+          API_KEY_PRIVATE_KEY: ${{ secrets.APPSTORE_CONNECT_API_KEY_PRIVATE_KEY }}
+          RELEASE_NOTES_DE: ${{ inputs.release-notes-de }}
+          RELEASE_NOTES_EN: ${{ inputs.release-notes-en }}
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          live=$(.github/scripts/store-notes.sh live)
+          if [ -z "$live" ]; then
+            # Apple accepts no "What's New" on the first version of an app.
+            echo "::notice::No version is on the App Store yet, so $TAG goes to review without release notes."
+            echo "## $TAG goes to App Store review as the first version, without release notes" >> "$GITHUB_STEP_SUMMARY"
+            echo submit=true >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          notes=$(.github/scripts/store-notes.sh whatsnew "$live" "$TAG")
+          if [ -z "$notes" ]; then
+            if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+              echo "::error::No release since $live added release notes, so pass them to this workflow."
+              exit 1
+            fi
+            echo "::notice::No release since $live added release notes, so $TAG stays on TestFlight until a later release does."
+            exit 0
+          fi
+          {
+            echo "notes=$notes"
+            echo submit=true
+          } >> "$GITHUB_OUTPUT"
+          {
+            echo "## Release notes for $TAG, replacing $live on the App Store"
+            echo
+            jq -r 'to_entries[] | "### \(.key)\n\n\(.value)\n"' <<<"$notes"
+          } >> "$GITHUB_STEP_SUMMARY"
+  submit:
+    name: Submit to App Store review
+    needs: notes
+    if: needs.notes.outputs.submit == 'true'
+    runs-on: ubuntu-26.04
+    timeout-minutes: 60
+    environment: app-store
+    # A newer release replaces one that still waits for approval, since its notes include the older ones.
+    concurrency:
+      group: app-store
+      cancel-in-progress: true
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          ref: refs/tags/${{ needs.notes.outputs.tag }}
+      - name: Submit the release
+        env:
+          API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
+          API_KEY_ISSUER_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ISSUER_ID }}
+          API_KEY_PRIVATE_KEY: ${{ secrets.APPSTORE_CONNECT_API_KEY_PRIVATE_KEY }}
+          NOTES: ${{ needs.notes.outputs.notes }}
+          TAG: ${{ needs.notes.outputs.tag }}
+        run: .github/scripts/store-notes.sh submit "$TAG"
