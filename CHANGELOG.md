@@ -1,3 +1,9 @@
+## [0.6.1](https://github.com/maevsi/ios/compare/0.6.0...0.6.1) (2026-11-18)
+
+### Bug Fixes
+
+* **i18n:** translate tracking prompt and web dialog buttons to german ([#72](https://github.com/maevsi/ios/issues/72)) ([d18cff4](https://github.com/maevsi/ios/commit/d18cff40bf78992b44189c6ff81142a2a7c94772))
+
 ## [0.6.0](https://github.com/maevsi/ios/compare/0.5.13...0.6.0) (2026-11-18)
 
 ### Features
