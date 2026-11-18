@@ -3,6 +3,8 @@
 # as the "What to Test" text of a release, and submits releases to App Store review with them as
 # "What's New". See docs/store-notes.md.
 set -euo pipefail
+# Without it, a failing API call inside $(...) lets the function go on with an empty response.
+shopt -s inherit_errexit
 # ${#var} counts bytes in the C locale, which would count each umlaut twice.
 export LC_ALL=C.UTF-8
 
@@ -105,18 +107,28 @@ token() {
   node -e '
 const crypto = require("crypto");
 const b64 = (value) => Buffer.from(JSON.stringify(value)).toString("base64url");
+// Secrets pasted by hand lose their line breaks or headers, which OpenSSL rejects in a PEM, so the
+// key is reduced to its base64 body, or decoded first if the whole file was base64 encoded.
+const body = (text) => text.replace(/-----[^-]+-----|\\n|\s/g, "");
+let key = Buffer.from(body(process.env.API_KEY_PRIVATE_KEY), "base64");
+if (key.toString("latin1").startsWith("-----")) key = Buffer.from(body(key.toString("latin1")), "base64");
 const now = Math.floor(Date.now() / 1000);
 const data = b64({ alg: "ES256", kid: process.env.API_KEY_ID, typ: "JWT" }) + "." +
   b64({ aud: "appstoreconnect-v1", exp: now + 1200, iat: now, iss: process.env.API_KEY_ISSUER_ID });
-const signature = crypto.sign("sha256", Buffer.from(data), { dsaEncoding: "ieee-p1363", key: process.env.API_KEY_PRIVATE_KEY });
+const signature = crypto.sign("sha256", Buffer.from(data), {
+  dsaEncoding: "ieee-p1363",
+  key: crypto.createPrivateKey({ format: "der", key, type: "pkcs8" }),
+});
 console.log(data + "." + signature.toString("base64url"));
 '
 }
 
 # api METHOD PATH [BODY]: calls the App Store Connect API with a fresh token.
 api() {
+  local token args
+  token=$(token)
   # -g keeps curl from reading the brackets in filter[...] as a URL range.
-  local args=(--fail-with-body -gsS -X "$1" -H "Authorization: Bearer $(token)")
+  args=(--fail-with-body -gsS -X "$1" -H "Authorization: Bearer $token")
   [ $# -lt 3 ] || args+=(-H 'Content-Type: application/json' --data "$3")
   curl "${args[@]}" "https://api.appstoreconnect.apple.com$2"
 }
@@ -245,10 +257,10 @@ submit() {
 }
 
 case "${1:-}" in
-  check | collect | live | notes | pr | previous | submit | testflight | whatsnew)
+  check | collect | live | notes | pr | previous | submit | testflight | token | whatsnew)
     command=$1
     shift
     "$command" "$@"
     ;;
-  *) fail "Usage: $0 check DIR... | collect FROM TO | live | notes FROM TO LOCALE | pr | previous TAG | submit TAG | testflight TAG | whatsnew FROM TO" ;;
+  *) fail "Usage: $0 check DIR... | collect FROM TO | live | notes FROM TO LOCALE | pr | previous TAG | submit TAG | testflight TAG | token | whatsnew FROM TO" ;;
 esac
