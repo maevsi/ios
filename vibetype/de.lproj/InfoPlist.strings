@@ -1,2 +1,3 @@
 /* the title of the home screen shortcut, keyed by its English text in Info.plist */
 "Explore events" = "Veranstaltungen entdecken";
+"NSCameraUsageDescription" = "Fotografiere ein Veranstaltungsplakat, zum Beispiel an einer Litfaßsäule, und die App füllt Name, Datum und Ort der Veranstaltung für Dich aus.";
