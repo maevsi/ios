@@ -1,3 +1,9 @@
+## [0.5.13](https://github.com/maevsi/ios/compare/0.5.12...0.5.13) (2026-11-18)
+
+### Bug Fixes
+
+* **permission:** drop the unused location permission ([#64](https://github.com/maevsi/ios/issues/64)) ([de685f1](https://github.com/maevsi/ios/commit/de685f18446d94dd96954e0e064d20576a0bdb2e))
+
 ## [0.5.12](https://github.com/maevsi/ios/compare/0.5.11...0.5.12) (2026-11-18)
 
 ### Bug Fixes
