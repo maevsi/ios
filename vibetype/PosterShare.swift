@@ -21,7 +21,9 @@ extension ViewController {
 
     @objc func openSharedPoster() {
         if receiveSharedPoster() {
-            vibetype.webView.load(URLRequest(url: posterHuntingUrl))
+            // As the launch link, a failed load retries poster hunting instead of the root page.
+            SceneDelegate.universalLinkToLaunch = posterHuntingUrl
+            loadRootUrl()
         }
     }
 
