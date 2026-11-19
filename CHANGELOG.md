@@ -1,3 +1,9 @@
+## [0.7.0](https://github.com/maevsi/ios/compare/0.6.1...0.7.0) (2026-11-19)
+
+### Features
+
+* **location:** allow the web app to ask for the current position ([#76](https://github.com/maevsi/ios/issues/76)) ([941e994](https://github.com/maevsi/ios/commit/941e99439e2f0ad3a6486e1ee9c672defc3ccc95))
+
 ## [0.6.1](https://github.com/maevsi/ios/compare/0.6.0...0.6.1) (2026-11-18)
 
 ### Bug Fixes
