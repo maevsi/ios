@@ -1,0 +1,1 @@
+You can now use your current location to set where an event takes place or where to look for events.
