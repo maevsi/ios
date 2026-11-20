@@ -1,3 +1,9 @@
+## [0.8.0](https://github.com/maevsi/ios/compare/0.7.0...0.8.0) (2026-11-20)
+
+### Features
+
+* **contact:** add native picker bridge ([#77](https://github.com/maevsi/ios/issues/77)) ([10225ec](https://github.com/maevsi/ios/commit/10225ecb509d7a6b3212e7c6ce686e2ca4c50b89))
+
 ## [0.7.0](https://github.com/maevsi/ios/compare/0.6.1...0.7.0) (2026-11-19)
 
 ### Features
