@@ -247,6 +247,9 @@ extension ViewController: WKScriptMessageHandler {
         if message.name == "att-request-permission" {
             handleATTPermissionRequest()
         }
+        if message.name == "contact-pick" {
+            handleContactPick()
+        }
         if message.name == "poster-scan" {
             handlePosterScan()
         }

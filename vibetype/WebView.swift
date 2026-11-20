@@ -27,6 +27,7 @@ func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler,
     userContentController.add(weakHandler, name: "att-get-idfa")
     userContentController.add(weakHandler, name: "att-get-status")
     userContentController.add(weakHandler, name: "att-request-permission")
+    userContentController.add(weakHandler, name: "contact-pick")
     userContentController.add(weakHandler, name: "poster-scan")
     userContentController.add(weakHandler, name: "poster-shared-request")
     userContentController.add(weakHandler, name: "print")
