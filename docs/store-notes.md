@@ -32,6 +32,7 @@ The store listing must hold both the German and the English localization, since 
 
 A version that waits for review or is in review blocks the next one, so the submission of a newer release fails until Apple has decided.
 Then run the Promote workflow from `main` once the earlier version is through, which submits the latest release.
+The workflow takes its scripts from `main` and only the notes from the release, so after a fix to the scripts, running it again also submits a release whose earlier run failed.
 To submit a release without fragments, or with shorter notes, pass your own notes, which replace the collected ones:
 
 ```sh
