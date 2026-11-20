@@ -238,15 +238,6 @@ extension ViewController: WKScriptMessageHandler {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         // Embedded frames must not reach the native bridge.
         guard message.frameInfo.isMainFrame else { return }
-        if message.name == "att-get-idfa" {
-            handleATTGetIDFA()
-        }
-        if message.name == "att-get-status" {
-            handleATTGetStatus()
-        }
-        if message.name == "att-request-permission" {
-            handleATTPermissionRequest()
-        }
         if message.name == "contact-pick" {
             handleContactPick()
         }
@@ -274,7 +265,7 @@ extension ViewController: WKScriptMessageHandler {
   }
 }
 
-// MARK: - App Tracking Transparency Handlers
+// MARK: - Event dispatch
 extension ViewController {
 
     func dispatchEvent(eventName: String, detail: String) {
@@ -294,20 +285,5 @@ extension ViewController {
                 print("Error dispatching \(eventName): \(error)")
             }
         }
-    }
-
-    func handleATTPermissionRequest() {
-        TrackingTransparencyManager.requestPermission { [weak self] status in
-            guard let self else { return }
-            self.dispatchEvent(eventName: "att-permission-response", detail: TrackingTransparencyManager.statusToString(status))
-        }
-    }
-
-    func handleATTGetStatus() {
-        dispatchEvent(eventName: "att-status-response", detail: TrackingTransparencyManager.getStatusString())
-    }
-
-    func handleATTGetIDFA() {
-        dispatchEvent(eventName: "att-idfa-response", detail: TrackingTransparencyManager.getIDFA() ?? "")
     }
 }

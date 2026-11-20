@@ -2,4 +2,3 @@
 "Explore events" = "Veranstaltungen entdecken";
 "NSCameraUsageDescription" = "Fotografiere ein Veranstaltungsplakat, zum Beispiel an einer Litfaßsäule, und die App füllt Name, Datum und Ort der Veranstaltung für Dich aus.";
 "NSLocationWhenInUseUsageDescription" = "Nutze Deinen aktuellen Standort, um festzulegen, wo eine Veranstaltung stattfindet oder wo Du Veranstaltungen finden möchtest.";
-"NSUserTrackingUsageDescription" = "Die Werbe-ID Deines Geräts wird von Google Analytics genutzt, um die Nutzung der App über Apps und Websites hinweg zu messen und auszuwerten. So verstehen wir, wie unser Dienst genutzt wird, und können ihn für alle verbessern.";

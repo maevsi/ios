@@ -19,7 +19,6 @@
 		5B69D6E730AD84AD00D22F57 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5B69D6E530AD84AD00D22F57 /* Localizable.strings */; };
 		6BC0B4AB2ED94D4100E03379 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6BC0B4AA2ED94D3A00E03379 /* README.md */; };
 		9356D2B42FA5641D00A47119 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 9356D2B32FA5641D00A47119 /* FirebaseMessaging */; };
-		936658952F3085DF00CE9A4A /* TrackingTransparency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936658942F3085DF00CE9A4A /* TrackingTransparency.swift */; };
 		A52A00000000000000000002 /* WebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A00000000000000000001 /* WebViewTests.swift */; };
 		A52A00000000000000000101 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52A00000000000000000102 /* InfoPlist.strings */; };
 		B05700000000000000000028 /* ContactPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000027 /* ContactPicker.swift */; };
@@ -80,7 +79,6 @@
 		595F23A425CEFBFE0053416C /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebView.swift; path = vibetype/WebView.swift; sourceTree = "<group>"; };
 		5B69D6E630AD84AD00D22F57 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = vibetype/de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6BC0B4AA2ED94D3A00E03379 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		936658942F3085DF00CE9A4A /* TrackingTransparency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TrackingTransparency.swift; path = vibetype/TrackingTransparency.swift; sourceTree = "<group>"; };
 		A52A00000000000000000001 /* WebViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewTests.swift; sourceTree = "<group>"; };
 		A52A00000000000000000003 /* vibetypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vibetypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52A00000000000000000103 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = vibetype/de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				595F23A125CEFBFE0053416C /* ViewController.swift */,
 				CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */,
 				CDC0FE252388222B002C8D56 /* Main.storyboard */,
-				936658942F3085DF00CE9A4A /* TrackingTransparency.swift */,
 				595F23A425CEFBFE0053416C /* WebView.swift */,
 				59333BAA25CFF706003392A4 /* vibetype.app */,
 				DDBCB1132D6C602600313680 /* GoogleService-Info.plist */,
@@ -328,7 +325,6 @@
 			files = (
 				595F23AD25CEFBFE0053416C /* AppDelegate.swift in Sources */,
 				595F23A825CEFBFE0053416C /* SceneDelegate.swift in Sources */,
-				936658952F3085DF00CE9A4A /* TrackingTransparency.swift in Sources */,
 				595F23A525CEFBFE0053416C /* Settings.swift in Sources */,
 				B05700000000000000000028 /* ContactPicker.swift in Sources */,
 				B05700000000000000000004 /* PosterImage.swift in Sources */,
