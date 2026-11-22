@@ -1,0 +1,1 @@
+The app no longer asks for permission to track you.

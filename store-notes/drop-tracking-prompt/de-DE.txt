@@ -1,0 +1,1 @@
+Die App fragt nicht mehr nach der Erlaubnis, Dich zu verfolgen.
