@@ -33,6 +33,7 @@
 		CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE252388222B002C8D56 /* Main.storyboard */; };
 		CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDC0FE272388222B002C8D56 /* LaunchScreen.storyboard */; };
 		DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DDBCB1132D6C602600313680 /* GoogleService-Info.plist */; };
+		C0DE0000000000000000A002 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C0DE0000000000000000A001 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		CDC0FE262388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDC0FE282388222B002C8D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = vibetype/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DDBCB1132D6C602600313680 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "vibetype/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C0DE0000000000000000A001 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = vibetype/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				595F23A425CEFBFE0053416C /* WebView.swift */,
 				59333BAA25CFF706003392A4 /* vibetype.app */,
 				DDBCB1132D6C602600313680 /* GoogleService-Info.plist */,
+				C0DE0000000000000000A001 /* PrivacyInfo.xcprivacy */,
 				A52A0000000000000000000C /* vibetypeTests */,
 				A52A00000000000000000003 /* vibetypeTests.xctest */,
 				B0570000000000000000001A /* vibetypeShare */,
@@ -295,6 +298,7 @@
 				595F23A625CEFBFE0053416C /* Entitlements in Resources */,
 				CDC0FE292388222C002C8D56 /* Main.storyboard in Resources */,
 				DDBCB1142D6C602600313680 /* GoogleService-Info.plist in Resources */,
+				C0DE0000000000000000A002 /* PrivacyInfo.xcprivacy in Resources */,
 				CDC0FE2A2388222C002C8D56 /* LaunchScreen.storyboard in Resources */,
 				5B69D6E730AD84AD00D22F57 /* Localizable.strings in Resources */,
 				A52A00000000000000000101 /* InfoPlist.strings in Resources */,

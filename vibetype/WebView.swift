@@ -41,7 +41,6 @@ func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler,
     config.limitsNavigationsToAppBoundDomains = true;
     config.allowsInlineMediaPlayback = true
     config.preferences.javaScriptCanOpenWindowsAutomatically = true
-    config.preferences.setValue(true, forKey: "standalone")
     config.applicationNameForUserAgent = "Device/\(deviceModel) Version/\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion) Safari/vibetype"
 
     let webView = WKWebView(frame: calcWebviewFrame(webviewView: container), configuration: config)
@@ -86,8 +85,9 @@ func setCustomCookie(webView: WKWebView) {
 }
 
 func calcWebviewFrame(webviewView: UIView) -> CGRect{
-    let winScene = UIApplication.shared.connectedScenes.first
-    let windowScene = winScene as! UIWindowScene
+    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+        return webviewView.bounds
+    }
     var statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height ?? 0
 
     switch displayMode {
