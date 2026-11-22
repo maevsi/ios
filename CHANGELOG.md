@@ -1,3 +1,9 @@
+## [0.8.1](https://github.com/maevsi/ios/compare/0.8.0...0.8.1) (2026-11-22)
+
+### Bug Fixes
+
+* **privacy:** drop the tracking permission prompt ([#78](https://github.com/maevsi/ios/issues/78)) ([47048aa](https://github.com/maevsi/ios/commit/47048aa29569f87cbfac4aae43afc44a6450105e))
+
 ## [0.8.0](https://github.com/maevsi/ios/compare/0.7.0...0.8.0) (2026-11-20)
 
 ### Features
