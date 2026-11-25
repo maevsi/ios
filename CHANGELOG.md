@@ -1,3 +1,9 @@
+## [0.8.2](https://github.com/maevsi/ios/compare/0.8.1...0.8.2) (2026-11-25)
+
+### Bug Fixes
+
+* **review:** conform to the App Store Review Guidelines ([#79](https://github.com/maevsi/ios/issues/79)) ([fe99b55](https://github.com/maevsi/ios/commit/fe99b5526dfda35d88d8308ca0ef0e7237f0c4a0))
+
 ## [0.8.1](https://github.com/maevsi/ios/compare/0.8.0...0.8.1) (2026-11-22)
 
 ### Bug Fixes
