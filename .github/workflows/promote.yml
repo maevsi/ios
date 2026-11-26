@@ -9,6 +9,16 @@ on:
         description: The release to submit, which must be on TestFlight
         required: true
         type: string
+    secrets:
+      APPSTORE_CONNECT_API_KEY_ID:
+        description: The App Store Connect API key ID
+        required: true
+      APPSTORE_CONNECT_API_KEY_ISSUER_ID:
+        description: The App Store Connect API issuer ID
+        required: true
+      APPSTORE_CONNECT_API_KEY_PRIVATE_KEY:
+        description: The App Store Connect API private key
+        required: true
   workflow_dispatch:
     inputs:
       release-notes-de:
