@@ -167,3 +167,7 @@ jobs:
       contents: read
     with:
       tag: ${{ needs.release_semantic.outputs.new_release_version }}
+    secrets:
+      APPSTORE_CONNECT_API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
+      APPSTORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ISSUER_ID }}
+      APPSTORE_CONNECT_API_KEY_PRIVATE_KEY: ${{ secrets.APPSTORE_CONNECT_API_KEY_PRIVATE_KEY }}
