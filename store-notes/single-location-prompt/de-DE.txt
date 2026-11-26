@@ -1,0 +1,1 @@
+Die App fragt jetzt nur noch einmal statt zweimal nach deinem Standort.
