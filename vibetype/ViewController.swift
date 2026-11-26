@@ -18,6 +18,9 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
 
     var htmlIsLoaded = false;
     var sharedPoster: String?
+    lazy var geolocationBridge = GeolocationBridge { [weak self] detail in
+        self?.dispatchEvent(eventName: "geolocation-result", detail: detail)
+    }
 
     private var themeObservation: NSKeyValueObservation?
     var currentWebViewTheme: UIUserInterfaceStyle = .unspecified
@@ -240,6 +243,9 @@ extension ViewController: WKScriptMessageHandler {
         guard message.frameInfo.isMainFrame else { return }
         if message.name == "contact-pick" {
             handleContactPick()
+        }
+        if message.name == "geolocation" && isAllowedSecurityOrigin(message.frameInfo.securityOrigin) {
+            geolocationBridge.handle(message.body)
         }
         if message.name == "poster-scan" {
             handlePosterScan()

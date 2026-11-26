@@ -1,3 +1,4 @@
+import JavaScriptCore
 import Testing
 import UIKit
 @testable import vibetype
@@ -64,5 +65,55 @@ struct TakeSharedPosterTests {
 
     @Test func returnsNothingWithoutPoster() {
         #expect(takeSharedPoster(at: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)) == nil)
+    }
+}
+
+struct GeolocationScriptTests {
+    // Runs the injected script against stand-ins for the WebKit globals it uses, with timers fired by hand.
+    private func run(_ test: String) throws -> JSContext {
+        let context = try #require(JSContext())
+        context.evaluateScript("""
+        var posted = [], listeners = {}, timers = [], result
+        var window = {
+          addEventListener: (name, listener) => { listeners[name] = listener },
+          webkit: { messageHandlers: { geolocation: { postMessage: (body) => posted.push(body) } } },
+        }
+        var setTimeout = (callback) => timers.push(callback)
+        var clearTimeout = () => {}
+        var reply = (detail) => listeners['geolocation-result']({ detail: JSON.stringify(detail) })
+        function Geolocation() {}
+        """)
+        context.evaluateScript(geolocationScript.source)
+        context.evaluateScript(test)
+        #expect(context.exception == nil)
+        return context
+    }
+
+    @Test func passesThePositionOn() throws {
+        let context = try run("""
+        new Geolocation().getCurrentPosition((position) => { result = position.coords.latitude })
+        reply({ id: posted[0].id, type: 'start' })
+        reply({ id: posted[0].id, position: { coords: { latitude: 51.3 } }, type: 'position' })
+        """)
+        #expect(context.evaluateScript("posted[0].type").toString() == "get")
+        #expect(context.evaluateScript("result").toDouble() == 51.3)
+    }
+
+    @Test func reportsDenialWithTheErrorConstants() throws {
+        let context = try run("""
+        new Geolocation().getCurrentPosition(() => {}, (error) => { result = error.code === error.PERMISSION_DENIED })
+        reply({ code: 1, id: posted[0].id, message: 'User denied Geolocation', type: 'error' })
+        """)
+        #expect(context.evaluateScript("result").toBool())
+    }
+
+    @Test func startsTheTimeoutOnlyOncePermitted() throws {
+        let context = try run("""
+        new Geolocation().getCurrentPosition(() => {}, (error) => { result = error.code }, { timeout: 10000 })
+        """)
+        #expect(context.evaluateScript("timers.length").toInt32() == 0)
+        context.evaluateScript("reply({ id: posted[0].id, type: 'start' }); timers[0]()")
+        #expect(context.evaluateScript("result").toInt32() == 3)
+        #expect(context.evaluateScript("posted[1].type").toString() == "clear")
     }
 }

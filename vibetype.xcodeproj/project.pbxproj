@@ -22,6 +22,7 @@
 		A52A00000000000000000002 /* WebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52A00000000000000000001 /* WebViewTests.swift */; };
 		A52A00000000000000000101 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A52A00000000000000000102 /* InfoPlist.strings */; };
 		B05700000000000000000028 /* ContactPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000027 /* ContactPicker.swift */; };
+		B05700000000000000000030 /* Geolocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000029 /* Geolocation.swift */; };
 		B05700000000000000000002 /* PosterScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000001 /* PosterScan.swift */; };
 		B05700000000000000000004 /* PosterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000003 /* PosterImage.swift */; };
 		B05700000000000000000011 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05700000000000000000010 /* ShareViewController.swift */; };
@@ -84,6 +85,7 @@
 		A52A00000000000000000003 /* vibetypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vibetypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52A00000000000000000103 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = vibetype/de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B05700000000000000000027 /* ContactPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactPicker.swift; path = vibetype/ContactPicker.swift; sourceTree = "<group>"; };
+		B05700000000000000000029 /* Geolocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Geolocation.swift; path = vibetype/Geolocation.swift; sourceTree = "<group>"; };
 		B05700000000000000000001 /* PosterScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PosterScan.swift; path = vibetype/PosterScan.swift; sourceTree = "<group>"; };
 		B05700000000000000000003 /* PosterImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PosterImage.swift; path = vibetype/PosterImage.swift; sourceTree = "<group>"; };
 		B05700000000000000000010 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				595F23A225CEFBFE0053416C /* AppDelegate.swift */,
 				595F239C25CEFBFD0053416C /* Assets.xcassets */,
 				B05700000000000000000027 /* ContactPicker.swift */,
+				B05700000000000000000029 /* Geolocation.swift */,
 				595F239B25CEFBFD0053416C /* Entitlements */,
 				595F23A025CEFBFE0053416C /* Info.plist */,
 				A52A00000000000000000102 /* InfoPlist.strings */,
@@ -331,6 +334,7 @@
 				595F23A825CEFBFE0053416C /* SceneDelegate.swift in Sources */,
 				595F23A525CEFBFE0053416C /* Settings.swift in Sources */,
 				B05700000000000000000028 /* ContactPicker.swift in Sources */,
+				B05700000000000000000030 /* Geolocation.swift in Sources */,
 				B05700000000000000000004 /* PosterImage.swift in Sources */,
 				B05700000000000000000002 /* PosterScan.swift in Sources */,
 				B05700000000000000000026 /* PosterShare.swift in Sources */,

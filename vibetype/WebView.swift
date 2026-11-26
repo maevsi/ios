@@ -32,6 +32,10 @@ func createWebView(container: UIView, WKSMH: AnyObject & WKScriptMessageHandler,
     userContentController.add(weakHandler, name: "push-permission-state")
     userContentController.add(weakHandler, name: "push-subscribe")
     userContentController.add(weakHandler, name: "push-token")
+    if #unavailable(iOS 27.0) {
+        userContentController.add(weakHandler, name: "geolocation")
+        userContentController.addUserScript(geolocationScript)
+    }
 
     config.userContentController = userContentController
 
@@ -65,6 +69,11 @@ func hostMatches(_ host: String, origin: String) -> Bool {
     let host = host.lowercased()
     let origin = origin.lowercased()
     return host == origin || host.hasSuffix("." + origin)
+}
+
+// Only the app's own pages may read the location.
+func isAllowedSecurityOrigin(_ origin: WKSecurityOrigin) -> Bool {
+    return origin.protocol == "https" && allowedOrigins.contains(where: { hostMatches(origin.host, origin: $0) })
 }
 
 func setCustomCookie(webView: WKWebView) {
@@ -112,6 +121,14 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
             webView.load(navigationAction.request)
         }
         return nil
+    }
+    // Skip WebKit's per-site location prompt for the app's own origins, leaving the system prompt as the only one
+    @available(iOS 27.0, *)
+    func webView(_ webView: WKWebView,
+        requestGeolocationPermissionFor origin: WKSecurityOrigin,
+        initiatedByFrame frame: WKFrameInfo,
+        decisionHandler: @escaping @MainActor @Sendable (WKPermissionDecision) -> Void) {
+        decisionHandler(isAllowedSecurityOrigin(origin) ? .grant : .deny)
     }
     // restrict navigation to target host, open external links in 3rd party apps
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
