@@ -1,3 +1,9 @@
+## [0.8.3](https://github.com/maevsi/ios/compare/0.8.2...0.8.3) (2026-11-26)
+
+### Bug Fixes
+
+* **location:** ask for the location only once ([#80](https://github.com/maevsi/ios/issues/80)) ([62b7e8e](https://github.com/maevsi/ios/commit/62b7e8ece001b9c4e2f5c15e7957fa3ac405414f))
+
 ## [0.8.2](https://github.com/maevsi/ios/compare/0.8.1...0.8.2) (2026-11-25)
 
 ### Bug Fixes
