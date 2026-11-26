@@ -1,3 +1,9 @@
+## [0.8.4](https://github.com/maevsi/ios/compare/0.8.3...0.8.4) (2026-11-26)
+
+### Bug Fixes
+
+* **release:** cut an empty release to exercise the app store promotion ([#82](https://github.com/maevsi/ios/issues/82)) ([362a702](https://github.com/maevsi/ios/commit/362a702e690e9a83673b8f19517b144717f35dba))
+
 ## [0.8.3](https://github.com/maevsi/ios/compare/0.8.2...0.8.3) (2026-11-26)
 
 ### Bug Fixes
