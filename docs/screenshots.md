@@ -10,13 +10,17 @@ So every screenshot shows a signed-in screen with real content, and together the
 
 ## Required sizes
 
-App Store Connect needs one set per display size and derives the smaller sizes from these.
-The simulators below produce exactly these sizes at their native resolution, in portrait.
+App Store Connect accepts portrait iPhone screenshots of 1206 × 2622 or 1179 × 2556 pixels, and iPad screenshots of 2064 × 2752 or 2048 × 2732 pixels.
+It rejects other sizes, such as the 1320 × 2868 of an iPhone 17 Pro Max.
+The simulators below produce the sizes in use at their native resolution, in portrait.
 
 | Folder | Display | Simulator | Pixels |
 | --- | --- | --- | --- |
-| `iphone-6.9` | 6.9-inch iPhone | iPhone 17 Pro Max | 1320 × 2868 |
+| `iphone-6.3` | 6.3-inch iPhone | iPhone 17 Pro | 1206 × 2622 |
 | `ipad-13` | 13-inch iPad | iPad Pro 13-inch (M5) | 2064 × 2752 |
+
+The current iPhone set was taken on an iPhone 17 Pro Max and resampled to 1206 × 2622 with `sips -z 2622 1206`, which changes the aspect ratio by less than 0.1%.
+Retake it on an iPhone 17 Pro to get its native layout.
 
 Each folder exists once per store language: `screenshots/en-US/` and `screenshots/de-DE/`.
 
@@ -74,7 +78,7 @@ Currently `02`, `03`, and `06` show the demo account's public event "Board Game 
    xcrun simctl terminate <udid> si.maev.twa
    SIMCTL_CHILD_START_URL='https://vibetype.app/event' xcrun simctl launch <udid> si.maev.twa
    sleep 10
-   xcrun simctl io <udid> screenshot --type=png screenshots/en-US/iphone-6.9/01-discover.png
+   xcrun simctl io <udid> screenshot --type=png screenshots/en-US/iphone-6.3/01-discover.png
    ```
 
    For the German set, use the `/de` URLs and append `-AppleLanguages "(de)" -AppleLocale de_DE` to `xcrun simctl launch`.
