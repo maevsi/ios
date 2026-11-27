@@ -79,3 +79,7 @@ See [docs/store-notes.md](docs/store-notes.md) for the format.
 ### App Review
 
 [docs/app-review.md](docs/app-review.md) records how the app meets the App Store Review Guidelines and when to recheck them.
+
+### Screenshots
+
+[docs/screenshots.md](docs/screenshots.md) specifies the App Store screenshots in `screenshots/` and how to retake them.
