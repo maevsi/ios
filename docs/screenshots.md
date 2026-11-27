@@ -6,7 +6,9 @@ App Store Connect shows them on the store listing, and App Review checks them.
 ## Why these screenshots
 
 [Guideline 2.3.3](https://developer.apple.com/app-store/review/guidelines/#2.3.3) asks screenshots to show the app in use, not mainly a title, login, or splash screen.
-So every screenshot shows a signed-in screen with real content, and together they cover the main features: discovering events, an event page, the dashboard, poster hunting, creating an event, and the guest list.
+So every screenshot shows a signed-in screen with real content, and together they cover the main features: the dashboard with poster hunting, discovering events, an event page, creating an event, and the guest list.
+The dashboard comes first, as the first screenshot is the one most people see.
+A separate poster hunting screenshot was dropped because its filled-in event draft looked the same as the create-event form.
 
 ## Required sizes
 
@@ -28,12 +30,11 @@ Each folder exists once per store language: `screenshots/en-US/` and `screenshot
 
 | File | Screen | URL |
 | --- | --- | --- |
-| `01-discover.png` | List of upcoming events | `/event` |
-| `02-event.png` | An upcoming public event of the screenshot account | `/event/view/<username>/<event>` |
-| `03-dashboard.png` | Home screen, including "Your next event" and poster hunting | `/dashboard` |
-| `04-poster-hunting.png` | Event draft filled in from a poster photo | `/event/ingest/image` |
-| `05-create-event.png` | Partly filled create-event form | `/event/create` |
-| `06-guests.png` | Guest list of the event in `02` | `/event/view/<username>/<event>/guest` |
+| `01-dashboard.png` | Home screen, including "Your next event" and poster hunting | `/dashboard` |
+| `02-discover.png` | List of upcoming events | `/event` |
+| `03-event.png` | An upcoming public event of the screenshot account | `/event/view/<username>/<event>` |
+| `04-create-event.png` | Partly filled create-event form | `/event/create` |
+| `05-guests.png` | Guest list of the event in `03` | `/event/view/<username>/<event>/guest` |
 
 The German set uses the same paths with a `/de` prefix, such as `/de/event`, not a query parameter.
 
@@ -42,7 +43,7 @@ The German set uses the same paths with a `/de` prefix, such as `/de/event`, not
 The screenshots are public.
 They may only show the App Review demo account, its own events, and public events whose organizers would not mind.
 Its credentials are in App Store Connect under App Review Information; never commit them or type them into a shell.
-Currently `02`, `03`, and `06` show the demo account's public event "Board Game Night", and `06` invites `@dargmuesli`.
+Currently `01`, `03`, and `05` show the demo account's public event "Board Game Night", and `05` invites `@dargmuesli`.
 
 ## Retaking them
 
@@ -76,26 +77,24 @@ Currently `02`, `03`, and `06` show the demo account's public event "Board Game 
 
    ```sh
    xcrun simctl terminate <udid> si.maev.twa
-   SIMCTL_CHILD_START_URL='https://vibetype.app/event' xcrun simctl launch <udid> si.maev.twa
+   SIMCTL_CHILD_START_URL='https://vibetype.app/dashboard' xcrun simctl launch <udid> si.maev.twa
    sleep 10
-   xcrun simctl io <udid> screenshot --type=png screenshots/en-US/iphone-6.3/01-discover.png
+   xcrun simctl io <udid> screenshot --type=png screenshots/en-US/iphone-6.3/01-dashboard.png
    ```
 
    For the German set, use the `/de` URLs and append `-AppleLanguages "(de)" -AppleLocale de_DE` to `xcrun simctl launch`.
 
-7. For `04`, add a poster photo to the simulator with `xcrun simctl addmedia <udid> <image>`, open `/event/ingest/image`, tap "Choose from library", turn off "Location" under Options in the photo picker so the photo's GPS data is not uploaded, and pick the photo. The app reads the poster right away; capture the draft once it is filled in. The first time, allow AI processing when asked.
+7. For `04`, fill in name, description, start and end, and "in person", but do not submit, or the account gets a duplicate event.
 
-8. For `05`, fill in name, description, start and end, and "in person", but do not submit, or the account gets a duplicate event.
+8. Look at every screenshot before keeping it: no spinner, empty list, error, toast, open keyboard, or red spell-check underline. Swiping down at the top of a page reloads it and empties forms.
 
-9. Look at every screenshot before keeping it: no spinner, empty list, error, toast, open keyboard, or red spell-check underline. Swiping down at the top of a page reloads it and empties forms.
+9. Check the sizes, then revert the patch and clear the status bars:
 
-10. Check the sizes, then revert the patch and clear the status bars:
-
-    ```sh
-    sips -g pixelWidth -g pixelHeight screenshots/*/*/*.png
-    git checkout -- vibetype/Settings.swift
-    xcrun simctl status_bar <udid> clear
-    ```
+   ```sh
+   sips -g pixelWidth -g pixelHeight screenshots/*/*/*.png
+   git checkout -- vibetype/Settings.swift
+   xcrun simctl status_bar <udid> clear
+   ```
 
 ## Storage
 
