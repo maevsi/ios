@@ -25,6 +25,7 @@ The current iPhone set was taken on an iPhone 17 Pro Max and resampled to 1206 Ã
 Retake it on an iPhone 17 Pro to get its native layout.
 
 Each folder exists once per store language: `screenshots/en-US/` and `screenshots/de-DE/`.
+The header and search results artwork in `screenshots/header/` serves both languages; [header-artwork.md](header-artwork.md) specifies it.
 
 ## Required screens
 

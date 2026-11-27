@@ -83,3 +83,4 @@ See [docs/store-notes.md](docs/store-notes.md) for the format.
 ### Screenshots
 
 [docs/screenshots.md](docs/screenshots.md) specifies the App Store screenshots in `screenshots/` and how to retake them.
+[docs/header-artwork.md](docs/header-artwork.md) specifies the header and search results artwork in `screenshots/header/`, including what a designer's rework must meet.
