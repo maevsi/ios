@@ -1,3 +1,9 @@
+## [0.8.5](https://github.com/maevsi/ios/compare/0.8.4...0.8.5) (2026-11-28)
+
+### Bug Fixes
+
+* **app-store:** distribute testflight builds to external testers ([#88](https://github.com/maevsi/ios/issues/88)) ([feffead](https://github.com/maevsi/ios/commit/feffeadb6a5bd9eafc9d01e608d676bc737ead98))
+
 ## [0.8.4](https://github.com/maevsi/ios/compare/0.8.3...0.8.4) (2026-11-26)
 
 ### Bug Fixes
