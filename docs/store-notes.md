@@ -10,10 +10,14 @@ The fragments stay in the repository, so they double as a history of what users 
 
 After CI uploads a release to TestFlight, the `release_notes` job collects the fragments added since the previous release, one bullet each.
 It waits until App Store Connect has processed the build, then sets the bullets as the build's "What to Test" text in both languages and shows them in the run's summary.
-A release that adds no fragments gets no text.
+A release that adds no fragments gets a generic text, since external testing requires one.
+The job then adds the build to every external TestFlight group of the app and submits it to beta review, after which Apple hands it to the external testers.
+An app without external groups only reaches internal testers, and the job warns about that.
+Beta review needs the test information in App Store Connect, such as the feedback email and the contact for Apple's reviewers, filled in once.
 The job uses the App Store Connect API key from the `testflight` environment, described in [signing.md](signing.md).
 
-When the job fails, the build stays on TestFlight without text, and you can add it by hand in App Store Connect.
+When the job fails, rerun it, as it skips what an earlier run did already.
+Otherwise add the text, the groups, or the beta review submission by hand in App Store Connect.
 The next release does not pick up the fragments of a release whose job failed.
 
 ## App Store
