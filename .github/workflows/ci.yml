@@ -136,7 +136,7 @@ jobs:
   # Waits for App Store Connect to process the build on a Linux runner, which costs less than the macOS one.
   release_notes:
     needs: [release_semantic, release]
-    name: Set the TestFlight release notes
+    name: Distribute to TestFlight testers
     runs-on: ubuntu-26.04
     timeout-minutes: 60
     environment: testflight
@@ -151,7 +151,7 @@ jobs:
           persist-credentials: false
           ref: ${{ needs.release_semantic.outputs.new_release_version }}
 
-      - name: Set the release notes
+      - name: Set the release notes and distribute to external testers
         env:
           API_KEY_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ID }}
           API_KEY_ISSUER_ID: ${{ secrets.APPSTORE_CONNECT_API_KEY_ISSUER_ID }}

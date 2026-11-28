@@ -57,9 +57,11 @@ expect "$(RELEASE_NOTES_DE='Neu' RELEASE_NOTES_EN='New' "$script" whatsnew 1.0.1
 RELEASE_NOTES_DE='Neu' fails whatsnew 1.0.1 1.0.2
 RELEASE_NOTES_DE=$(printf 'x%.0s' {1..4001}) RELEASE_NOTES_EN='New' fails whatsnew 1.0.1 1.0.2
 
-# Releases without fragments leave TestFlight alone, before any call to App Store Connect.
-expect "$("$script" testflight 1.0.0)" '::notice::1.0.0 is the first release, so there are no release notes to collect.'
-expect "$("$script" testflight 1.0.2)" '::notice::No release since 1.0.1 added release notes, so TestFlight shows none for 1.0.2.'
+# TestFlight shows the fragments since the previous release, or a generic text without any.
+generic='{"de-DE":"• Fehlerbehebungen und kleine Verbesserungen.","en-US":"• Bug fixes and minor improvements."}'
+expect "$("$script" whattotest 1.0.1 2>/dev/null)" '{"de-DE":"• Der Startbildschirm ist jetzt hell.","en-US":"• The start screen is light now."}'
+expect "$("$script" whattotest 1.0.0 2>/dev/null)" "$generic"
+expect "$("$script" whattotest 1.0.2 2>/dev/null)" "$generic"
 
 # Pull requests that release need a fragment, and every fragment needs both locales.
 check_pr() { BASE=$1 HEAD=$2 TITLE=$3 AUTHOR=someone SKIP=${4:-false} "$script" pr; }

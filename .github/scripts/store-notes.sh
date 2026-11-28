@@ -192,26 +192,49 @@ localize() {
   done
 }
 
-# testflight TAG: sets the fragments since the previous release as "What to Test" of the build for TAG.
+# whattotest TAG: prints the "What to Test" text of TAG as one line of JSON, from the fragments since
+# the previous release, or a generic text, since external testing requires one.
+whattotest() {
+  local from notes=''
+  from=$(previous "$1")
+  [ -z "$from" ] || notes=$(whatsnew "$from" "$1")
+  if [ -n "$notes" ]; then
+    echo "$notes"
+    return 0
+  fi
+  echo "::notice::No release notes since ${from:-the first release}, so TestFlight shows a generic text for $1." >&2
+  jq -cn '{"de-DE": "• Fehlerbehebungen und kleine Verbesserungen.", "en-US": "• Bug fixes and minor improvements."}'
+}
+
+# testflight TAG: sets "What to Test" of the build for TAG, adds it to every external TestFlight group,
+# and submits it to beta review, which external testers need before they get the build.
 # Waits until App Store Connect has processed the build. Reads BUNDLE_ID and the variables of token.
 testflight() {
-  local tag=$1 from notes app build list
-  from=$(previous "$tag")
-  if [ -z "$from" ]; then
-    echo "::notice::$tag is the first release, so there are no release notes to collect."
-    return 0
-  fi
-  notes=$(whatsnew "$from" "$tag")
-  if [ -z "$notes" ]; then
-    echo "::notice::No release since $from added release notes, so TestFlight shows none for $tag."
-    return 0
-  fi
+  local tag=$1 notes app build list groups body
+  notes=$(whattotest "$tag")
   # Assignments, unlike arguments, pass a failing command substitution on to set -e.
   app=$(app)
   build=$(build "$app" "$tag")
   list=$(api GET "/v1/builds/$build/betaBuildLocalizations")
   localize "$list" betaBuildLocalizations build "$build" "$notes"
-  echo "Set the release notes collected since $from on the TestFlight build of $tag."
+  echo "Set the release notes on the TestFlight build of $tag."
+  groups=$(api GET "/v1/betaGroups?filter[app]=$app&filter[isInternalGroup]=false&limit=200" |
+    jq -c '[.data[] | {type: "betaGroups", id}]')
+  if [ "$groups" = '[]' ]; then
+    echo "::warning::The app has no external TestFlight group, so only internal testers get $tag."
+    return 0
+  fi
+  body=$(jq -n --argjson groups "$groups" '{data: $groups}')
+  api POST "/v1/builds/$build/relationships/betaGroups" "$body" >/dev/null
+  echo "Added the build of $tag to $(jq length <<<"$groups") external TestFlight groups."
+  # A rerun finds the build submitted already, which Apple would refuse to take a second time.
+  if [ "$(api GET "/v1/betaAppReviewSubmissions?filter[build]=$build" | jq -r '.data[0].id // empty')" ]; then
+    echo "The build of $tag is submitted to beta review already."
+    return 0
+  fi
+  body=$(jq -n --arg build "$build" '{data: {type: "betaAppReviewSubmissions", relationships: {build: {data: {type: "builds", id: $build}}}}}')
+  api POST /v1/betaAppReviewSubmissions "$body" >/dev/null
+  echo "Submitted the build of $tag to beta review, after which external testers get it."
 }
 
 # submit TAG: submits the build of TAG to App Store review, to go on sale once Apple approves it.
@@ -257,10 +280,10 @@ submit() {
 }
 
 case "${1:-}" in
-  check | collect | live | notes | pr | previous | submit | testflight | token | whatsnew)
+  check | collect | live | notes | pr | previous | submit | testflight | token | whatsnew | whattotest)
     command=$1
     shift
     "$command" "$@"
     ;;
-  *) fail "Usage: $0 check DIR... | collect FROM TO | live | notes FROM TO LOCALE | pr | previous TAG | submit TAG | testflight TAG | token | whatsnew FROM TO" ;;
+  *) fail "Usage: $0 check DIR... | collect FROM TO | live | notes FROM TO LOCALE | pr | previous TAG | submit TAG | testflight TAG | token | whatsnew FROM TO | whattotest TAG" ;;
 esac
